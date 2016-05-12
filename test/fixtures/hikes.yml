@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  distance_in_km: 1
+  time_in_hours: 1
+  difficulty: 1
+  description: MyText
+
+two:
+  name: MyString
+  distance_in_km: 1
+  time_in_hours: 1
+  difficulty: 1
+  description: MyText
