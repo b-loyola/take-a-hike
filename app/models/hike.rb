@@ -5,5 +5,11 @@ class Hike < ActiveRecord::Base
 	validates :difficulty, numericality: {allow_blank: true, only_integer: true}
 
 	serialize :waypoints, Array
-	
+
+  scope :winter, -> { where(winter: true) }
+  scope :spring, -> { where(spring: true) }
+  scope :summer, -> { where(summer: true) }
+  scope :fall, -> { where(fall: true) }
+  scope :duration, -> (min, max) { where('time_in_hours >= ? AND time_in_hours <= ?', min, max)}
+  scope :difficulty, -> (index) { where('difficulty = ?', index) }
 end
