@@ -1,4 +1,5 @@
 # require 'rubygems'
+
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
@@ -7,7 +8,7 @@ TARGET_DOMAIN = 'http://www.trailpeak.com/'
 
 
 #downloaded html page for search area (e.g. All hikes near Vancouver that have GPX data)
-target_page = Nokogiri::HTML(open('vancouver_search.html'))
+target_page = Nokogiri::HTML(open('public/vancouver_search.html'))
 
 #selects table rows that each contain one hike URL
 target_page_hike_list = target_page.css("table tr td a")
@@ -28,22 +29,21 @@ end
 
 def hike_builder(target)
   i = 24
-  while i < 26
+  while i < 162
     hike_array = get_name_and_url(target, i)
     name = hike_array[0]
     url = hike_array[1]
 
     source = Nokogiri::HTML(open(TARGET_DOMAIN + url))
-
-    # waypoints = extract_coordinates(gpx_file_builder(source))
     stats = source.css("div#stats").to_s
+    text_box = source.css("div#description")
+
+    waypoints = extract_coordinates(gpx_file_builder(source))
 
     seasons = extract_seasons(stats)
     difficulty = extract_difficulty(stats)
     hours = extract_hours(stats)
     distance = extract_distance(stats)
-
-    text_box = source.css("div#description")
     description = extract_description(text_box)
 
     Hike.create(
@@ -51,9 +51,12 @@ def hike_builder(target)
       difficulty: difficulty,
       time_in_hours: hours,
       distance_in_km: distance,
-      description: description
+      description: description,
+      winter: seasons[:winter],
+      spring: seasons[:spring],
+      summer: seasons[:summer],
+      fall: seasons[:fall]
     )
-    # new_hike.seasons
 
     i += 1
   end
@@ -80,7 +83,13 @@ def extract_coordinates(source)
 end
 
 def extract_seasons(stats)
-  stats.scan(/spring|winter|fall|summer/i)
+  seasons = stats.scan(/spring|winter|fall|summer/i)
+  output = {}
+  output[:summer] = seasons.include?("Summer"||"summer")
+  output[:winter] = seasons.include?("Winter"||"winter")
+  output[:fall] = seasons.include?("Fall"||"fall")
+  output[:spring] = seasons.include?("Spring"||"spring")
+  output
 end
 
 def extract_difficulty(stats)
