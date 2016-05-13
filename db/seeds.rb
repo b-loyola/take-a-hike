@@ -1,4 +1,4 @@
-require 'rubygems'
+# require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
@@ -7,7 +7,7 @@ TARGET_DOMAIN = 'http://www.trailpeak.com/'
 
 
 #downloaded html page for search area (e.g. All hikes near Vancouver that have GPX data)
-target_page = Nokogiri::HTML(open('/lib/vancouver_search.html'))
+target_page = Nokogiri::HTML(open('vancouver_search.html'))
 
 #selects table rows that each contain one hike URL
 target_page_hike_list = target_page.css("table tr td a")
@@ -46,13 +46,13 @@ def hike_builder(target)
     text_box = source.css("div#description")
     description = extract_description(text_box)
 
-    # new_hike = Hike.create(
-    #   name: name,
-    #   difficulty: difficulty,
-    #   hours: hours,
-    #   distance: distance,
-    #   description: description
-    # )
+    Hike.create(
+      name: name,
+      difficulty: difficulty,
+      time_in_hours: hours,
+      distance_in_km: distance,
+      description: description
+    )
     # new_hike.seasons
 
     i += 1
