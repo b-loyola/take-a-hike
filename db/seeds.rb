@@ -23,10 +23,7 @@ def get_name_and_url(target, index)
   [hike_name, search_page_hike_url]
 end
 
-
-
-
-
+#builds new hike object
 def hike_builder(target)
   i = 24
   while i < 162
@@ -39,7 +36,8 @@ def hike_builder(target)
     text_box = source.css("div#description")
 
     waypoints = extract_coordinates(gpx_file_builder(source))
-
+    print waypoints
+    puts
     seasons = extract_seasons(stats)
     difficulty = extract_difficulty(stats)
     hours = extract_hours(stats)
@@ -56,12 +54,17 @@ def hike_builder(target)
       spring: seasons[:spring],
       summer: seasons[:summer],
       fall: seasons[:fall]
+      start_lat: waypoints[0][:lat],
+      start_lng: waypoints[0][:lng],
+      waypoints: waypoints
     )
 
     i += 1
   end
 end
 
+
+#creates gpx URL out of a few components of the scraped page
 def gpx_file_builder(source)
   script = source.css('script')[3]
   trail_id =  script.children.to_s.match(/TRAIL_ID\s=\s\"(\d+)\"/)[1]
@@ -74,14 +77,16 @@ def extract_coordinates(source)
   gpx_source = Nokogiri::HTML(open(source))
   waypoints = []
   gpx_source.css("trkpt").each do |waypoint|
-    coords = []
-    coords << waypoint.attribute("lat").value
-    coords << waypoint.attribute("lon").value
+    coords = {}
+    coords[:lat] = waypoint.attribute("lat").value
+    coords[:lng] = waypoint.attribute("lon").value
     waypoints << coords
   end
   waypoints
 end
 
+
+#returns hash of seasons available
 def extract_seasons(stats)
   seasons = stats.scan(/spring|winter|fall|summer/i)
   output = {}
@@ -91,6 +96,7 @@ def extract_seasons(stats)
   output[:spring] = seasons.include?("Spring"||"spring")
   output
 end
+
 
 def extract_difficulty(stats)
   difficulty = stats.slice(/easy|moderate|difficult|extreme/i).downcase
@@ -121,6 +127,7 @@ end
 def extract_description(text_box)
   text_box.xpath('text()').text.strip
 end
+
 
 def parse
   source = Nokogiri::HTML(open(@source))
