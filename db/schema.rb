@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513021413) do
+ActiveRecord::Schema.define(version: 20160513185216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 20160513021413) do
     t.text     "description"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.boolean  "winter"
+    t.boolean  "spring"
+    t.boolean  "summer"
+    t.boolean  "fall"
+    t.text     "waypoints"
+    t.float    "start_lat"
+    t.float    "start_lng"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -38,12 +45,6 @@ ActiveRecord::Schema.define(version: 20160513021413) do
   add_index "reviews", ["hike_id"], name: "index_reviews_on_hike_id", using: :btree
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
-  create_table "seasons", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "password_digest"
@@ -53,18 +54,6 @@ ActiveRecord::Schema.define(version: 20160513021413) do
     t.string   "last_name"
   end
 
-  create_table "waypoints", force: :cascade do |t|
-    t.float    "lat"
-    t.float    "lon"
-    t.integer  "index"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "hike_id"
-  end
-
-  add_index "waypoints", ["hike_id"], name: "index_waypoints_on_hike_id", using: :btree
-
   add_foreign_key "reviews", "hikes"
   add_foreign_key "reviews", "users"
-  add_foreign_key "waypoints", "hikes"
 end
