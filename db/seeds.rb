@@ -31,34 +31,37 @@ def hike_builder(target)
     name = hike_array[0]
     url = hike_array[1]
 
-    source = Nokogiri::HTML(open(TARGET_DOMAIN + url))
-    stats = source.css("div#stats").to_s
-    text_box = source.css("div#description")
+    puts "#{name}: #{url}"
 
-    waypoints = extract_coordinates(gpx_file_builder(source))
-    print waypoints
-    puts
-    seasons = extract_seasons(stats)
-    difficulty = extract_difficulty(stats)
-    hours = extract_hours(stats)
-    distance = extract_distance(stats)
-    description = extract_description(text_box)
+    begin
+      source = Nokogiri::HTML(open(TARGET_DOMAIN + url))
+      stats = source.css("div#stats").to_s
+      text_box = source.css("div#description")
 
-    Hike.create(
-      name: name,
-      difficulty: difficulty,
-      time_in_hours: hours,
-      distance_in_km: distance,
-      description: description,
-      winter: seasons[:winter],
-      spring: seasons[:spring],
-      summer: seasons[:summer],
-      fall: seasons[:fall]
-      start_lat: waypoints[0][:lat],
-      start_lng: waypoints[0][:lng],
-      waypoints: waypoints
-    )
+      waypoints = extract_coordinates(gpx_file_builder(source))
+      seasons = extract_seasons(stats)
+      difficulty = extract_difficulty(stats)
+      hours = extract_hours(stats)
+      distance = extract_distance(stats)
+      description = extract_description(text_box)
 
+      Hike.create(
+        name: name,
+        difficulty: difficulty,
+        time_in_hours: hours,
+        distance_in_km: distance,
+        description: description,
+        winter: seasons[:winter],
+        spring: seasons[:spring],
+        summer: seasons[:summer],
+        fall: seasons[:fall],
+        start_lat: waypoints[0][:lat],
+        start_lng: waypoints[0][:lng],
+        waypoints: waypoints
+      )
+    rescue
+      puts "*** Failed to import ***"
+    end
     i += 1
   end
 end
@@ -67,9 +70,9 @@ end
 #creates gpx URL out of a few components of the scraped page
 def gpx_file_builder(source)
   script = source.css('script')[3]
-  trail_id =  script.children.to_s.match(/TRAIL_ID\s=\s\"(\d+)\"/)[1]
-  gpx_name =  script.children.to_s.match(/GPX_URL\s=\s\"(.+)\"/)[1]
-  gpx_url = TARGET_DOMAIN + "/content/gpsData/gps" + trail_id + "-" + gpx_name + ".gpx"
+  trail_id = script.children.to_s.match(/TRAIL_ID\s=\s\"(\d+)\"/)[1]
+  gpx_name = script.children.to_s.match(/GPX_URL\s=\s\"([a-zA-Z0-9_\-]+).*\"/)[1]
+  gpx_url = TARGET_DOMAIN + "content/gpsData/gps" + trail_id + "-" + gpx_name + ".gpx"
 end
 
 # Returns array of coordinates
