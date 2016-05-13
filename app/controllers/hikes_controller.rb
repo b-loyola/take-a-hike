@@ -1,7 +1,18 @@
 class HikesController < ApplicationController
 
   def index
-  	@hikes = Hike.all
+    @hikes = Hike.all
+    @hikes = @hikes.spring if params[:spring]
+    @hikes = @hikes.winter if params[:winter]
+    @hikes = @hikes.summer if params[:summer]
+    @hikes = @hikes.fall if params[:fall]
+    @hikes = @hikes.difficulty(params[:difficulty]) if params[:difficulty] && params[:difficulty] != ''
+    if params[:duration]
+      min,max = params[:duration].split('-')
+      @hikes = @hikes.duration(min,max)
+    end
+
+
   end
 
   def show
