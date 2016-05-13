@@ -7,12 +7,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    # if @user.save
-    #   session[:user_id] = @user.id
-    #   redirect_to hikes_path, notice: "Welcome aboard, #{@user.name}!"
-    # else
-      
-    # end
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to hikes_path, notice: "Welcome to the trails, #{@user.name}!"
+    else
+      render :new
+    end
   end
 
   def show
