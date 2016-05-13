@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to hikes_path, notice: "Welcome to the trails, #{@user.name}!"
+      redirect_to hikes_path, notice: "Welcome back to the trails, #{@user.name}!"
     else
       render :new
     end
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   protected
 
   def user_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation)
+    params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
   end
 
 end
