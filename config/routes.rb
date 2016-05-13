@@ -1,15 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'hikes/index'
+  resources :hikes, only: [:index, :create, :show] #do
+  #   resources :ratings
+  # end
 
-  get 'hikes/show'
-
-  get 'hikes/edit'
-
-  get 'hikes/create'
-
-  get 'users/new'
-
-  get 'users/create'
+  resources :users, only: [:index, :new, :create, :update, :destroy]
 
 end

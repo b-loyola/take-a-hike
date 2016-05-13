@@ -1,2 +1,11 @@
-<h1>Hikes#index</h1>
-<p>Find me in app/views/hikes/index.html.erb</p>
+<h1>Hikes</h1>
+<% @hikes.each do |hike| %>
+	<h2><%= link_to hike.name, hike_path(hike) %></h2>
+	<h3><%= pluralize(hike.distance_in_km, 'Km') %></h3>
+	<h3><%= pluralize(hike.time_in_hours, 'Hour') %></h3>
+	<h3>Difficulty Rating:<%= hike.difficulty %></h3>
+	<p><%= hike.description %></p>
+<% end %>
+
+
+
