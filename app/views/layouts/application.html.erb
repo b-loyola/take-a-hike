@@ -8,6 +8,12 @@
 </head>
 <body>
 
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value) %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
 <%= yield %>
 
 </body>
