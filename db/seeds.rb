@@ -6,13 +6,10 @@ require 'pry'
 
 TARGET_DOMAIN = 'http://www.trailpeak.com/'
 
-
 #downloaded html page for search area (e.g. All hikes near Vancouver that have GPX data)
 target_page = Nokogiri::HTML(open('public/vancouver_search.html'))
-
 #selects table rows that each contain one hike URL
 target_page_hike_list = target_page.css("table tr td a")
-
 
 def get_name_and_url(target, index)
   hike_name = target[index].text
@@ -62,6 +59,7 @@ def hike_builder(target)
     rescue
       puts "*** Failed to import ***"
     end
+
     i += 1
   end
 end
@@ -72,8 +70,9 @@ def gpx_file_builder(source)
   script = source.css('script')[3]
   trail_id = script.children.to_s.match(/TRAIL_ID\s=\s\"(\d+)\"/)[1]
   gpx_name = script.children.to_s.match(/GPX_URL\s=\s\"([a-zA-Z0-9_\-]+).*\"/)[1]
-  gpx_url = TARGET_DOMAIN + "content/gpsData/gps" + trail_id + "-" + gpx_name + ".gpx"
+  TARGET_DOMAIN + "content/gpsData/gps" + trail_id + "-" + gpx_name + ".gpx"
 end
+
 
 # Returns array of coordinates
 def extract_coordinates(source)
