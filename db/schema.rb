@@ -63,8 +63,7 @@ ActiveRecord::Schema.define(version: 20160512233847) do
 
   add_index "waypoints", ["hike_id"], name: "index_waypoints_on_hike_id", using: :btree
 
-  add_foreign_key "waypoints", "hikes"
   add_foreign_key "reviews", "hikes"
   add_foreign_key "reviews", "users"
-
+  add_foreign_key "waypoints", "hikes"
 end

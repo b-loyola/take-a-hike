@@ -1,2 +1,7 @@
-<h1>Hikes#show</h1>
-<p>Find me in app/views/hikes/show.html.erb</p>
+<%= link_to "Back to all hikes", hikes_path %><br/>
+
+<h2><%= link_to @hike.name, hike_path(@hike) %></h2>
+<h3><%= pluralize(@hike.distance_in_km, 'Km') %></h3>
+<h3><%= pluralize(@hike.time_in_hours, 'Hour') %></h3>
+<h3>Difficulty Rating:<%= @hike.difficulty %></h3>
+<p><%= @hike.description %></p>
