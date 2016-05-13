@@ -26,6 +26,18 @@ ActiveRecord::Schema.define(version: 20160512233847) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "hike_id"
+    t.integer  "rating"
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reviews", ["hike_id"], name: "index_reviews_on_hike_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
+
   create_table "seasons", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -52,4 +64,7 @@ ActiveRecord::Schema.define(version: 20160512233847) do
   add_index "waypoints", ["hike_id"], name: "index_waypoints_on_hike_id", using: :btree
 
   add_foreign_key "waypoints", "hikes"
+  add_foreign_key "reviews", "hikes"
+  add_foreign_key "reviews", "users"
+
 end
