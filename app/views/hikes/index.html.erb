@@ -29,10 +29,6 @@
   <% end %>
 </div>
 
-
-
-
-
 <h1>Hikes</h1>
 <% @hikes.each do |hike| %>
 	<h2><%= link_to hike.name, hike_path(hike) %></h2>
@@ -44,8 +40,6 @@
 
 
 <%= paginate(@hikes) %>
-
-
 <!-- MOVE TO JAVASCRIPT FILE -->
 <script>
 //--------------LOAD API KEY--------------//
@@ -60,20 +54,31 @@ script.appendTo($('body'));
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 49.2819, lng: -123.108},
       zoom: 12,
-      scrollwheel:false
+      scrollwheel:false,
+      disableDefaultUI: true,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
     });
-
-        //------ ADD ALL MARKERS TO MAP START ----//
+    //------ ADD ALL MARKERS TO MAP START ----//
     var hikes = <%=@hikes_json%>
-   
     hikes.forEach(function(hike){
       var marker = new google.maps.Marker({
       position: {lat:hike.start_lat, lng:hike.start_lng},
       map: map,
       title: hike.name
       });
+      
+      //----- ADD INFO WINDOW FOR EACH MARKER -----//
+      var infowindow = new google.maps.InfoWindow({
+        content:"<div> <a href=/hikes/" + hike.id + "/>" + hike.name + "</div>"
+      });
+      
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+      //----- ADD INFO WINDOW FOR EACH MARKER -----//
+
     });
-    var infoWindow = new google.maps.InfoWindow({map: map});
+
 //------------INITIATE MAP------------------//
 
 //--------------------------------GEO LOCATION STUFF-----------------------//
@@ -101,6 +106,4 @@ script.appendTo($('body'));
                           'Error: Your browser doesn\'t support geolocation.');
   }
 //---------------------------------GEO LOCATION STUFF-----------------------//
-
-
 </script>

@@ -30,7 +30,8 @@
       zoom: 13,
       center: hikeCoordinates[midPoint],
       mapTypeId: google.maps.MapTypeId.TERRAIN,
-      scrollwheel:false
+      scrollwheel:false,
+      disableDefaultUI: true
     });
 
     var hikePath = new google.maps.Polyline({
@@ -53,5 +54,7 @@
       title: 'End'
     });
   }
+  //*********DISTANCE AND DURATION**********************//
 
 </script>
+
