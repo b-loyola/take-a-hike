@@ -63,6 +63,17 @@ script.appendTo($('body'));
       zoom: 12,
       scrollwheel:false
     });
+
+        //------ ADD ALL MARKERS TO MAP START ----//
+    var hikes = <%=@hikes_json%>
+   
+    hikes.forEach(function(hike){
+      var marker = new google.maps.Marker({
+      position: {lat:hike.start_lat, lng:hike.start_lng},
+      map: map,
+      title: hike.name
+      });
+    });
     var infoWindow = new google.maps.InfoWindow({map: map});
 //------------INITIATE MAP------------------//
 
