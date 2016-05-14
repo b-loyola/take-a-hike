@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TakeAHike</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <title>Take a Hike</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Raleway' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<% flash.each do |key, value| %>
-  <%= content_tag(:div, value) %>
-<% end %>
+	<% flash.each do |key, value| %>
+	  <%= content_tag(:div, value) %>
+	<% end %>
 
-<%= render 'layouts/navbar' %>
+	<%= render 'layouts/navbar' %>
 
-<%= yield %>
+	<%= yield %>
 
 </body>
 </html>
