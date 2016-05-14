@@ -1,5 +1,8 @@
 class ReviewsController < ApplicationController
 
+  before_filter :restrict_access
+  before_filter :load_hike
+
   def new
     @review = @hike.reviews.build
   end
@@ -19,6 +22,10 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:rating, :comment)
+  end
+
+  def load_hike
+    @hike = Hike.find(params[:hike_id])
   end
 
 end
