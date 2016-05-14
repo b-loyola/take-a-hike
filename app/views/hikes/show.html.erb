@@ -7,3 +7,45 @@
 <h3><%= pluralize(@hike.time_in_hours, 'Hour') %></h3>
 <h3>Difficulty Rating:<%= @hike.difficulty %></h3>
 <p><%= @hike.description %></p>
+
+<!-- TO CHANGE -->
+<% test = @hike.waypoints.to_s %>
+<% test = test.gsub('"',"")%>
+<% test = test.gsub(':','')%>
+<% test = test.gsub("=>",':')%>
+
+<!--     MOVE TO JAVASCRIPT FILE -->
+    <script>  
+      function initMap() {
+        var hikeCoordinates = <%=test%>
+        midPoint = Math.floor(hikeCoordinates.length/2);
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: hikeCoordinates[midPoint],
+          mapTypeId: google.maps.MapTypeId.TERRAIN
+        });
+
+        var hikePath = new google.maps.Polyline({
+          path: hikeCoordinates,
+          geodesic: true,
+          strokeColor: 'black',
+          strokeOpacity: 1.0,
+          strokeWeight: 4
+        });       
+        hikePath.setMap(map);
+
+        var startMarker = new google.maps.Marker({
+          position: hikeCoordinates[0],
+          map: map,
+          title: 'Start'
+        });
+        var endMarker = new google.maps.Marker({
+          position: hikeCoordinates[hikeCoordinates.length-1],
+          map: map,
+          title: 'End'
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE&callback=initMap">
+    </script>
