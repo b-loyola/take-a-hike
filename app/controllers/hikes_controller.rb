@@ -12,6 +12,8 @@ class HikesController < ApplicationController
       @hikes = @hikes.duration(min,max)
     end
     @hikes = @hikes.search_name(params[:search_name]) if params[:search_name]
+    @hikes_json = @hikes.to_json.html_safe
+
   end
 
   def show
