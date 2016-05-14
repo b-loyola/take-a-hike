@@ -1,4 +1,7 @@
 class Hike < ActiveRecord::Base
+
+  has_many :reviews, dependent: :destroy
+
 	validates :name, presence: true
 	validates :distance_in_km, numericality: {allow_blank: true, only_integer: true}
 	validates :time_in_hours, numericality: {allow_blank: true, only_integer: true}
@@ -14,6 +17,6 @@ class Hike < ActiveRecord::Base
   scope :difficulty, -> (index) { where('difficulty = ?', index) }
   scope :search_name, -> (search) { where("name iLIKE ?", "%#{search}%") }
 
-  # paginates_per 20
+  # paginates_per 30
 
 end
