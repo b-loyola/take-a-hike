@@ -1,9 +1,10 @@
 <div class="fixed_map">
 <div id="map"></div>
 </div>
-<div class="search-form" class"well well-lg">
+<div class="search-form" class="well well-lg">
   <%= form_tag hikes_path, method: "get" do %>
     Seasons:
+    Any: <%= check_box_tag :all %>
     Summer: <%= check_box_tag :summer %>
     Fall: <%= check_box_tag :fall %>
     Winter: <%= check_box_tag :winter %>
