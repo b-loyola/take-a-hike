@@ -19,7 +19,6 @@ $(function(){
           .appendTo('#searched_hikes');
         });
       }
-
     });
   });
 });
