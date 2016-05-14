@@ -1,9 +1,10 @@
 <div class="fixed_map">
 <div id="map"></div>
 </div>
-<div class="search-form" class"well well-lg">
+<div class="search-form" class="well well-lg">
   <%= form_tag hikes_path, method: "get" do %>
     Seasons:
+    Any: <%= check_box_tag :all %>
     Summer: <%= check_box_tag :summer %>
     Fall: <%= check_box_tag :fall %>
     Winter: <%= check_box_tag :winter %>
@@ -47,7 +48,6 @@
 
 <!-- MOVE TO JAVASCRIPT FILE -->
 <script>
-
 //--------------LOAD API KEY--------------//
 var script = $('<script>')
   .attr('src', "https://maps.googleapis.com/maps/api/js?key=" + googleKey + "&callback=initMap")
@@ -61,6 +61,17 @@ script.appendTo($('body'));
       center: {lat: 49.2819, lng: -123.108},
       zoom: 12,
       scrollwheel:false
+    });
+
+        //------ ADD ALL MARKERS TO MAP START ----//
+    var hikes = <%=@hikes_json%>
+   
+    hikes.forEach(function(hike){
+      var marker = new google.maps.Marker({
+      position: {lat:hike.start_lat, lng:hike.start_lng},
+      map: map,
+      title: hike.name
+      });
     });
     var infoWindow = new google.maps.InfoWindow({map: map});
 //------------INITIATE MAP------------------//
