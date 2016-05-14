@@ -12,4 +12,6 @@ class Hike < ActiveRecord::Base
   scope :fall, -> { where(fall: true) }
   scope :duration, -> (min, max) { where('time_in_hours >= ? AND time_in_hours <= ?', min, max)}
   scope :difficulty, -> (index) { where('difficulty = ?', index) }
+  scope :search_name, -> (search) { where("name iLIKE ?", "%#{search}%") }
+
 end
