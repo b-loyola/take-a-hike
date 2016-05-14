@@ -1,49 +1,21 @@
 <div class="fixed_map">
 <div id="map"></div>
 </div>
-<div class="search-form" class="well well-lg">
-  <%= form_tag hikes_path, method: "get" do %>
-    Seasons:
-    Any: <%= check_box_tag :all %>
-    Summer: <%= check_box_tag :summer %>
-    Fall: <%= check_box_tag :fall %>
-    Winter: <%= check_box_tag :winter %>
-    Spring: <%= check_box_tag :spring %>
-    <br>
-    Duration: <%= select_tag(:duration, options_for_select([
-      ['All', '0-24'],
-      ['Short (<2hr)', '0-2'],
-      ['Medium (<5hr)', '2-5'],
-      ['Long (>5hr)', '5-24']
-      ])) %>
-    Difficulty: <%= select_tag(:difficulty, options_for_select([
-    ['easy', '0'],
-    [' med', '1'],
-    [' hard', '2'],
-    [' extreme', '3']
-    ]), include_blank: "Any") %>
 
-    Name: <%= text_field_tag(:search_name) %>
+<%= render 'search' %>
 
-    <%= submit_tag "Search", class: "btn btn-sm btn-default" %>
-  <% end %>
-</div>
+<table id='all_hikes'>
+  <%= render @hikes %>
+</table>
+<table id='searched_hikes'>
+  <tbody>
+  </tbody>
+</table>
 
 
+<%#= paginate(@hikes) %>
 
 
-
-<h1>Hikes</h1>
-<% @hikes.each do |hike| %>
-	<h2><%= link_to hike.name, hike_path(hike) %></h2>
-	<h3><%= pluralize(hike.distance_in_km, 'Km') %></h3>
-	<h3><%= pluralize(hike.time_in_hours, 'Hour') %></h3>
-	<h3>Difficulty Rating:<%= hike.difficulty %></h3>
-	<p><%= hike.description %></p>
-<% end %>
-
-
-<%= paginate(@hikes) %>
 
 
 <!-- MOVE TO JAVASCRIPT FILE -->
@@ -94,3 +66,6 @@ script.appendTo($('body'));
 
 
 </script>
+
+
+

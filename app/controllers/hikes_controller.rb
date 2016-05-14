@@ -1,7 +1,7 @@
 class HikesController < ApplicationController
 
   def index
-    @hikes = Hike.all.page(params[:page])
+    @hikes = Hike.all #.page(params[:page])
     @hikes = @hikes.spring if params[:spring]
     @hikes = @hikes.winter if params[:winter]
     @hikes = @hikes.summer if params[:summer]
@@ -12,6 +12,12 @@ class HikesController < ApplicationController
       @hikes = @hikes.duration(min,max)
     end
     @hikes = @hikes.search_name(params[:search_name]) if params[:search_name]
+
+    respond_to do |format|
+      format.html
+      format.json {render json: @hikes}
+    end
+
   end
 
   def show
@@ -37,6 +43,10 @@ class HikesController < ApplicationController
 	  @hike.destroy
 	  redirect_to hikes_path
 	end
+
+  def query
+    "Hello"
+  end
 
 	protected
 
