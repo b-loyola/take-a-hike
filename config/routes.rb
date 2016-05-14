@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
+  # get '/hikes/query', to: 'hikes#query', as: 'query'
+
   resources :hikes, only: [:index, :create, :show] do
     resources :reviews, only: [:new, :create]
-    resource :waypoints, only: [:show]
   end
 
   resources :users, only: [:index, :new, :create, :update, :destroy]
