@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav id="navbar" class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		
 		<div class="navbar-header">
@@ -15,17 +15,21 @@
 		  <ul class="nav navbar-nav navbar-right">
 		    
 			  <% if current_user %>
-			    <li class="dropdown open">
+			    <li class="dropdown navbar-btn">
 			    	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
 			    		<%= current_user.full_name %><span class="caret"></span>
 			    	</a>
 			    	<ul class="dropdown-menu">
-			    		<li><%= link_to "Log out", session_path("current"), method: :delete %></li>
+			    		<li class="navbar-btn"><a href="">My Profile</a></li>
+			    		<li class="navbar-btn"><a href="">My Hikes</a></li>
+			    		<li class="navbar-btn"><a href="">Settings</a></li>
+			    		<li role="separator" class="divider"></li>
+			    		<li class="navbar-btn"><%= link_to "Log out", session_path("current"), method: :delete %></li>
 			    	</ul>
 			    </li>
 			  <% else %>
-			  	<li><%= link_to "Log In", new_session_path %></li>
-			  	<li><%= link_to "Sign Up", new_user_path %></li>
+			  	<li class="navbar-btn"><%= link_to "Log In", new_session_path %></li>
+			  	<li class="navbar-btn"><%= link_to "Sign Up", new_user_path %></li>
 			  <% end %>
 		    <!-- <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li> -->
 		  </ul>

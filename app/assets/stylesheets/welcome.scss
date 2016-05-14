@@ -1,24 +1,5 @@
-// Place all the styles related to the Welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/ 
-// #4E6766
-
 body {
 	font-family: 'Raleway'
-}
-
-.navbar-default {
-	border: none;
-	background-color: white;
-	opacity: 0.1;
-	margin-bottom: 0;
-	.navbar-toggle {
-		border-color: #777;
-	}
-}
-
-.navbar-collapse {
-	border: none;
 }
 
 .hero {
@@ -42,7 +23,6 @@ a {
 	.main-btn {
 		color: #fff;
 		text-align: center;
-		// border-left: 1px solid #5cb85c;
 		transition: .5s all;
 		padding: 15px;
 		&:hover {
@@ -55,7 +35,6 @@ a {
 			text-decoration: none;
 		}
 		.main-btn-txt {
-			// margin-top: 5px;
 			text-align: left;
 		}
 	}
