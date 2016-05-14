@@ -19,4 +19,8 @@ class Hike < ActiveRecord::Base
 
   # paginates_per 30
 
+  def average_rating
+    reviews.count > 0 ? (reviews.sum(:rating).to_f/reviews.count).round(2) : 0
+  end
+
 end
