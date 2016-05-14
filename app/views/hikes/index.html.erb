@@ -43,6 +43,14 @@
 
 <!-- MOVE TO JAVASCRIPT FILE -->
 <script>
+
+//--------------LOAD API KEY--------------//
+var script = $('<script>')
+  .attr('src', "https://maps.googleapis.com/maps/api/js?key=" + googleKey + "&callback=initMap")
+  .attr('async','').attr('defer','');
+script.appendTo($('body'));
+//--------------LOAD API KEY--------------//
+
 //--------------INITIATE MAP--------------//
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -81,7 +89,3 @@
 
 
 </script>
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE&callback=initMap">
-</script>
-
