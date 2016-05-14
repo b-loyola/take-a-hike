@@ -11,7 +11,7 @@ class HikesController < ApplicationController
       min,max = params[:duration].split('-')
       @hikes = @hikes.duration(min,max)
     end
-
+    @hikes = @hikes.search_name(params[:search_name]) if params[:search_name]
 
   end
 
