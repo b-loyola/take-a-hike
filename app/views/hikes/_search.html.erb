@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="search-form" class="well col-lg-4 col-lg-offset-4">
+    <%= form_tag hikes_path, method: "get", id: "search_form" do %>
+      Seasons:
+      Any: <%= check_box_tag :all %>
+      Summer: <%= check_box_tag :summer %>
+      Fall: <%= check_box_tag :fall %>
+      Winter: <%= check_box_tag :winter %>
+      Spring: <%= check_box_tag :spring %>
+      <br>
+      Duration: <%= select_tag(:duration, options_for_select([
+        ['All', '0-24'],
+        ['Short (<2hr)', '0-2'],
+        ['Medium (<5hr)', '2-5'],
+        ['Long (>5hr)', '5-24']
+        ])) %>
+      Difficulty: <%= select_tag(:difficulty, options_for_select([
+        ['easy', '0'],
+        [' med', '1'],
+        [' hard', '2'],
+        [' extreme', '3']
+        ]), include_blank: "Any") %>
+      <br>
+      Name: <%= text_field_tag :search_name %>
+
+      <%= submit_tag "Search", class: "btn btn-sm btn-default"%>
+    <% end %>
+  </div>
+</div>
