@@ -14,4 +14,6 @@ class Hike < ActiveRecord::Base
   scope :difficulty, -> (index) { where('difficulty = ?', index) }
   scope :search_name, -> (search) { where("name iLIKE ?", "%#{search}%") }
 
+  # paginates_per 20
+
 end
