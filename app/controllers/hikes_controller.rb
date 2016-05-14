@@ -1,7 +1,7 @@
 class HikesController < ApplicationController
 
   def index
-    @hikes = Hike.all
+    @hikes = Hike.all.page(params[:page])
     @hikes = @hikes.spring if params[:spring]
     @hikes = @hikes.winter if params[:winter]
     @hikes = @hikes.summer if params[:summer]
@@ -12,7 +12,6 @@ class HikesController < ApplicationController
       @hikes = @hikes.duration(min,max)
     end
     @hikes = @hikes.search_name(params[:search_name]) if params[:search_name]
-
   end
 
   def show
