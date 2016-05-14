@@ -9,7 +9,8 @@ body {
 
 .navbar-default {
 	border: none;
-	background-color: #1E152A;
+	background-color: white;
+	opacity: 0.1;
 	margin-bottom: 0;
 	.navbar-toggle {
 		border-color: #777;
@@ -25,6 +26,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	min-height: 440px;
+	width: 100%;
 	display: flex;
   align-items: center;
   justify-content: center;
@@ -33,16 +35,28 @@ body {
 	}
 }
 a {
-	color: #626D58;
+	
 }
-.main-btn {
-	text-align: center;
-	background-color: whitesmoke;
-	border-bottom: 1px solid #BDC667;
-	transition: .5s all;
-	&:hover {
-		color: white;
-		text-decoration: none;
-		background-color: #BDC667;
+.main-btn-wrapper {
+	background-color: #449d44;
+	.main-btn {
+		color: #fff;
+		text-align: center;
+		// border-left: 1px solid #5cb85c;
+		transition: .5s all;
+		padding: 15px;
+		&:hover {
+			color: #085808;
+			text-decoration: none;
+			background-color: #71BE71;
+		}
+		&:focus {
+			color: #085808;
+			text-decoration: none;
+		}
+		.main-btn-txt {
+			// margin-top: 5px;
+			text-align: left;
+		}
 	}
 }

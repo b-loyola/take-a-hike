@@ -1,24 +1,60 @@
 <%= render "layouts/navbar" %>
 
-<div class="row">
-	<section class="hero">
-		<div class="slogan">
-			<h1>I haven't been everywhere, but it's on my list.</h1>
-			<p>- Susan Sontag</p>
-		</div>
-	</section>
-</div>
-
 <div class="container-fluid">
+
 	<div class="row">
-		<a href="#" class="col-xs-4 main-btn">
-			<h2>Explore</h2>
-		</a>
-		<a href="#" class="col-xs-4 main-btn">
-			<h2>Take Action</h2>
-		</a>
-		<a href="#" class="col-xs-4 main-btn">
-			<h2>Get Started</h2>
-		</a>
+		<section class="hero">
+			<div class="hidden-xs slogan">
+				<h1>I haven't been everywhere, but it's on my list.</h1>
+				<p>- Susan Sontag</p>
+			</div>
+			<div class="hidden-sm hidden-md hidden-lg slogan">
+				<h2>Hike Forward</h2>
+			</div>
+		</section>
+	</div>
+
+	<div class="row main-btn-wrapper">
+		<div class="container">
+			<a href="<%= hikes_path %>" class="col-xs-4 main-btn">
+				<div class="row">
+					<div class="col-md-2 hidden-xs hidden-sm"></div>
+					<div class="col-xs-12 col-md-2">
+						<h1><span class="glyphicon glyphicon-record" aria-hidden="true"></span></h1>
+						<h4 class="hidden-md hidden-lg">Browse</h4>
+					</div>
+					<div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+						<h3>Start Exploring</h3>
+						<p>Browse all hikes</p>
+					</div>
+				</div>
+			</a>
+			<a href="<%= hikes_path %>" class="col-xs-4 main-btn">
+				<div class="row">
+					<div class="col-md-2 hidden-xs hidden-sm"></div>
+					<div class="col-xs-12 col-md-2">
+						<h1><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></h1>
+						<h4 class="hidden-md hidden-lg">Search</h4>
+					</div>
+					<div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+						<h3>Seek Adventure</h3>
+						<p>Find the perfect trail</p>
+					</div>
+				</div>
+			</a>
+			<a href="<%= new_user_path %>" class="col-xs-4 main-btn">
+				<div class="row">
+					<div class="col-md-2 hidden-xs hidden-sm"></div>
+					<div class="col-xs-12 col-md-2">
+						<h1><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></h1>
+						<h4 class="hidden-md hidden-lg">Join</h4>
+					</div>
+					<div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+						<h3>Get Started</h3>
+						<p>Join our community</p>
+					</div>
+				</div>
+			</a>
+		</div>
 	</div>
 </div>
