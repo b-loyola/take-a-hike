@@ -1,6 +1,12 @@
 <div>
 
-  <div><%= link_to "Rate this hike!", new_hike_review_path(@hike) %></div>
+  <div>
+    <br>
+    <%= link_to "Rate this hike!", new_hike_review_path(@hike) %>
+    <% unless @hike.reviews.count == 0 %>
+      Average Rating: <em><%= @hike.average_rating %></em>
+    <% end %>
+  </div>
 
   <% @hike.reviews.each do |review| %>
     <div>
