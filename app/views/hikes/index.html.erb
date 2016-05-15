@@ -26,7 +26,6 @@
 			  	<%= render @hikes %>
 				</tbody>
 			</table>
-
 		</div>
 	</div>
 
@@ -38,7 +37,10 @@
 	  var hikes = <%=@hikes_json%>
 	</script>
 
+
 </div>
 
 <%= javascript_include_tag 'hikes/index.js' %>
+<%= javascript_include_tag 'hikes/hikes.js' %>
+
 
