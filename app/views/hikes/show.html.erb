@@ -1,5 +1,9 @@
+<div class="container-fluid">
+
+</div>
+
 <div class="fixed_map">
-<div id="map"></div>
+	<div id="map"></div>
 </div>
 
 <%= link_to "Back to all hikes", hikes_path %><br/>
@@ -13,14 +17,8 @@
 <h3>Difficulty Rating:<%= @hike.difficulty %></h3>
 <p><%= @hike.description %></p>
 
-<!-- TO CHANGE -->
-<% test = @hike.waypoints.to_s %>
-<% test = test.gsub('"',"")%>
-<% test = test.gsub(':','')%>
-<% test = test.gsub("=>",':')%>
-
 <script type="text/javascript">
-  var hikeCoordinates = <%=test%>
+  var hikeCoordinates = <%=@hike_waypoints%>
 </script>
 
 <%= javascript_include_tag 'hikes/show.js' %>

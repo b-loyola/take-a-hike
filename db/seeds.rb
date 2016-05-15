@@ -80,8 +80,8 @@ def extract_coordinates(source)
   waypoints = []
   gpx_source.css("trkpt").each do |waypoint|
     coords = {}
-    coords[:lat] = waypoint.attribute("lat").value
-    coords[:lng] = waypoint.attribute("lon").value
+    coords[:lat] = waypoint.attribute("lat").value.to_f
+    coords[:lng] = waypoint.attribute("lon").value.to_f
     waypoints << coords
   end
   waypoints
