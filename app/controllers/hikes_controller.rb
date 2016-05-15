@@ -13,12 +13,6 @@ class HikesController < ApplicationController
     end
     @hikes = @hikes.search_name(params[:search_name]) if params[:search_name]
     @hikes_json = @hikes.to_json.html_safe
-
-    respond_to do |format|
-      format.html
-      format.json {render json: @hikes}
-    end
-
   end
 
   def show
