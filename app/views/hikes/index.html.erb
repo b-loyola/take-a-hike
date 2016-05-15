@@ -1,25 +1,44 @@
-<div class="fixed_map">
-<div id="map"></div>
+<div class="container-fluid">
+
+	<div class="row">
+		<section class="fixed_map">
+			<div id="map"></div>
+		</section>
+	</div>
+
+	<div class="row">
+		<%= render 'search' %>
+	</div>
+
+	<div class="row">
+		<div class="container">
+
+			<table id="searched_hikes" class="table table-hover">
+				<thead>
+					<tr>
+						<th>Hike Name</th>
+						<th>Distance</th>
+						<th>Time</th>
+						<th>Difficulty</th>
+					</tr>
+				</thead>
+				<tbody>
+			  	<%= render @hikes %>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+
+
+	<%#= paginate(@hikes) %>
+
+
+	<script type="text/javascript">
+	  var hikes = <%=@hikes_json%>
+	</script>
+
 </div>
-
-<%= render 'search' %>
-
-<table id='all_hikes'>
-  <%= render @hikes %>
-</table>
-<table id='searched_hikes'>
-  <tbody>
-  </tbody>
-</table>
-
-
-<%#= paginate(@hikes) %>
-
-
-<script type="text/javascript">
-  var hikes = <%=@hikes_json%>
-</script>
-
 
 <%= javascript_include_tag 'hikes/index.js' %>
 

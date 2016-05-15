@@ -1,7 +1,7 @@
 #navbar.navbar-default {
 	color: #004000;
 	border: none;
-	background-color: rgba(255,255,255,0.1);
+	background-color: rgba(255,255,255,0.8);
 	margin-bottom: 0;
 	.navbar-toggle {
 		border-color: #777;
@@ -24,13 +24,13 @@
 		}
 	}
 	.navbar-nav > .navbar-btn {
-		background-color: rgba(255,255,255,0.3);
+		background-color: rgba(255,255,255,0.95);
 	}
 	.dropdown {
 		.dropdown-menu {
 			border: none;
 			border-radius: 0;
-			background-color: rgba(255,255,255,0.5);
+			background-color: rgba(255,255,255,0.95);
 			a {
 				background-color: rgba(255,255,255,0);
 			}

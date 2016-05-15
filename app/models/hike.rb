@@ -19,4 +19,17 @@ class Hike < ActiveRecord::Base
 
   # paginates_per 30
 
+  def difficulty_description
+    case self.difficulty
+    when 0
+      "Easy as Pie"
+    when 1
+      "A Walk in the Park"
+    when 2
+      "Between a Rock and a Hard Place"
+    when 3
+      "Grueling"
+    end
+  end
+
 end
