@@ -12,3 +12,4 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( hikes/index.js )
 Rails.application.config.assets.precompile += %w( hikes/show.js )
+Rails.application.config.assets.precompile += %w( hikes/hikes.js )

@@ -24,10 +24,8 @@
 				</thead>
 				<tbody>
 			  	<%= render @hikes %>
-          <script id="Handlebars-Template" type="text/x-handlebars-template">
 				</tbody>
 			</table>
-
 		</div>
 	</div>
 
@@ -39,7 +37,10 @@
 	  var hikes = <%=@hikes_json%>
 	</script>
 
+
 </div>
 
 <%= javascript_include_tag 'hikes/index.js' %>
+<%= javascript_include_tag 'hikes/hikes.js' %>
+
 
