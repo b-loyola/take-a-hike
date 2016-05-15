@@ -15,6 +15,15 @@
       scrollwheel:false
     });
 
+    var bounds = new google.maps.LatLngBounds();
+
+    hikeCoordinates.forEach(function(coord){
+      var point = new google.maps.LatLng(coord.lat, coord.lng);
+      bounds.extend(point);
+    });
+
+    map.fitBounds(bounds);
+
     var hikePath = new google.maps.Polyline({
       path: hikeCoordinates,
       geodesic: true,
