@@ -8,7 +8,6 @@ $(function(){
         $(this).hide();
       } else {
         $(this).show();
-
       }
     })
   });
