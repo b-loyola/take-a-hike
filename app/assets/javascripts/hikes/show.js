@@ -27,12 +27,14 @@
     var startMarker = new google.maps.Marker({
       position: hikeCoordinates[0],
       map: map,
-      title: 'Start'
+      title: 'Start',
+      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
     });
     var endMarker = new google.maps.Marker({
       position: hikeCoordinates[hikeCoordinates.length-1],
       map: map,
-      title: 'End'
+      title: 'End',
+      icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
     });
   }
   //*********DISTANCE AND DURATION**********************//
