@@ -13,6 +13,27 @@ script.appendTo($('body'));
       scrollwheel:false,
       mapTypeId: google.maps.MapTypeId.TERRAIN
     });
+
+    map.set('styles',[
+      {
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [
+          { hue: '#7E6511' },
+          { saturation: 10 },
+          { lightness: -10 }
+        ]
+      },
+      {
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [
+          { lightness: -5 }
+        ]
+      }
+    ]);
+
+
     //------ ADD ALL MARKERS TO MAP START ----//
     
     hikes.forEach(function(hike){
