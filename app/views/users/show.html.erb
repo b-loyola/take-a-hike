@@ -1,0 +1,52 @@
+<div class="container">
+
+  <div class="row">
+
+    <div id="user-avatar" class="col-xs-4 col-sm-2 col-lg-2">
+      <%= link_to image_tag('avatar.png', width: '75', height: '75', alt: 'user avatar') %>
+    </div>
+
+    <div id="user-name" class="col-xs-14 col-sm-10 col-lg-10">
+
+      <h3><%= @user.full_name %></h3>
+
+      <div>
+        <h4>Total KMs Hiked: </h4>
+      </div>
+
+    </div>
+
+  </div> <!-- end of row -->
+
+  <div class="row">
+
+  <!-- Hikes marked as To-Do by User -->
+    <div id="hikes-todo" class="col-xs-6 col-sm-4">
+      <h4>To-Do Hikes</h4>
+    </div>
+
+  <!-- Hikes Completed by User -->
+    <div id="hikes-completed" class="col-xs-6 col-sm-4">
+      <h4>Completed Hikes</h4>
+    </div>
+
+  <!-- Hikes favourited by User -->
+    <div id="hikes-favourited" class="col-xs-6 col-sm-4">
+      <h4>Favourite Hikes</h4>
+    </div>
+
+  </div> <!-- End of row -->
+
+  <div class="row">
+
+  <!-- Reviews by User -->
+    <div class="col-md-12">
+      <h4>Reviews by <%= @user.first_name %>:</h4>
+      <% @user.reviews.each do |review| %>
+        <p>Review of <%= link_to "#{Hike.find(review.hike_id).name}", hike_path(review.hike_id) %>: "<%= review.comment %>", Rating: <%= review.rating %></p>
+      <% end %>
+    </div>
+
+  </div> <!-- End of row -->
+
+</div> 
