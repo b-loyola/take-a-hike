@@ -1,39 +1,52 @@
 <div class="container">
 
-  <%= link_to "Go Back", :back %>
+  <div class="row">
 
-  <h3><%= @user.full_name %>'s Profile</h3>
+    <div id="user-avatar" class="col-xs-4 col-sm-2 col-lg-2">
+      <%= link_to image_tag('avatar.png', width: '75', height: '75', alt: 'user avatar') %>
+    </div>
+
+    <div id="user-name" class="col-xs-14 col-sm-10 col-lg-10">
+
+      <h3><%= @user.full_name %></h3>
+
+      <div>
+        <h4>Total KMs Hiked: </h4>
+      </div>
+
+    </div>
+
+  </div> <!-- end of row -->
 
   <div class="row">
 
-    <div id="kms-hiked" class="col-sm-6 col-md-4">
-      <h4>Total KMS Hiked: </h4>
-    </div>
-
   <!-- Hikes marked as To-Do by User -->
-    <div id="hikes-todo"class="col-sm-6 col-md-4">
+    <div id="hikes-todo" class="col-xs-6 col-sm-4">
       <h4>To-Do Hikes</h4>
     </div>
 
   <!-- Hikes Completed by User -->
-    <div id="hikes-completed" class="col-sm-6 col-md-4">
+    <div id="hikes-completed" class="col-xs-6 col-sm-4">
       <h4>Completed Hikes</h4>
     </div>
 
   <!-- Hikes favourited by User -->
-    <div id="hikes-favourited" class="col-sm-6 col-md-4">
+    <div id="hikes-favourited" class="col-xs-6 col-sm-4">
       <h4>Favourite Hikes</h4>
     </div>
 
-  </div> <!-- End of div class 'row' -->
+  </div> <!-- End of row -->
 
-<!-- Reviews by User -->
-  <div>
-    <h4>Reviews by <%= @user.first_name %>:</h4>
+  <div class="row">
 
-    <% @user.reviews.each do |review| %>
-      <p>Review of <%= link_to "#{Hike.find(review.hike_id).name}", hike_path(review.hike_id) %>: "<%= review.comment %>", Rating: <%= review.rating %></p>
-    <% end %>
-  </div>
+  <!-- Reviews by User -->
+    <div class="col-md-12">
+      <h4>Reviews by <%= @user.first_name %>:</h4>
+      <% @user.reviews.each do |review| %>
+        <p>Review of <%= link_to "#{Hike.find(review.hike_id).name}", hike_path(review.hike_id) %>: "<%= review.comment %>", Rating: <%= review.rating %></p>
+      <% end %>
+    </div>
+
+  </div> <!-- End of row -->
 
 </div> 
