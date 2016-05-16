@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require jquery
 //= require bootstrap-sprockets
-
+//= require jquery.bootstrap-autohidingnavbar
+//= require _env
+//= require navbar.js
