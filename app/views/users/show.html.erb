@@ -1,16 +1,39 @@
-<%= link_to "Go Back", :back %>
-<br>
+<div class="container">
 
-<div>
+  <%= link_to "Go Back", :back %>
 
   <h3><%= @user.full_name %>'s Profile</h3>
 
-  <h3>Total KMS Hiked: </h3>
+  <div class="row">
 
-  <h4>To-Do Hikes</h4>
+    <div id="kms-hiked" class="col-sm-6 col-md-4">
+      <h4>Total KMS Hiked: </h4>
+    </div>
 
-  <h4>Completed Hikes</h4>
+  <!-- Hikes marked as To-Do by User -->
+    <div id="hikes-todo"class="col-sm-6 col-md-4">
+      <h4>To-Do Hikes</h4>
+    </div>
 
-  <h4>Favourite Hikes</h4>
+  <!-- Hikes Completed by User -->
+    <div id="hikes-completed" class="col-sm-6 col-md-4">
+      <h4>Completed Hikes</h4>
+    </div>
 
-</div>
+  <!-- Hikes favourited by User -->
+    <div id="hikes-favourited" class="col-sm-6 col-md-4">
+      <h4>Favourite Hikes</h4>
+    </div>
+
+  </div> <!-- End of div class 'row' -->
+
+<!-- Reviews by User -->
+  <div>
+    <h4>Reviews by <%= @user.first_name %>:</h4>
+
+    <% @user.reviews.each do |review| %>
+      <p>Review of <%= link_to "#{Hike.find(review.hike_id).name}", hike_path(review.hike_id) %>: "<%= review.comment %>", Rating: <%= review.rating %></p>
+    <% end %>
+  </div>
+
+</div> 
