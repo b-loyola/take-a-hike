@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513185216) do
+ActiveRecord::Schema.define(version: 20160516181515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,18 @@ ActiveRecord::Schema.define(version: 20160513185216) do
   add_index "reviews", ["hike_id"], name: "index_reviews_on_hike_id", using: :btree
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
+  create_table "saved_hikes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "hike_id"
+    t.integer  "times_completed", default: 0
+    t.boolean  "favourite",       default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "saved_hikes", ["hike_id"], name: "index_saved_hikes_on_hike_id", using: :btree
+  add_index "saved_hikes", ["user_id"], name: "index_saved_hikes_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "password_digest"
@@ -56,4 +68,6 @@ ActiveRecord::Schema.define(version: 20160513185216) do
 
   add_foreign_key "reviews", "hikes"
   add_foreign_key "reviews", "users"
+  add_foreign_key "saved_hikes", "hikes"
+  add_foreign_key "saved_hikes", "users"
 end

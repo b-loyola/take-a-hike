@@ -41,8 +41,11 @@ class HikesController < ApplicationController
 	  redirect_to hikes_path
 	end
 
-  def query
-    "Hello"
+  def add_hike
+    if current_user
+      @hike = Hike.find(params[:id])
+      current_user.hikes << @hike
+    end
   end
 
 	protected
