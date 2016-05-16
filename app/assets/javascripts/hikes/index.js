@@ -77,7 +77,15 @@ script.appendTo($('body'));
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-        map.setCenter(pos);
+        map.setCenter(pos); 
+
+       var marker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          title: 'Current Location',
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+      });
+      
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
       });
