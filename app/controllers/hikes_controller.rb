@@ -17,8 +17,7 @@ class HikesController < ApplicationController
 
   def show
   	@hike = Hike.find(params[:id])
-    @hike_waypoints = @hike.simplified_waypoints(@hike.waypoints).to_json.html_safe
-    puts @hike_waypoints
+    @hike_waypoints = @hike.simplified_waypoints.to_json.html_safe
   end
 
   def edit

@@ -34,11 +34,21 @@ class Hike < ActiveRecord::Base
     end
   end
 
-  def simplified_waypoints(array)
+  def simplify_waypoints(array)
     simplified = []
     array.each_with_index do |point,i|
       simplified << point if i % 2 == 0
     end
+    simplified
+  end
+
+  def simplified_waypoints
+    simplified = waypoints
+    puts "Before size: #{simplified.size}"
+    while simplified.size > 250
+      simplified = simplify_waypoints(simplified)
+    end
+    puts "After size: #{simplified.size}"
     simplified
   end
 
