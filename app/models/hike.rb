@@ -2,7 +2,7 @@ class Hike < ActiveRecord::Base
 
   has_many :reviews, dependent: :destroy
   has_many :users, through: :saved_hikes
-  has_many :saved_hikes
+  has_many :saved_hikes, dependent: :destroy
 
 	validates :name, presence: true
 	validates :distance_in_km, numericality: {allow_blank: true, only_integer: true}
@@ -32,6 +32,14 @@ class Hike < ActiveRecord::Base
     when 3
       "Grueling"
     end
+  end
+
+  def simplified_waypoints(array)
+    simplified = []
+    array.each_with_index do |point,i|
+      simplified << point if i % 2 == 0
+    end
+    simplified
   end
 
   def average_rating

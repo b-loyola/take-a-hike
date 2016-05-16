@@ -60,7 +60,6 @@ script.appendTo($('body'));
     function closeAllInfoWindow(){
       for (var i=0; i<infoWindowList.length; i++){
         infoWindowList[i].close();
-        console.log(infoWindowList[i]);
       }
     }
     //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---// 
