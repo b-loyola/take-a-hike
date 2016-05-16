@@ -35,7 +35,7 @@ script.appendTo($('body'));
 
 
     //------ ADD ALL MARKERS TO MAP START ----//
-    
+    var infoWindowList = []
     hikes.forEach(function(hike){
       var marker = new google.maps.Marker({
       position: {lat:hike.start_lat, lng:hike.start_lng},
@@ -47,14 +47,27 @@ script.appendTo($('body'));
       var infowindow = new google.maps.InfoWindow({
         content:"<div> <a href=/hikes/" + hike.id + "/>" + hike.name + "</div>"
       });
+
+      infoWindowList.push(infowindow)
       
       marker.addListener('click', function() {
+        closeAllInfoWindow();
         infowindow.open(map, marker);
       });
       //----- ADD INFO WINDOW FOR EACH MARKER -----//
 
+    //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---//  
+    function closeAllInfoWindow(){
+      for (var i=0; i<infoWindowList.length; i++){
+        infoWindowList[i].close();
+        console.log(infoWindowList[i]);
+      }
+    }
+    //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---// 
+
     });
 
+    
 //------------INITIATE MAP------------------//
 
 //--------------------------------GEO LOCATION STUFF-----------------------//
