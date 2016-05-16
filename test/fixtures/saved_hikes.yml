@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  hike_id: 
+  completed: false
+  favourite: false
+
+two:
+  user_id: 
+  hike_id: 
+  completed: false
+  favourite: false
