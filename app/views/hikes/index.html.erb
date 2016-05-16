@@ -10,6 +10,7 @@
 		<%= render 'search' %>
 	</div>
 
+
 	<div class="row">
 		<div class="container">
 
@@ -17,7 +18,7 @@
 				<thead>
 					<tr>
 						<th>Hike Name</th>
-						<th>Distance</th>
+						<th id="distance_sort">Distance</th>
 						<th>Time</th>
 						<th>Difficulty</th>
 					</tr>
@@ -39,6 +40,6 @@
 </div>
 
 <%= javascript_include_tag 'hikes/index.js' %>
-<%= javascript_include_tag 'hikes/hikes.js' %>
+<%= javascript_include_tag 'hikes/hikes_search.js' %>
 
 
