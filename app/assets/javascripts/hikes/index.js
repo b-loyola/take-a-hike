@@ -45,9 +45,14 @@ function initMap() {
 
   function getMarkers() {
 
+    var southWest = map.getBounds().getSouthWest();
+    var northEast = map.getBounds().getNorthEast();
+
     var position = {
-      lat: map.getCenter().lat(),
-      lng: map.getCenter().lng()
+      max_lat: northEast.lat(),
+      min_lat: southWest.lat(),
+      max_lng: northEast.lng(),
+      min_lng: southWest.lng()
     };
 
     // Call server with ajax passing it the bounds

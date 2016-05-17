@@ -23,21 +23,20 @@ class HikesController < ApplicationController
       @hikes = @hikes.duration(min,max)
     end
     @hikes = @hikes.search_name(params[:search_name]) if params[:search_name]
-    @hikes_json = @hikes.to_json.html_safe
   end
 
   def nearby
 
     bounds = {
-      max_lat: params[:position]["lat"].to_f + 0.1,
-      min_lat: params[:position]["lat"].to_f - 0.1,
-      max_lng: params[:position]["lng"].to_f + 0.4,
-      min_lng: params[:position]["lng"].to_f - 0.4
+      max_lat: params[:position]["max_lat"].to_f,
+      min_lat: params[:position]["min_lat"].to_f,
+      max_lng: params[:position]["max_lng"].to_f,
+      min_lng: params[:position]["min_lng"].to_f
     }
 
     puts bounds
 
-    @hike = Hike.where('start_lat >= ? AND start_lat <= ?', bounds[:min_lat], bounds[:max_lat]).select(:id,
+    @hike = Hike.where('start_lat >= ? AND start_lat <= ?', bounds[:min_lat], bounds[:max_lat]).where('start_lng >= ? AND start_lng <= ?', bounds[:min_lng], bounds[:max_lng]).select(:id,
       :spring, 
       :winter, 
       :summer, 
