@@ -26,6 +26,35 @@ class HikesController < ApplicationController
     @hikes_json = @hikes.to_json.html_safe
   end
 
+  def nearby
+
+    bounds = {
+      max_lat: params[:position]["lat"].to_f + 0.1,
+      min_lat: params[:position]["lat"].to_f - 0.1,
+      max_lng: params[:position]["lng"].to_f + 0.4,
+      min_lng: params[:position]["lng"].to_f - 0.4
+    }
+
+    puts bounds
+
+    @hike = Hike.where('start_lat >= ? AND start_lat <= ?', bounds[:min_lat], bounds[:max_lat]).select(:id,
+      :spring, 
+      :winter, 
+      :summer, 
+      :fall, 
+      :name, 
+      :distance_in_km, 
+      :time_in_hours,
+      :difficulty,
+      :start_lat,
+      :start_lng 
+    )
+
+    respond_to do |format|
+      format.json { render json: @hike }
+    end
+  end
+
   def show
   	@hike = Hike.find(params[:id])
     @hike_waypoints = @hike.simplified_waypoints(@hike.waypoints).to_json.html_safe
