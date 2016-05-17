@@ -13,3 +13,16 @@
 .gm-style-mtc {
   display: none;
 }
+
+
+th.sorting {
+  cursor:s-resize;
+}
+
+th.sorting_asc {
+  cursor:n-resize;
+}
+
+th.sorting_desc {
+  cursor:s-resize;
+}

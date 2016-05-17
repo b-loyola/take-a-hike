@@ -1,7 +1,7 @@
 <script src="https://www.google.com/jsapi"></script>
 
-<div class="container-fluid"></div>
 
+<%= link_to "Back to all hikes", hikes_path %><br/>
 
 <div class="container-fluid">
   <div class="row">
@@ -13,12 +13,9 @@
         <h4><%= pluralize(@hike.time_in_hours, 'Hour') %></h4>
         <h4>Difficulty Rating:<%= @hike.difficulty_description %></h4>
         <h4><%=@hike.seasons%></h4>
-
-      </div>
-
-      <div class="well">
-        <h2> Description </h2>
+        <h4> Description </h4>
         <p><%= @hike.description %></p>
+
       </div>
 
       <div class="well">
@@ -55,7 +52,6 @@
 
 
 
-<%= link_to "Back to all hikes", hikes_path %><br/>
 
 
 

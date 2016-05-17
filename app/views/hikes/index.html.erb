@@ -14,13 +14,13 @@
 	<div class="row">
 		<div class="container">
 
-			<table id="searched_hikes" class="table table-hover tablesorter">
+			<table id="searched_hikes" class="table table-hover">
 				<thead>
 					<tr>
-						<th>Hike Name</th>
-						<th id="distance_sort">Distance</th>
-						<th>Time</th>
-						<th>Difficulty</th>
+						<th>Hike Name <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
+						<th>Distance <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
+						<th>Time <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
+						<th>Difficulty <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,13 +32,8 @@
 
 	<%#= paginate(@hikes) %>
 
-	<script type="text/javascript">
-	  var hikes = <%=@hikes_json%>
-	</script>
-
-
 </div>
-
+<%= javascript_include_tag 'jquery.dataTables.min' %>
 <%= javascript_include_tag 'hikes/index.js' %>
 <%= javascript_include_tag 'hikes/hikes_search.js' %>
 
