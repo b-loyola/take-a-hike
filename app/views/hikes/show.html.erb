@@ -5,17 +5,25 @@
 
 <div class="container-fluid">
   <div class="row">
+    
+    <div class="title-header">
+      <h2><%= link_to @hike.name, hike_path(@hike) %></h2>
+    </div>
 
     <div class="col-xs-6">
       <div class="well">
-        <ul>
-          <h2><%= link_to @hike.name, hike_path(@hike) %></h2>
-          <li>
-              <h3><%= pluralize(@hike.distance_in_km, 'Km') %>, <%= pluralize(@hike.time_in_hours, 'Hour') %></h3>
-          </li>
-          <li><h4>Difficulty Rating:<%= @hike.difficulty %></h4></li>
-          <li><p><%= @hike.description %></p></li>
-        </ul>
+      
+        <h4><%= pluralize(@hike.distance_in_km, 'Km') %> </h4>
+        <h4><%= pluralize(@hike.time_in_hours, 'Hour') %></h4>
+        <h4>Difficulty Rating:<%= @hike.difficulty %></h4>
+
+        
+
+      </div>
+
+      <div class="well">
+        <h2> Description </h2>
+        <p><%= @hike.description %></p>
       </div>
 
       <div class="well">
@@ -24,6 +32,11 @@
           <ul id="result-list">
           </ul>
         </div>
+      </div>
+    
+      <div class="well">
+        <!-- WS - Working on Reviews (Rating & Comment) -->
+        <%= render partial: 'review' %>
       </div>
     </div>
 
@@ -49,8 +62,7 @@
 
 <%= link_to "Back to all hikes", hikes_path %><br/>
 
-<!-- WS - Working on Reviews (Rating & Comment) -->
-<%= render partial: 'review' %>
+
 
 <script type="text/javascript">
   var hikeCoordinates = <%=@hike_waypoints%>
