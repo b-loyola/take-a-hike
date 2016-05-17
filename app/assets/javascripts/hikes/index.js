@@ -94,6 +94,8 @@ function initMap() {
   // var bounds = new google.maps.LatLngBounds();
   function populateMap(hikes){
     deleteMarkers();
+
+    $('#searched_hikes').dataTable().fnDestroy();
     $('#searched_hikes').find('tbody').empty();
 
     hikes.forEach(function(hike){
@@ -132,6 +134,7 @@ function initMap() {
         .append(difficulty);
       $('#searched_hikes').append(row);
     });
+    $('#searched_hikes').dataTable({"bDestroy": true });
   }
 
   //--------------------------------GEO LOCATION STUFF-----------------------//
