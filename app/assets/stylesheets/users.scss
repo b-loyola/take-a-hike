@@ -3,36 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-#profile-page {
-  background-image: url('mountainbckgrnd.jpg');
-
-}
-
 #profile-header {
-}
-
-#user-avatar {
-  /*background-color: aqua;*/
-}
-
-#user-name {
-  /*background-color: beige;*/
-}
-
-#hikes-todo {
-  /*background-color: lightpink;*/
-}
-
-#hikes-completed {
-  /*background-color: lightgreen;*/
-}
-
-#hikes-favourited {
-  /*background-color: lightblue;*/
-}
-
-#reviews-by-user {
-  background-color: beige;
+  background-image: url('mountainbckgrnd-crop.jpg');
 }
 
 .main-btn-wrapper {
@@ -56,3 +28,6 @@
     }
   }
 }
+
+
+

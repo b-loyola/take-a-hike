@@ -1,30 +1,29 @@
 <div id="profile-page">
-<div id="" class="container">
+<div id="" class="container-fluid">
 
   <div id="profile-header" class="row">
 
     <div id="user-avatar" class="col-xs-4 col-sm-2 col-lg-2">
+      <br>
       <%= link_to image_tag('avatar.png', width: '75', height: '75', id: '#', alt: 'user avatar') %>
     </div>
 
     <div id="user-name" class="col-xs-14 col-sm-10 col-lg-10">
-
       <h3><%= @user.full_name %></h3>
-
       <div>
         <h5>(Insert funny hiker level here)</h5>
+        <br>
         <h5>Total KMs Hiked = __</h5>
       </div>
-
     </div>
 
   </div> <!-- end of row -->
 
-  <!-- Using the same design as the front page -->
 
   <div class="row main-btn-wrapper">
-    <div class="container">
-      <a href="<%=  %>" class="col-xs-4 main-btn">
+    <div class="container-fluid">
+
+      <a data-toggle="collapse" href="#collapse1" class="col-xs-4 main-btn">
         <div class="row">
           <div class="col-md-2 hidden-xs hidden-sm"></div>
           <div class="col-xs-12 col-md-2">
@@ -37,7 +36,8 @@
           </div>
         </div>
       </a>
-      <a href="<%=  %>" class="col-xs-4 main-btn">
+
+      <a data-toggle="collapse" href="#collapse2" class="col-xs-4 main-btn">
         <div class="row">
           <div class="col-md-2 hidden-xs hidden-sm"></div>
           <div class="col-xs-12 col-md-2">
@@ -50,7 +50,8 @@
           </div>
         </div>
       </a>
-      <a href="<%=  %>" class="col-xs-4 main-btn">
+
+      <a data-toggle="collapse" href="#collapse3" class="col-xs-4 main-btn">
         <div class="row">
           <div class="col-md-2 hidden-xs hidden-sm"></div>
           <div class="col-xs-12 col-md-2">
@@ -63,56 +64,74 @@
           </div>
         </div>
       </a>
+
     </div>
   </div>
 
-  <!-- End of front page design -->
+
+  <!-- Collapsible panel -->
 
 <div class="row">
 
-  <!-- Hikes marked as To-Do by User -->
-    <div id="hikes-todo" class="col-xs-6 col-sm-4">
-      <h4 class="profile-columns">To-Do Hikes</h4>
-      <ul>
-      <% @todo_hikes.each do |saved_hike| %>
-        <li><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
-      <% end %>
-      </ul>
+  <div class="col-xs-6 col-sm-4 panel-group">
+    <div class="panel panel-default">
+      <div id="collapse1" class="panel-collapse collapse">
+        <ul class="list-group">
+          <% @todo_hikes.each do |saved_hike| %>
+            <li class="list-group-item"><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
+  </div>
 
-  <!-- Hikes Completed by User -->
-    <div id="hikes-completed" class="col-xs-6 col-sm-4">
-      <h4 class="profile-columns">Completed Hikes</h4>
-      <ul>
-      <% @completed_hikes.each do |saved_hike| %>
-        <li><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
-      <% end %>
-      </ul>
+  <div class="col-xs-6 col-sm-4 panel-group">
+    <div class="panel panel-default">
+      <div id="collapse2" class="panel-collapse collapse">
+        <ul class="list-group">
+          <% @completed_hikes.each do |saved_hike| %>
+            <li class="list-group-item"><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
+  </div>
 
-  <!-- Hikes favourited by User -->
-    <div id="hikes-favourited" class="col-xs-6 col-sm-4">
-      <h4 class="profile-columns">Favourite Hikes</h4>
-      <ul>
-      <% @fave_hikes.each do |saved_hike| %>
-        <li><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
-      <% end %>
-      </ul>
+
+  <div class="col-xs-6 col-sm-4 panel-group">
+    <div class="panel panel-default">
+      <div id="collapse3" class="panel-collapse collapse">
+        <ul class="list-group">
+          <% @fave_hikes.each do |saved_hike| %>
+            <li class="list-group-item"><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
+  </div>
 
-  </div> <!-- End of row -->
+</div>
 
-  <div class="row">
+  <!-- End collapse panel -->
 
   <!-- Reviews by User -->
-    <div id="reviews-by-user" class="col-md-12">
-      <h4>Reviews by <%= @user.first_name %>:</h4>
-      <% @user.reviews.each do |review| %>
-        <p>Review of <%= link_to "#{Hike.find(review.hike_id).name}", hike_path(review.hike_id) %>: "<%= review.comment %>", Rating: <%= review.rating %></p>
-      <% end %>
-    </div>
 
-  </div> <!-- End of row -->
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse4">Reviews by <%= @user.first_name %></a>
+      </h4>
+    </div>
+    <div id="collapse4" class="panel-collapse collapse">
+      <ul class="list-group">
+        <% @user.reviews.each do |review| %>
+          <li class="list-group-item">Review of <%= link_to "#{Hike.find(review.hike_id).name}", hike_path(review.hike_id) %>: "<%= review.comment %>", Rating: <%= review.rating %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
 
 </div> 
 </div>
