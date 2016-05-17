@@ -12,12 +12,17 @@ $(function() {
   });
 
   $('#searched_hikes').DataTable({
-    'paging': false,
-    'filter': false
-
+    // 'paging': false,
+    // 'filter': false
   });
 
+  var link = $('<a>').attr('href', '/hikes/' + '3').text('Name');
+  var row = $('<tr>').addClass("hike-row").append($('<td>').append(link));
+
+  $('#difficulty').on('change', function(event){
+    debugger
+    event.preventDefault();
+    $('#searched_hikes').append(row);
+  });
 });
-
-
 

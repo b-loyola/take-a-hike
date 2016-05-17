@@ -63,9 +63,7 @@ function initMap() {
 
   // Sets the map on all markers in the array.
   function setMapOnAll(map) {
-    console.log("inside setMapOnAll");
     for (var i = 0; i < markers.length; i++) {
-      console.log(markers[i]);
       markers[i].setMap(map);
     }
   }
@@ -91,6 +89,7 @@ function initMap() {
   // var bounds = new google.maps.LatLngBounds();
   function populateMap(hikes){
     deleteMarkers();
+    $('#searched_hikes').find('tbody').empty();
 
     hikes.forEach(function(hike){
 
@@ -102,19 +101,31 @@ function initMap() {
       id: hike.id,
       distance: hike.distance_in_km,
       });
-      
+
       markers.push(marker);
 
       //----- ADD INFO WINDOW FOR EACH MARKER -----//
 
       google.maps.event.addListener(marker, 'click', function(){
-        console.log(this);
         windowContent = "<h5>"+"<a href=/hikes/"+this.id+">"+this.name+"</a>"+"</h5>"+"<p>"+"<strong>"+this.distance+"</strong>"+" km"+"</p>";
         // calcRoute(this.position);
         infoWindow.setContent(windowContent);
         infoWindow.open(map, this);
       });
 
+      //------ POPULATE TABLE WITH DATA ----------//
+
+
+      var name = $('<td>').append($('<a>').attr('href', '/hikes/' + hike.id).text(hike.name));
+      var dist = $('<td>').text(hike.distance_in_km + " km");
+      var difficulty = $('<td>').text(hike.difficulty);
+      var time = $('<td>').text(hike.time_in_hours + "Hours");
+      var row = $('<tr>').addClass("hike-row")
+        .append(name)
+        .append(dist)
+        .append(time)
+        .append(difficulty);
+      $('#searched_hikes').append(row);
     });
   }
 
@@ -153,4 +164,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                         'Error: Your browser doesn\'t support geolocation.');
 }
 //---------------------------------GEO LOCATION STUFF-----------------------//
+
+//-----------FILTERING RESULTS--------//
+
+
 
