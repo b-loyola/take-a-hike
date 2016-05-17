@@ -50,4 +50,13 @@ class Hike < ActiveRecord::Base
     reviews.count > 0 ? (reviews.sum(:rating).to_f/reviews.count).round(2) : 0
   end
 
+  def seasons
+    seasons = []
+    seasons << "Winter" if winter
+    seasons << "Spring" if spring
+    seasons << "Summer" if summer
+    seasons << "Fall" if fall
+    seasons
+  end
+
 end
