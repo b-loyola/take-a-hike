@@ -3,32 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-#profile-page {
-  background-image: url('mountainbckgrnd.jpg');
-
-}
-
 #profile-header {
-}
-
-#user-avatar {
-  /*background-color: aqua;*/
-}
-
-#user-name {
-  /*background-color: beige;*/
-}
-
-#hikes-todo {
-  /*background-color: lightpink;*/
-}
-
-#hikes-completed {
-  /*background-color: lightgreen;*/
-}
-
-#hikes-favourited {
-  /*background-color: lightblue;*/
+  background-image: url('mountainbckgrnd-crop.jpg');
 }
 
 #reviews-by-user {
@@ -56,3 +32,13 @@
     }
   }
 }
+
+.saved-hikes {
+  .hidden {
+    display: none;
+  }
+  .show {
+    display: block;
+  }
+}
+
