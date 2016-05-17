@@ -11,8 +11,11 @@ $(function() {
     });
   });
 
+  $('#searched_hikes').DataTable({
+    'paging': false,
+    'filter': false
 
-  // setTimeout(function() {$('#searched_hikes').tablesorter();}, 10000);
+  });
 
 });
 
