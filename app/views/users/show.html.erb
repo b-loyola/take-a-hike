@@ -1,6 +1,5 @@
-<div id="profile-page" class="wrapper">
-
-<div id="#" class="container">
+<div id="profile-page">
+<div id="" class="container">
 
   <div id="profile-header" class="row">
 
@@ -21,34 +20,82 @@
 
   </div> <!-- end of row -->
 
-  <div class="row">
+  <!-- Using the same design as the front page -->
+
+  <div class="row main-btn-wrapper">
+    <div class="container">
+      <a href="<%=  %>" class="col-xs-4 main-btn">
+        <div class="row">
+          <div class="col-md-2 hidden-xs hidden-sm"></div>
+          <div class="col-xs-12 col-md-2">
+            <h1><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></h1>
+            <h4 class="hidden-md hidden-lg">To-Do</h4>
+          </div>
+          <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+            <h3>To-Do Hikes</h3>
+            <p>Your Next Adventure Awaits!</p>
+          </div>
+        </div>
+      </a>
+      <a href="<%=  %>" class="col-xs-4 main-btn">
+        <div class="row">
+          <div class="col-md-2 hidden-xs hidden-sm"></div>
+          <div class="col-xs-12 col-md-2">
+            <h1><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></h1>
+            <h4 class="hidden-md hidden-lg">Completed</h4>
+          </div>
+          <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+            <h3>Completed Hikes</h3>
+            <p>See How Far You've Come</p>
+          </div>
+        </div>
+      </a>
+      <a href="<%=  %>" class="col-xs-4 main-btn">
+        <div class="row">
+          <div class="col-md-2 hidden-xs hidden-sm"></div>
+          <div class="col-xs-12 col-md-2">
+            <h1><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></h1>
+            <h4 class="hidden-md hidden-lg">Favourites</h4>
+          </div>
+          <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+            <h3>Favourite Hikes</h3>
+            <p>Easy Access to Your Faves</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- End of front page design -->
+
+<div class="row">
 
   <!-- Hikes marked as To-Do by User -->
     <div id="hikes-todo" class="col-xs-6 col-sm-4">
-      <h4>To-Do Hikes</h4>
+      <h4 class="profile-columns">To-Do Hikes</h4>
       <ul>
       <% @todo_hikes.each do |saved_hike| %>
-        <li><%= saved_hike.hike.name %></li>
+        <li><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
       <% end %>
       </ul>
     </div>
 
   <!-- Hikes Completed by User -->
     <div id="hikes-completed" class="col-xs-6 col-sm-4">
-      <h4>Completed Hikes</h4>
+      <h4 class="profile-columns">Completed Hikes</h4>
       <ul>
       <% @completed_hikes.each do |saved_hike| %>
-        <li><%= saved_hike.hike.name %></li>
+        <li><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
       <% end %>
       </ul>
     </div>
 
   <!-- Hikes favourited by User -->
     <div id="hikes-favourited" class="col-xs-6 col-sm-4">
-      <h4>Favourite Hikes</h4>
+      <h4 class="profile-columns">Favourite Hikes</h4>
       <ul>
       <% @fave_hikes.each do |saved_hike| %>
-        <li><%= saved_hike.hike.name %></li>
+        <li><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
       <% end %>
       </ul>
     </div>
