@@ -4,7 +4,7 @@ var script = $('<script>')
   .attr('async','').attr('defer','');
 script.appendTo($('body'));
 //--------------LOAD API KEY--------------//
-
+var position;
 //--------------INITIATE MAP--------------//
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -42,32 +42,32 @@ script.appendTo($('body'));
       map: map,
       title: hike.name
       });
-      
+
       //----- ADD INFO WINDOW FOR EACH MARKER -----//
       var infowindow = new google.maps.InfoWindow({
         content:"<div> <a href=/hikes/" + hike.id + "/>" + hike.name + "</div>"
       });
 
       infoWindowList.push(infowindow)
-      
+
       marker.addListener('click', function() {
         closeAllInfoWindow();
         infowindow.open(map, marker);
       });
       //----- ADD INFO WINDOW FOR EACH MARKER -----//
 
-    //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---//  
+    //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---//
     function closeAllInfoWindow(){
       for (var i=0; i<infoWindowList.length; i++){
         infoWindowList[i].close();
         console.log(infoWindowList[i]);
       }
     }
-    //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---// 
+    //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---//
 
     });
 
-    
+
 //------------INITIATE MAP------------------//
 
 //--------------------------------GEO LOCATION STUFF-----------------------//
@@ -78,6 +78,7 @@ script.appendTo($('body'));
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
+        position=pos;
         map.setCenter(pos);
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -95,3 +96,5 @@ script.appendTo($('body'));
                           'Error: Your browser doesn\'t support geolocation.');
   }
 //---------------------------------GEO LOCATION STUFF-----------------------//
+
+console.log(position);
