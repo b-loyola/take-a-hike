@@ -8,11 +8,11 @@ $(function() {
       } else {
         $(this).show();
       }
-    })
+    });
   });
 
 
-  setTimeout(function() {$('#searched_hikes').tablesorter();}, 10000);
+  // setTimeout(function() {$('#searched_hikes').tablesorter();}, 10000);
 
 });
 

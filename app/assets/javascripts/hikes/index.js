@@ -34,8 +34,12 @@ var position;
     ]);
 
 
+
     //------ ADD ALL MARKERS TO MAP START ----//
-    var infoWindowList = []
+    var infoWindowList = [];
+
+    var bounds = new google.maps.LatLngBounds();
+
     hikes.forEach(function(hike){
       var marker = new google.maps.Marker({
       position: {lat:hike.start_lat, lng:hike.start_lng},
@@ -44,12 +48,17 @@ var position;
       title: hike.name
       });
 
+      //------ ADD ALL STARTING POINTS TO BOUNDS----//
+      var point = new google.maps.LatLng(hike.start_lat, hike.start_lng);
+      bounds.extend(point);
+      
+
       //----- ADD INFO WINDOW FOR EACH MARKER -----//
       var infowindow = new google.maps.InfoWindow({
         content:"<div> <a href=/hikes/" + hike.id + "/>" + hike.name + "</div>"
       });
 
-      infoWindowList.push(infowindow)
+      infoWindowList.push(infowindow);
 
       marker.addListener('click', function() {
         closeAllInfoWindow();
@@ -57,15 +66,17 @@ var position;
       });
       //----- ADD INFO WINDOW FOR EACH MARKER -----//
 
-    //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---//
-    function closeAllInfoWindow(){
-      for (var i=0; i<infoWindowList.length; i++){
-        infoWindowList[i].close();
+      //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---//
+      function closeAllInfoWindow(){
+        for (var i=0; i<infoWindowList.length; i++){
+          infoWindowList[i].close();
+        }
       }
-    }
     //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---//
 
     });
+
+    map.fitBounds(bounds);
 
 
 //------------INITIATE MAP------------------//
