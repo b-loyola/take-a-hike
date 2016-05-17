@@ -1,3 +1,58 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#profile-page {
+  background-image: url('mountainbckgrnd.jpg');
+
+}
+
+#profile-header {
+}
+
+#user-avatar {
+  /*background-color: aqua;*/
+}
+
+#user-name {
+  /*background-color: beige;*/
+}
+
+#hikes-todo {
+  /*background-color: lightpink;*/
+}
+
+#hikes-completed {
+  /*background-color: lightgreen;*/
+}
+
+#hikes-favourited {
+  /*background-color: lightblue;*/
+}
+
+#reviews-by-user {
+  background-color: beige;
+}
+
+.main-btn-wrapper {
+  background-color: #449d44;
+  .main-btn {
+    color: #fff;
+    text-align: left;
+    transition: .5s all;
+    padding: 15px;
+    &:hover {
+      color: #085808;
+      text-decoration: none;
+      background-color: #71BE71;
+    }
+    &:focus {
+      color: #085808;
+      text-decoration: none;
+    }
+    .main-btn-txt {
+      text-align: left;
+    }
+  }
+}

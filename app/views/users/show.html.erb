@@ -1,9 +1,10 @@
-<div class="container">
+<div id="profile-page">
+<div id="" class="container">
 
-  <div class="row">
+  <div id="profile-header" class="row">
 
     <div id="user-avatar" class="col-xs-4 col-sm-2 col-lg-2">
-      <%= link_to image_tag('avatar.png', width: '75', height: '75', alt: 'user avatar') %>
+      <%= link_to image_tag('avatar.png', width: '75', height: '75', id: '#', alt: 'user avatar') %>
     </div>
 
     <div id="user-name" class="col-xs-14 col-sm-10 col-lg-10">
@@ -11,28 +12,92 @@
       <h3><%= @user.full_name %></h3>
 
       <div>
-        <h4>Total KMs Hiked: </h4>
+        <h5>(Insert funny hiker level here)</h5>
+        <h5>Total KMs Hiked = __</h5>
       </div>
 
     </div>
 
   </div> <!-- end of row -->
 
-  <div class="row">
+  <!-- Using the same design as the front page -->
+
+  <div class="row main-btn-wrapper">
+    <div class="container">
+      <a href="<%=  %>" class="col-xs-4 main-btn">
+        <div class="row">
+          <div class="col-md-2 hidden-xs hidden-sm"></div>
+          <div class="col-xs-12 col-md-2">
+            <h1><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></h1>
+            <h4 class="hidden-md hidden-lg">To-Do</h4>
+          </div>
+          <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+            <h3>To-Do Hikes</h3>
+            <p>Your Next Adventure Awaits!</p>
+          </div>
+        </div>
+      </a>
+      <a href="<%=  %>" class="col-xs-4 main-btn">
+        <div class="row">
+          <div class="col-md-2 hidden-xs hidden-sm"></div>
+          <div class="col-xs-12 col-md-2">
+            <h1><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></h1>
+            <h4 class="hidden-md hidden-lg">Completed</h4>
+          </div>
+          <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+            <h3>Completed Hikes</h3>
+            <p>See How Far You've Come</p>
+          </div>
+        </div>
+      </a>
+      <a href="<%=  %>" class="col-xs-4 main-btn">
+        <div class="row">
+          <div class="col-md-2 hidden-xs hidden-sm"></div>
+          <div class="col-xs-12 col-md-2">
+            <h1><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></h1>
+            <h4 class="hidden-md hidden-lg">Favourites</h4>
+          </div>
+          <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+            <h3>Favourite Hikes</h3>
+            <p>Easy Access to Your Faves</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- End of front page design -->
+
+<div class="row">
 
   <!-- Hikes marked as To-Do by User -->
     <div id="hikes-todo" class="col-xs-6 col-sm-4">
-      <h4>To-Do Hikes</h4>
+      <h4 class="profile-columns">To-Do Hikes</h4>
+      <ul>
+      <% @todo_hikes.each do |saved_hike| %>
+        <li><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
+      <% end %>
+      </ul>
     </div>
 
   <!-- Hikes Completed by User -->
     <div id="hikes-completed" class="col-xs-6 col-sm-4">
-      <h4>Completed Hikes</h4>
+      <h4 class="profile-columns">Completed Hikes</h4>
+      <ul>
+      <% @completed_hikes.each do |saved_hike| %>
+        <li><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
+      <% end %>
+      </ul>
     </div>
 
   <!-- Hikes favourited by User -->
     <div id="hikes-favourited" class="col-xs-6 col-sm-4">
-      <h4>Favourite Hikes</h4>
+      <h4 class="profile-columns">Favourite Hikes</h4>
+      <ul>
+      <% @fave_hikes.each do |saved_hike| %>
+        <li><%= link_to saved_hike.hike.name, hike_path(saved_hike.hike_id) %></li>
+      <% end %>
+      </ul>
     </div>
 
   </div> <!-- End of row -->
@@ -40,7 +105,7 @@
   <div class="row">
 
   <!-- Reviews by User -->
-    <div class="col-md-12">
+    <div id="reviews-by-user" class="col-md-12">
       <h4>Reviews by <%= @user.first_name %>:</h4>
       <% @user.reviews.each do |review| %>
         <p>Review of <%= link_to "#{Hike.find(review.hike_id).name}", hike_path(review.hike_id) %>: "<%= review.comment %>", Rating: <%= review.rating %></p>
@@ -50,3 +115,4 @@
   </div> <!-- End of row -->
 
 </div> 
+</div>
