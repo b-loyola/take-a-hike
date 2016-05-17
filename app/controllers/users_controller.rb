@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @todo_hikes = SavedHike.where(user_id: params[:id], times_completed: 0)
-    @completed_hikes = SavedHike.where(user_id: params[:id]).where('times_completed >= 1')
+    @completed_hikes = SavedHike.where(user_id: params[:id]).where('times_completed >= ?', 1)
     @fave_hikes = SavedHike.where(user_id: params[:id], favourite: true)
   end
 
