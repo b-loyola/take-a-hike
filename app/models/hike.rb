@@ -24,13 +24,13 @@ class Hike < ActiveRecord::Base
   def difficulty_description
     case self.difficulty
     when 0
-      "Easy as Pie"
+      "Easy"
     when 1
-      "A Walk in the Park"
+      "Medium"
     when 2
-      "Between a Rock and a Hard Place"
+      "Hard"
     when 3
-      "Grueling"
+      "Extreme"
     end
   end
 
