@@ -4,116 +4,153 @@ var script = $('<script>')
   .attr('async','').attr('defer','');
 script.appendTo($('body'));
 //--------------LOAD API KEY--------------//
-var position;
+
+var hikes = [];
+var markers = [];
+var infowindow = null;
+
 //--------------INITIATE MAP--------------//
-  function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 49.2819, lng: -123.108},
-      zoom: 11,
-      scrollwheel:false,
-      mapTypeId: google.maps.MapTypeId.TERRAIN
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 49.2819, lng: -123.108},
+    zoom: 11,
+    scrollwheel:false,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  });
+
+  infoWindow = new google.maps.InfoWindow({content: "Holding..."});
+
+  //--------------SET MAP STYLES--------------/
+  map.set('styles',[
+    {
+      featureType: 'landscape',
+      elementType: 'geometry',
+      stylers: [
+        { hue: '#7E6511' },
+        { saturation: 10 },
+        { lightness: -10 }
+      ]
+    },
+    {
+      featureType: 'road',
+      elementType: 'geometry',
+      stylers: [
+        { lightness: -5 }
+      ]
+    }
+  ]);
+
+  //--------------GET NEW HIKES ONCE MAP HAS CHANGED--------------/
+  google.maps.event.addListener(map, 'idle', getMarkers);
+
+  function getMarkers() {
+
+    var position = {
+      lat: map.getCenter().lat(),
+      lng: map.getCenter().lng()
+    };
+
+    // Call server with ajax passing it the bounds
+    $.ajax({
+      method: 'get',
+      url: 'hikes/nearby',
+      data: {position: position},
+      dataType: 'json',
+      success: populateMap
     });
 
-    map.set('styles',[
-      {
-        featureType: 'landscape',
-        elementType: 'geometry',
-        stylers: [
-          { hue: '#7E6511' },
-          { saturation: 10 },
-          { lightness: -10 }
-        ]
-      },
-      {
-        featureType: 'road',
-        elementType: 'geometry',
-        stylers: [
-          { lightness: -5 }
-        ]
-      }
-    ]);
+  }
 
+  // Sets the map on all markers in the array.
+  function setMapOnAll(map) {
+    console.log("inside setMapOnAll");
+    for (var i = 0; i < markers.length; i++) {
+      console.log(markers[i]);
+      markers[i].setMap(map);
+    }
+  }
 
+  // Removes the markers from the map, but keeps them in the array.
+  function clearMarkers() {
+    setMapOnAll(null);
+  }
 
-    //------ ADD ALL MARKERS TO MAP START ----//
-    var infoWindowList = [];
+  // Shows any markers currently in the array.
+  function showMarkers() {
+    setMapOnAll(map);
+  }
 
-    var bounds = new google.maps.LatLngBounds();
+  // Deletes all markers in the array by removing references to them.
+  function deleteMarkers() {
+    clearMarkers();
+    markers = [];
+  }
+
+  //------ ADD ALL MARKERS TO MAP START ----//
+
+  // var bounds = new google.maps.LatLngBounds();
+  function populateMap(hikes){
+    deleteMarkers();
 
     hikes.forEach(function(hike){
+
       var marker = new google.maps.Marker({
       position: {lat:hike.start_lat, lng:hike.start_lng},
       icon: 'media/hiking.png',
       map: map,
-      title: hike.name
+      name: hike.name,
+      id: hike.id,
+      distance: hike.distance_in_km,
       });
-
-      //------ ADD ALL STARTING POINTS TO BOUNDS----//
-      var point = new google.maps.LatLng(hike.start_lat, hike.start_lng);
-      bounds.extend(point);
       
+      markers.push(marker);
 
       //----- ADD INFO WINDOW FOR EACH MARKER -----//
-      var infowindow = new google.maps.InfoWindow({
-        content:"<div> <a href=/hikes/" + hike.id + "/>" + hike.name + "</div>"
+
+      google.maps.event.addListener(marker, 'click', function(){
+        console.log(this);
+        windowContent = "<h5>"+"<a href=/hikes/"+this.id+">"+this.name+"</a>"+"</h5>"+"<p>"+"<strong>"+this.distance+"</strong>"+" km"+"</p>";
+        // calcRoute(this.position);
+        infoWindow.setContent(windowContent);
+        infoWindow.open(map, this);
       });
-
-      infoWindowList.push(infowindow);
-
-      marker.addListener('click', function() {
-        closeAllInfoWindow();
-        infowindow.open(map, marker);
-      });
-      //----- ADD INFO WINDOW FOR EACH MARKER -----//
-
-      //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---//
-      function closeAllInfoWindow(){
-        for (var i=0; i<infoWindowList.length; i++){
-          infoWindowList[i].close();
-        }
-      }
-    //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---//
 
     });
-
-    map.fitBounds(bounds);
-
-
-//------------INITIATE MAP------------------//
-
-//--------------------------------GEO LOCATION STUFF-----------------------//
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-
-
-        map.setCenter(pos);
-
-       var marker = new google.maps.Marker({
-          position: pos,
-          map: map,
-          title: 'Current Location',
-          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-      });
-
-      }, function() {
-        handleLocationError(true, infoWindow, map.getCenter());
-      });
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
-    }
   }
 
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-                          'Error: The Geolocation service failed.' :
-                          'Error: Your browser doesn\'t support geolocation.');
+  //--------------------------------GEO LOCATION STUFF-----------------------//
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      map.setCenter(pos);
+
+      var marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        title: 'Current Location',
+        icon: 'media/here.png',
+      });
+
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
   }
+}
+//------------END OF INITIATE MAP------------------//
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+}
 //---------------------------------GEO LOCATION STUFF-----------------------//
 

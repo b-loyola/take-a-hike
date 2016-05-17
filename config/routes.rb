@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'hikes/nearby'
+  
   resources :hikes, only: [:index, :create, :show] do
     resources :reviews, only: [:new, :create]
   end
