@@ -2,7 +2,6 @@ $(function(){
   // $("#searched_hikes").tablesorter();
 
   $('#search_form').on('keyup', function(){
-    console.log("event activated");
     var searchName = $('#search_name').val();
     var rows = $('.hike-row');
     $.each(rows, function(){
