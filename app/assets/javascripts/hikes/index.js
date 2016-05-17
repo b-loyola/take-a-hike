@@ -9,7 +9,7 @@ script.appendTo($('body'));
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 49.2819, lng: -123.108},
-      zoom: 12,
+      zoom: 11,
       scrollwheel:false,
       mapTypeId: google.maps.MapTypeId.TERRAIN
     });
@@ -39,6 +39,7 @@ script.appendTo($('body'));
     hikes.forEach(function(hike){
       var marker = new google.maps.Marker({
       position: {lat:hike.start_lat, lng:hike.start_lng},
+      icon: 'media/hiking.png',
       map: map,
       title: hike.name
       });

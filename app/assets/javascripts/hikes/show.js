@@ -39,13 +39,13 @@
       position: hikeCoordinates[0],
       map: map,
       title: 'Start',
-      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+      icon: '../../media/start.png'
     });
     var endMarker = new google.maps.Marker({
       position: hikeCoordinates[hikeCoordinates.length-1],
       map: map,
       title: 'End',
-      icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+      icon: '../../media/finish.png'
     });
 
     //----ELEVATION CHART----//
