@@ -1,7 +1,18 @@
 class HikesController < ApplicationController
 
   def index
-    @hikes = Hike.all #.page(params[:page])
+    @hikes = Hike.select(:id,
+      :spring, 
+      :winter, 
+      :summer, 
+      :fall, 
+      :name, 
+      :distance_in_km, 
+      :time_in_hours,
+      :difficulty,
+      :description,
+      :start_lat,
+      :start_lng ) 
     @hikes = @hikes.spring if params[:spring]
     @hikes = @hikes.winter if params[:winter]
     @hikes = @hikes.summer if params[:summer]
@@ -17,8 +28,7 @@ class HikesController < ApplicationController
 
   def show
   	@hike = Hike.find(params[:id])
-    @hike_waypoints = @hike.waypoints.to_json.html_safe
-    puts @hike_waypoints
+    @hike_waypoints = @hike.simplified_waypoints(@hike.waypoints).to_json.html_safe
   end
 
   def edit

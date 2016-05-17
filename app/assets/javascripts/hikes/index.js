@@ -9,7 +9,7 @@ var position;
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 49.2819, lng: -123.108},
-      zoom: 12,
+      zoom: 11,
       scrollwheel:false,
       mapTypeId: google.maps.MapTypeId.TERRAIN
     });
@@ -39,6 +39,7 @@ var position;
     hikes.forEach(function(hike){
       var marker = new google.maps.Marker({
       position: {lat:hike.start_lat, lng:hike.start_lng},
+      icon: 'media/hiking.png',
       map: map,
       title: hike.name
       });
@@ -60,7 +61,6 @@ var position;
     function closeAllInfoWindow(){
       for (var i=0; i<infoWindowList.length; i++){
         infoWindowList[i].close();
-        console.log(infoWindowList[i]);
       }
     }
     //----NAIVE LINEAR WAY TO CLOSE ALL INFO WINDOW BEFORE CLICKING NEW ONE---//
@@ -78,8 +78,17 @@ var position;
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-        position=pos;
+
+
         map.setCenter(pos);
+
+       var marker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          title: 'Current Location',
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+      });
+
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
       });
@@ -97,4 +106,3 @@ var position;
   }
 //---------------------------------GEO LOCATION STUFF-----------------------//
 
-console.log(position);
