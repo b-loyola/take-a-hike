@@ -40,10 +40,16 @@ function initMap() {
     }
   ]);
 
+  $('#difficulty').on('change', getMarkers);
+
   //--------------GET NEW HIKES ONCE MAP HAS CHANGED--------------/
   google.maps.event.addListener(map, 'idle', getMarkers);
 
   function getMarkers() {
+
+    var difficulty = $('#difficulty').val();
+    var duration = $('#duration').val();
+    var name = $('#search_name').val();
 
     var southWest = map.getBounds().getSouthWest();
     var northEast = map.getBounds().getNorthEast();
@@ -59,7 +65,7 @@ function initMap() {
     $.ajax({
       method: 'get',
       url: 'hikes/nearby',
-      data: {position: position},
+      data: {position: position, difficulty: difficulty, duration: duration, name: name},
       dataType: 'json',
       success: populateMap
     });
@@ -125,16 +131,19 @@ function initMap() {
 
 
       var name = $('<td>').append($('<a>').attr('href', '/hikes/' + hike.id).text(hike.name));
-      var dist = $('<td>').text(hike.distance_in_km + " km");
+      var dist = $('<td>').text(hike.distance_in_km + ' km');
       var difficulty = $('<td>').text(hike.difficulty);
-      var time = $('<td>').text(hike.time_in_hours + " hours");
-      var row = $('<tr>').addClass("hike-row")
+
+      var time = $('<td>').text(hike.time_in_hours + 'Hours');
+      var row = $('<tr>').addClass('hike-row').attr('data-difficulty', hike.difficulty).attr('data-distance', hike.distance_in_km)
+
         .append(name)
         .append(dist)
         .append(time)
         .append(difficulty);
       $('#searched_hikes').append(row);
     });
+
     $('#searched_hikes').dataTable({
       "bDestroy": true,
       "iDisplayLength": 25,
@@ -145,6 +154,7 @@ function initMap() {
         { "width": "15%" }
       ]
     });
+
   }
 
   //--------------------------------GEO LOCATION STUFF-----------------------//
@@ -183,7 +193,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 //---------------------------------GEO LOCATION STUFF-----------------------//
 
-//-----------FILTERING RESULTS--------//
 
 
 
