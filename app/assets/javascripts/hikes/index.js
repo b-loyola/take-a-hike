@@ -107,6 +107,7 @@ function initMap() {
       name: hike.name,
       id: hike.id,
       distance: hike.distance_in_km,
+      time: hike.time_in_hours
       });
 
       markers.push(marker);
@@ -114,7 +115,7 @@ function initMap() {
       //----- ADD INFO WINDOW FOR EACH MARKER -----//
 
       google.maps.event.addListener(marker, 'click', function(){
-        windowContent = "<h5>"+"<a href=/hikes/"+this.id+">"+this.name+"</a>"+"</h5>"+"<p>"+"<strong>"+this.distance+"</strong>"+" km"+"</p>";
+        windowContent = "<h5>"+"<a href=/hikes/"+this.id+">"+this.name+"</a></h5><p>Length: <strong>"+this.distance+"</strong> km</p><p>Duration: <strong>"+this.time+"</strong> hours</p>";
         // calcRoute(this.position);
         infoWindow.setContent(windowContent);
         infoWindow.open(map, this);
@@ -126,7 +127,7 @@ function initMap() {
       var name = $('<td>').append($('<a>').attr('href', '/hikes/' + hike.id).text(hike.name));
       var dist = $('<td>').text(hike.distance_in_km + " km");
       var difficulty = $('<td>').text(hike.difficulty);
-      var time = $('<td>').text(hike.time_in_hours + "Hours");
+      var time = $('<td>').text(hike.time_in_hours + " hours");
       var row = $('<tr>').addClass("hike-row")
         .append(name)
         .append(dist)
@@ -134,7 +135,16 @@ function initMap() {
         .append(difficulty);
       $('#searched_hikes').append(row);
     });
-    $('#searched_hikes').dataTable({"bDestroy": true });
+    $('#searched_hikes').dataTable({
+      "bDestroy": true,
+      "iDisplayLength": 25,
+      "columns": [
+        { "width": "55%" },
+        { "width": "15%" },
+        { "width": "15%" },
+        { "width": "15%" }
+      ]
+    });
   }
 
   //--------------------------------GEO LOCATION STUFF-----------------------//
