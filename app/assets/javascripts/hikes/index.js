@@ -134,7 +134,7 @@ function initMap() {
       var dist = $('<td>').text(hike.distance_in_km + ' km');
       var difficulty = $('<td>').text(hike.difficulty);
 
-      var time = $('<td>').text(hike.time_in_hours + 'Hours');
+      var time = $('<td>').text(hike.time_in_hours + (hike.time_in_hours == 1 ? ' hour' : ' hours'));
       var row = $('<tr>').addClass('hike-row').attr('data-difficulty', hike.difficulty).attr('data-distance', hike.distance_in_km)
 
         .append(name)
