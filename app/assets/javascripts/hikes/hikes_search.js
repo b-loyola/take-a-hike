@@ -12,12 +12,9 @@ $(function() {
   });
 
   $('#searched_hikes').DataTable({
-    'paging': false,
-    'filter': false
-
+    "bDestroy": true
+    // 'paging': false,
+    // 'filter': false
   });
-
 });
-
-
 
