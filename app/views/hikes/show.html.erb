@@ -4,6 +4,8 @@
   var hikeCoordinates = <%=@hike_waypoints%>;
   var reviews = <%=@hike_reviews_json%>;
   var averageRating = <%=@average_rating_json%>;
+  var hike = <%=@hike_json%>;
+
 </script>
 
 <%= link_to "Back to all hikes", hikes_path %><br/>
@@ -22,7 +24,9 @@
         <h4>Difficulty Rating:<%= @hike.difficulty_description %></h4>
         <h4><%=@hike.seasons.join(", ")%></h4>
         <h4> Description </h4>
-        <p><%= @hike.description %></p>
+        <p id="hike-description-trunc"><%= truncate(@hike.description, :omission => "...", :length => 200) %></p>
+        <button class="hike-description btn btn-default" role="button">More</button>
+        <button class="hide-hike-description btn btn-default" style="display: none;" role="button">Less</button>
       </div>
          
       <div class="well">

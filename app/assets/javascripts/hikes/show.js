@@ -99,3 +99,19 @@ function plotElevation(elevations, status) {
     backgroundColor: '#E4E4E4',
   });
 }
+
+
+
+// Hike Description Show More Button
+var oldText=$('#hike-description-trunc').text();
+$('.hike-description').on('click', function(){
+  $('#hike-description-trunc').text(hike.description);
+  $(this).hide();
+  $('.hide-hike-description').show();
+});
+
+$('.hide-hike-description').on('click', function(){
+  $('#hike-description-trunc').text(oldText);
+  $(this).hide();
+  $('.hike-description').show();
+});
