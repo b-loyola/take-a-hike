@@ -1,23 +1,105 @@
 <div>
-
   <div>
-    <br>
     <%= link_to "Rate this hike!", new_hike_review_path(@hike) %>
     <% unless @hike.reviews.count == 0 %>
-      Average Rating: <em><%= @hike.average_rating %></em>
+      <div id="rating-block">
+          <h4 class="bold padding-bottom-7">Average User Rating: <%= @hike.average_rating %> <small>/ 5</small></h4>
+          <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </button>
+      </div>
     <% end %>
-  </div>
 
-  <% @hike.reviews.each do |review| %>
-    <div>
-      <%= link_to review.user.full_name, user_path(review.user.id) %>:
-      (<%= review.id %>) Rating: <%= review.rating %>, Comment: <%= review.comment %>
+      <br>
+      <br>
+
+      <div class="review-block">
+          <% @hike.reviews.each do |review| %>
+              <div class="row">
+                
+                <div class="col-sm-3">
+                  <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                  <div class="review-block-name">
+                   <%= link_to review.user.full_name, user_path(review.user.id) %>
+                  </div>
+                </div>
+                
+                <div class="col-sm-9">
+                  <div id="review-block-rate-<%= review.id %>">
+                    <button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="review-block-description"> Rating: <%= review.rating %> 
+                  <br>
+                <h4><%= review.comment %></h4>
+                </div>
+            </div>
+        </div>
+        <hr>
+      <% end %>
     </div>
-  <% end %>
-
+    <button type="button" class="btn btn-default hide-button">Hide Reviews </button>
+    <button type="button" class="btn btn-default show-button">Show Reviews </button>    
+    </div>
 </div>
 
 
+<script>
+$(".review-block").hide();
+$(".hide-button").hide();
+
+ for (var i=0; i<averageRating+2; i++){
+  var star="#rating-block button:nth-child(" + i + ")"
+  $(star).removeClass("btn-default");
+  $(star).addClass("btn-warning");
+}
+
+reviews.forEach(function(review){
+  for (var i=0; i<review.rating+1; i++){
+    var star="#review-block-rate-"+ review.id +" button:nth-child(" + i + ")"
+    $(star).removeClass("btn-default");
+    $(star).addClass("btn-warning");
+  }
+})
+
+$(".hide-button").on('click',function(){
+  $(".review-block").hide();
+  $(".hide-button").hide();
+  $(".show-button").show();
+})
+
+$(".show-button").on('click', function(){
+  $(".review-block").show();
+  $(".hide-button").show();
+  $(".show-button").hide();
+})
+
+</script>
 
 
 

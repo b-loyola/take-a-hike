@@ -54,6 +54,8 @@ class HikesController < ApplicationController
   def show
   	@hike = Hike.find(params[:id])
     @hike_waypoints = @hike.simplified_waypoints(@hike.waypoints).to_json.html_safe
+    @hike_reviews_json = @hike.reviews.to_json.html_safe
+    @average_rating_json = @hike.average_rating.to_json.html_safe
   end
 
   def edit

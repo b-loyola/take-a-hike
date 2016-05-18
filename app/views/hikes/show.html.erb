@@ -1,17 +1,21 @@
 <script src="https://www.google.com/jsapi"></script>
 
+<script type="text/javascript">
+  var hikeCoordinates = <%=@hike_waypoints%>;
+  var reviews = <%=@hike_reviews_json%>;
+  var averageRating = <%=@average_rating_json%>;
+</script>
 
 <%= link_to "Back to all hikes", hikes_path %><br/>
 <%text = "https://twitter.com/intent/tweet?button_hashtag=TakeAHike&text=I%20just%20finished%20" +@hike.name.gsub(" ","%20") +"!!" %>
 
 
 <div class="container-fluid">
+  
   <div class="row">
     
-    <div class="col-xs-4">
+    <div class="col-xs-6">
       <div class="well">
-     
-        <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
         <h2><%= link_to @hike.name, hike_path(@hike) %></h2>
         <h4><%= pluralize(@hike.distance_in_km, 'Km') %> </h4>
         <h4><%= pluralize(@hike.time_in_hours, 'Hour') %></h4>
@@ -20,10 +24,9 @@
         <h4> Description </h4>
         <p><%= @hike.description %></p>
       </div>
-      
- 
-    
+         
       <div class="well">
+        <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
         <%= render partial: 'review' %>
       </div>
     </div>
@@ -34,34 +37,19 @@
         	<div id="map"></div>
         </div>
         <div class="fixed_graph">
+          <h4> Elevation Change: </h4>
           <div id="elevation_chart"></div>
         </div>
       </div>
     </div>
 
-    <div class="col-xs-2">
-      
-      <div class="well">
-        <h3>Current Weather:</h3>
-        <div id="results-container">
-          <div id="result-list">
-          </div>
-        </div>
-      </div>
-
-      <div class="well">
-        <h3>Image Gallery:</h3>
-        <div>
-        </div>
-      </div>
-
-
-
-    </div>
-
-
-
   </div>
+</div>
+
+
+<%src="http://forecast.io/embed/#lat="+@hike.start_lat.to_s+"&lon="+@hike.start_lng.to_s+"&name="+@hike.name.gsub(" ","%20")+"&units=ca"%>
+<div id="weather">
+  <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src=<%=src%>> </iframe>
 </div>
 
 <script>
@@ -73,11 +61,6 @@
 
 
 
-
-<script type="text/javascript">
-  var hikeCoordinates = <%=@hike_waypoints%>
-</script>
-
 <%= javascript_include_tag 'hikes/show.js' %>
-<%= javascript_include_tag 'hikes/weather.js' %>
+
 
