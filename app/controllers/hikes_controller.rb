@@ -15,8 +15,6 @@ class HikesController < ApplicationController
   end
 
 
-
-
   def nearby
 
     bounds = {
@@ -39,6 +37,7 @@ class HikesController < ApplicationController
       :start_lng
     )
     @hikes = @hikes.difficulty(params[:difficulty]) if params[:difficulty] && params[:difficulty] != ''
+
     if params[:duration]
       min,max = params[:duration].split('-')
       @hikes = @hikes.duration(min,max)
