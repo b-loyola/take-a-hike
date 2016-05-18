@@ -42,6 +42,7 @@ function initMap() {
 
   $('#difficulty').on('change', getMarkers);
   $('#duration').on('change', getMarkers);
+  $('#search_name').on('keyup', getMarkers);
 
   //--------------GET NEW HIKES ONCE MAP HAS CHANGED--------------/
 

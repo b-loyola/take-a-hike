@@ -8,8 +8,8 @@ $(function() {
       { "width": "15%" },
       { "width": "15%" },
       { "width": "15%" }
-    ]
-    // 'paging': false,
-    // 'filter': false
+    ],
+    'paging': false,
+    'filter': false
   });
 });

@@ -13,6 +13,11 @@
 .gm-style-mtc {
   display: none;
 }
+//
+ // Colour customisation
+ //
+ // `!default` allows overriding variables that are defined before @import
+ //
 
 .hike-row {
 	cursor: pointer;
@@ -21,17 +26,4 @@
 			text-decoration: none;
 		}
 	}
-}
-
-
-th.sorting {
-  cursor:s-resize;
-}
-
-th.sorting_asc {
-  cursor:n-resize;
-}
-
-th.sorting_desc {
-  cursor:s-resize;
 }

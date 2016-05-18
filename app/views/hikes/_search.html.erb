@@ -1,18 +1,22 @@
 <div class="container">
   <div class="search-form" class="well col-lg-4 col-lg-offset-4">
     <%= form_tag hikes_path, method: "get", id: "search_form" do %>
+
       Duration: <%= select_tag(:duration, options_for_select([
         ['All', '0-24'],
         ['An hour or less', '0-1'],
         ['Less than 5 hours', '2-5'],
         ['More than 5 hours', '6-24']
         ])) %>
+
       Difficulty: <%= select_tag(:difficulty, options_for_select([
         ['Easy', '0'],
         ['Medium', '1'],
         ['Hard', '2'],
         ['Extreme', '3']
         ]), include_blank: "Any") %>
+
+      Search: <%= text_field_tag :search_name %>
     <% end %>
   </div>
 </div>
