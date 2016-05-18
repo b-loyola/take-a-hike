@@ -1,3 +1,4 @@
+
 $(function() {
   $('#searched_hikes').DataTable({
     "bDestroy": true,
@@ -12,4 +13,3 @@ $(function() {
     // 'filter': false
   });
 });
-

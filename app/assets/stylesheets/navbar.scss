@@ -1,11 +1,12 @@
-body {
-	margin-top: 50px;
+#navbar-spacer {
+	height: 50px;
+	background-color: #000;
 }
 
 #navbar.navbar-default {
-	color: #ffffff;
+	color: #fff;
 	border: none;
-	background-color: #ffffff;
+	background-color: #000;
 	margin-bottom: 0;
 	.navbar-toggle {
 		border-color: #777;

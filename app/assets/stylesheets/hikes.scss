@@ -14,6 +14,15 @@
   display: none;
 }
 
+.hike-row {
+	cursor: pointer;
+	a {
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
 
 th.sorting {
   cursor:s-resize;

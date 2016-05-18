@@ -44,6 +44,7 @@ function initMap() {
   $('#duration').on('change', getMarkers);
 
   //--------------GET NEW HIKES ONCE MAP HAS CHANGED--------------/
+
   google.maps.event.addListener(map, 'idle', getMarkers);
 
   function getMarkers() {
@@ -98,7 +99,6 @@ function initMap() {
 
   //------ ADD ALL MARKERS TO MAP START ----//
 
-  // var bounds = new google.maps.LatLngBounds();
   function populateMap(hikes){
     deleteMarkers();
 
@@ -134,13 +134,20 @@ function initMap() {
       var name = $('<td>').append($('<a>').attr('href', '/hikes/' + hike.id).text(hike.name));
       var dist = $('<td>').text(hike.distance_in_km + ' km');
       var difficulty = $('<td>').text(hike.difficulty);
-
       var time = $('<td>').text(hike.time_in_hours + (hike.time_in_hours == 1 ? ' hour' : ' hours'));
-      var row = $('<tr>').addClass('hike-row').attr('data-difficulty', hike.difficulty).attr('data-distance', hike.distance_in_km)
+
+      var row = $('<tr>')
+        .addClass('hike-row')
+        .attr('data-difficulty', hike.difficulty)
+        .attr('data-distance', hike.distance_in_km)
         .append(name)
         .append(dist)
         .append(time)
         .append(difficulty);
+
+      row.on('click', function(){
+        $(this).find('a')[0].click();
+      });
       $('#searched_hikes').append(row);
     });
 
