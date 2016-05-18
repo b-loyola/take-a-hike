@@ -4,6 +4,7 @@
     <% unless @hike.reviews.count == 0 %>
       <div id="rating-block">
           <h4 class="bold padding-bottom-7">Average User Rating: <%= @hike.average_rating %> <small>/ 5</small></h4>
+          <!-- AVERAGE STAR RATING -->
           <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
           </button>
@@ -38,6 +39,7 @@
                 
                 <div class="col-sm-9">
                   <div id="review-block-rate-<%= review.id %>">
+                    <!-- STAR RATING FOR EACH REVIEW-->
                     <button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
                       <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                     </button>
@@ -68,7 +70,7 @@
     </div>
 </div>
 
-
+<!-- MOVE TO JS FILE -->
 <script>
 $(".review-block").hide();
 $(".hide-button").hide();
@@ -101,6 +103,6 @@ $(".show-button").on('click', function(){
 
 </script>
 
-
+<!-- MOVE TO JS FILE -->
 
 
