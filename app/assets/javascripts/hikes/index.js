@@ -41,6 +41,7 @@ function initMap() {
   ]);
 
   $('#difficulty').on('change', getMarkers);
+  $('#duration').on('change', getMarkers);
 
   //--------------GET NEW HIKES ONCE MAP HAS CHANGED--------------/
   google.maps.event.addListener(map, 'idle', getMarkers);
@@ -136,7 +137,6 @@ function initMap() {
 
       var time = $('<td>').text(hike.time_in_hours + (hike.time_in_hours == 1 ? ' hour' : ' hours'));
       var row = $('<tr>').addClass('hike-row').attr('data-difficulty', hike.difficulty).attr('data-distance', hike.distance_in_km)
-
         .append(name)
         .append(dist)
         .append(time)
