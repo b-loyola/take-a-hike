@@ -2,28 +2,19 @@ class HikesController < ApplicationController
 
   def index
     @hikes = Hike.select(:id,
-      :spring, 
-      :winter, 
-      :summer, 
-      :fall, 
-      :name, 
-      :distance_in_km, 
+      :name,
+      :distance_in_km,
       :time_in_hours,
       :difficulty,
-      :description,
-      :start_lat,
-      :start_lng ) 
-    @hikes = @hikes.spring if params[:spring]
-    @hikes = @hikes.winter if params[:winter]
-    @hikes = @hikes.summer if params[:summer]
-    @hikes = @hikes.fall if params[:fall]
-    @hikes = @hikes.difficulty(params[:difficulty]) if params[:difficulty] && params[:difficulty] != ''
-    if params[:duration]
-      min,max = params[:duration].split('-')
-      @hikes = @hikes.duration(min,max)
-    end
-    @hikes = @hikes.search_name(params[:search_name]) if params[:search_name]
+    )
+    # @hikes = @hikes.spring if params[:spring]
+    # @hikes = @hikes.winter if params[:winter]
+    # @hikes = @hikes.summer if params[:summer]
+    # @hikes = @hikes.fall if params[:fall]
   end
+
+
+
 
   def nearby
 
@@ -34,23 +25,28 @@ class HikesController < ApplicationController
       min_lng: params[:position]["min_lng"].to_f
     }
 
-    puts bounds
-
-    @hike = Hike.where('start_lat >= ? AND start_lat <= ?', bounds[:min_lat], bounds[:max_lat]).where('start_lng >= ? AND start_lng <= ?', bounds[:min_lng], bounds[:max_lng]).select(:id,
-      :spring, 
-      :winter, 
-      :summer, 
-      :fall, 
-      :name, 
-      :distance_in_km, 
+    @hikes = Hike.where('start_lat >= ? AND start_lat <= ?', bounds[:min_lat], bounds[:max_lat]).where('start_lng >= ? AND start_lng <= ?', bounds[:min_lng], bounds[:max_lng]).select(:id,
+      :spring,
+      :winter,
+      :summer,
+      :fall,
+      :name,
+      :distance_in_km,
       :time_in_hours,
       :difficulty,
       :start_lat,
-      :start_lng 
+      :start_lng
     )
+    @hikes = @hikes.difficulty(params[:difficulty]) if params[:difficulty] && params[:difficulty] != ''
+    if params[:duration]
+      min,max = params[:duration].split('-')
+      @hikes = @hikes.duration(min,max)
+    end
+
+    @hikes = @hikes.search_name(params[:name]) if params[:name]
 
     respond_to do |format|
-      format.json { render json: @hike }
+      format.json { render json: @hikes }
     end
   end
 
