@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516181515) do
+ActiveRecord::Schema.define(version: 20160518012839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "completed_hikes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "hike_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "completed_hikes", ["hike_id"], name: "index_completed_hikes_on_hike_id", using: :btree
+  add_index "completed_hikes", ["user_id"], name: "index_completed_hikes_on_user_id", using: :btree
+
+  create_table "fave_hikes", force: :cascade do |t|
+    t.integer  "hike_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "fave_hikes", ["hike_id"], name: "index_fave_hikes_on_hike_id", using: :btree
+  add_index "fave_hikes", ["user_id"], name: "index_fave_hikes_on_user_id", using: :btree
 
   create_table "hikes", force: :cascade do |t|
     t.string   "name"
@@ -66,6 +86,10 @@ ActiveRecord::Schema.define(version: 20160516181515) do
     t.string   "last_name"
   end
 
+  add_foreign_key "completed_hikes", "hikes"
+  add_foreign_key "completed_hikes", "users"
+  add_foreign_key "fave_hikes", "hikes"
+  add_foreign_key "fave_hikes", "users"
   add_foreign_key "reviews", "hikes"
   add_foreign_key "reviews", "users"
   add_foreign_key "saved_hikes", "hikes"
