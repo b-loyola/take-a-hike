@@ -7,7 +7,7 @@ require 'pry'
 TARGET_DOMAIN = 'http://www.trailpeak.com/'
 
 #downloaded html page for search area (e.g. All hikes near Vancouver that have GPX data)
-target_page = Nokogiri::HTML(open('public/vancouver_search.html'))
+target_page = Nokogiri::HTML(open('public/bc_search.html'))
 #selects table rows that each contain one hike URL
 target_page_hike_list = target_page.css("table tr td a")
 
@@ -23,7 +23,7 @@ end
 #builds new hike object
 def hike_builder(target)
   i = 24
-  while i < 162
+  while i < 1240
     hike_array = get_name_and_url(target, i)
     name = hike_array[0]
     url = hike_array[1]
@@ -123,7 +123,9 @@ def extract_hours(stats)
 end
 
 def extract_distance(stats)
-  stats.slice(/\d+\.?\d*\s*kms?/).to_i
+  distance = stats.slice(/\d+\.?\d*\s*kms?/).to_i
+  distance = 1 if distance < 1
+  distance
 end
 
 def extract_description(text_box)

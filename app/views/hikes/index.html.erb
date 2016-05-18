@@ -17,14 +17,16 @@
 			<table id="searched_hikes" class="table table-hover">
 				<thead>
 					<tr>
-						<th class="col-md-6">Hike Name <span class="glyphicon glyphicon-sort" style="font-size: 10px"></span></th>
-						<th class="col-md-2">Distance <span class="glyphicon glyphicon-sort" style="font-size: 10px"></span></th>
-						<th class="col-md-2">Time <span class="glyphicon glyphicon-sort" style="font-size: 10px"></span></th>
-						<th class="col-md-2">Difficulty <span class="glyphicon glyphicon-sort" style="font-size: 10px"></span></th>
+
+						<th>Hike Name <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
+						<th>Distance <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
+						<th>Time <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
+						<th>Difficulty <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
+
 					</tr>
 				</thead>
 				<tbody>
-			  	<%= render @hikes %>
+			  	<%#= render @hikes %>
 				</tbody>
 			</table>
 		</div>

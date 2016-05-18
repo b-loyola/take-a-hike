@@ -11,6 +11,7 @@ class HikesController < ApplicationController
     # @hikes = @hikes.winter if params[:winter]
     # @hikes = @hikes.summer if params[:summer]
     # @hikes = @hikes.fall if params[:fall]
+
   end
 
 
