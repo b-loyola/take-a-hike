@@ -26,15 +26,14 @@ $(function(){
         var time = parsed_json.current_observation.local_time_rfc822;
 
         var parent = $("#result-list");
-        $('<ul>').addClass('weather-for-result')
-          .append($('<li>').text(location))
-          .append($('<li>').text(time))
-          .append($('<li>').text("Current conditions: " + weather))
-          .append($('<li>').text("Temperature: " + temp + "C, Feels like: " + tempFeel + 'C'))
-          .append($('<li>').text("Wind speed: " + wind_spd + "km/h, Wind direction: " + wind_dir))
+        $('<div>').addClass('weather-for-result')
+          .append($('<p>').text(location))
+          .append($('<p>').text(temp + "C"))
           .append($('<img>').attr('src',img))
+          .append($('<p>').text(weather))
           .appendTo(parent);
       }
+
     });
   }
 });
