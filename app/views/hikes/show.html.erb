@@ -16,7 +16,7 @@
         <h4><%= pluralize(@hike.distance_in_km, 'Km') %> </h4>
         <h4><%= pluralize(@hike.time_in_hours, 'Hour') %></h4>
         <h4>Difficulty Rating:<%= @hike.difficulty_description %></h4>
-        <h4><%=@hike.seasons%></h4>
+        <h4><%=@hike.seasons.join(", ")%></h4>
         <h4> Description </h4>
         <p><%= @hike.description %></p>
       </div>
