@@ -1,38 +1,38 @@
-$(function() {
-  $('#difficulty').on('change', function(){
+// $(function() {
+//   $('#difficulty').on('change', function(){
 
-    $('#searched_hikes').dataTable().fnDestroy();
-    $('#searched_hikes').find('tbody').empty();
+//     $('#searched_hikes').dataTable().fnDestroy();
+//     $('#searched_hikes').find('tbody').empty();
 
-    var searchVal = $(this).val();
-    var rows = $('.hike-row');
-    $.each(rows, function(){
-      var difficulty = $(this).attr('data-difficulty');
-      console.log(this);
-      console.log("Difficulty: "+ difficulty);
-      console.log("Search: "+ searchVal);
+//     var searchVal = $(this).val();
+//     var rows = $('.hike-row');
+//     $.each(rows, function(){
+//       var difficulty = $(this).attr('data-difficulty');
+//       console.log(this);
+//       console.log("Difficulty: "+ difficulty);
+//       console.log("Search: "+ searchVal);
 
-      if (difficulty === searchVal) {
-        console.log('show!');
-        $(this).show();
-      } else {
-        console.log('hide!');
-        $(this).hide();
-      }
-    });
-  });
+//       if (difficulty === searchVal) {
+//         console.log('show!');
+//         $(this).show();
+//       } else {
+//         console.log('hide!');
+//         $(this).hide();
+//       }
+//     });
+//   });
 
-  $('#search_form').on('keyup', function(){
-    var searchName = $('#search_name').val();
-    var rows = $('.hike-row');
-    $.each(rows, function(){
-      if ( !($(this).data('name').toLowerCase().match(searchName)) ){
-        $(this).hide();
-      } else {
-        $(this).show();
-      }
-    });
-  });
+//   $('#search_form').on('keyup', function(){
+//     var searchName = $('#search_name').val();
+//     var rows = $('.hike-row');
+//     $.each(rows, function(){
+//       if ( !($(this).data('name').toLowerCase().match(searchName)) ){
+//         $(this).hide();
+//       } else {
+//         $(this).show();
+//       }
+//     });
+//   });
 
 //     var name = $('<td>').append($('<a>').attr('href', '/hikes/' + hike.id).text(hike.name));
 //     var dist = $('<td>').text(hike.distance_in_km + ' km');
@@ -56,17 +56,17 @@ $(function() {
 
 
 
-  $('#searched_hikes').DataTable({
-    "bDestroy": true,
-    "iDisplayLength": 25,
-    "columns": [
-      { "width": "55%" },
-      { "width": "15%" },
-      { "width": "15%" },
-      { "width": "15%" }
-    ]
-    // 'paging': false,
-    // 'filter': false
-  });
-});
+//   $('#searched_hikes').DataTable({
+//     "bDestroy": true,
+//     "iDisplayLength": 25,
+//     "columns": [
+//       { "width": "55%" },
+//       { "width": "15%" },
+//       { "width": "15%" },
+//       { "width": "15%" }
+//     ]
+//     // 'paging': false,
+//     // 'filter': false
+//   });
+// });
 
