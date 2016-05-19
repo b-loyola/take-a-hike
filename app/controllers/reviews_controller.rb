@@ -8,13 +8,18 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    puts params
     @review = @hike.reviews.build(review_params)
     @review.user_id = current_user.id
 
     if @review.save
-      redirect_to @hike, notice: "Review created successfully"
+      respond_to do |format|
+        format.json { render json: @review }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.json { render :json => { :error => @review.errors.full_messages }, :status => 422 }
+      end
     end
   end
 
@@ -30,7 +35,7 @@ class ReviewsController < ApplicationController
   protected
 
   def review_params
-    params.require(:review).permit(:rating, :comment)
+    params.permit(:rating, :comment)
   end
 
   def load_hike

@@ -1,6 +1,14 @@
 // Place all the styles related to the hikes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$primary-accent: #449d44;
+
+$easy-hike: #449d44;
+$medium-hike: #D79C08;
+$hard-hike: #D75708;
+$extreme-hike: #B10000;
+
 .fixed_map{
   height:500px;
   width:100%;
@@ -11,7 +19,7 @@
 }
 
 .search-wrapper {
-	background-color: #449d44;
+	background-color: $primary-accent;
 	h3 {
 		color: white;
 		padding-left: 15px;
@@ -23,10 +31,36 @@
 	.hike-row {
 		transition: 0.5s all;
 		cursor: pointer;
+		.difficulty {
+			font-weight: 600;
+		}
+		&.easy-difficulty {
+			.difficulty {
+				color: $easy-hike;
+			}
+		}
+		&.medium-difficulty {
+			.difficulty {
+				color: $medium-hike;
+			}
+		}
+		&.hard-difficulty {
+			.difficulty {
+				color: $hard-hike;
+			}
+		}
+		&.extreme-difficulty {
+			.difficulty {
+				color: $extreme-hike;
+			}
+		}
 		&:hover {
 			color: white;
-			background-color: #449d44;
+			background-color: $primary-accent;
 			a {
+				color: white;
+			}
+			.difficulty {
 				color: white;
 			}
 		}

@@ -7,11 +7,6 @@ class HikesController < ApplicationController
       :time_in_hours,
       :difficulty,
     )
-    # @hikes = @hikes.spring if params[:spring]
-    # @hikes = @hikes.winter if params[:winter]
-    # @hikes = @hikes.summer if params[:summer]
-    # @hikes = @hikes.fall if params[:fall]
-
   end
 
 
@@ -52,6 +47,7 @@ class HikesController < ApplicationController
 
   def show
   	@hike = Hike.find(params[:id])
+    @review = Review.new
     @hike_json = @hike.to_json.html_safe
     @hike_waypoints = @hike.simplified_waypoints(@hike.waypoints).to_json.html_safe
     @hike_reviews_json = @hike.reviews.to_json.html_safe

@@ -1,0 +1,35 @@
+.br-theme-bootstrap-trees .br-widget {
+  height: 28px;
+  white-space: nowrap;
+}
+.br-theme-bootstrap-trees .br-widget a {
+  font: normal normal normal 18px/1 'Glyphicons Halflings';
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+  margin-right: 2px;
+}
+.br-theme-bootstrap-trees .br-widget a:after {
+  content: '\e199';
+  color: #dddddd;
+}
+.br-theme-bootstrap-trees .br-widget a.br-active:after {
+  color: #03693A;
+}
+.br-theme-bootstrap-trees .br-widget a.br-selected:after {
+  color: #03693A;
+}
+.br-theme-bootstrap-trees .br-widget .br-current-rating {
+  display: none;
+}
+@media print {
+  .br-theme-bootstrap-trees .br-widget a:after {
+    content: '\e199';
+    color: black;
+  }
+  .br-theme-bootstrap-trees .br-widget a.br-active:after,
+  .br-theme-bootstrap-trees .br-widget a.br-selected:after {
+    content: '\e199';
+    color: black;
+  }
+}
