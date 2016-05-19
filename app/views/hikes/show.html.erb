@@ -24,9 +24,15 @@
         <h4>Difficulty Rating:<%= @hike.difficulty_description %></h4>
         <h4><%=@hike.seasons.join(", ")%></h4>
         <h4> Description </h4>
-        <p id="hike-description-trunc"><%= truncate(@hike.description, :omission => "...", :length => 200) %></p>
-        <button class="hike-description btn btn-default" role="button">More</button>
-        <button class="hide-hike-description btn btn-default" style="display: none;" role="button">Less</button>
+        <p id="hike-description-trunc"><%= truncate(@hike.description, :omission => "...", :length => 300) %></p>
+        <% if @hike.description.length >= 300 %>
+          <button class="hike-description btn btn-default" role="button">More</button>
+          <button class="hide-hike-description btn btn-default" style="display: none;" role="button">Less</button>
+        <% end %>
+
+        <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn btn-default" %>
+        <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn btn-default" %>
+
       </div>
          
       <div class="well">

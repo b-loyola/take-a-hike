@@ -1,8 +1,10 @@
 class Hike < ActiveRecord::Base
 
   has_many :reviews, dependent: :destroy
-  has_many :users, through: :saved_hikes
-  has_many :saved_hikes, dependent: :destroy
+  has_many :users, through: :fave_hikes
+  has_many :users, through: :completed_hikes
+  has_many :fave_hikes, dependent: :destroy
+  has_many :completed_hikes, dependent: :destroy
 
 	validates :name, presence: true
 	validates :distance_in_km, numericality: {allow_blank: true, only_integer: true}
