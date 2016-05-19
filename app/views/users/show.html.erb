@@ -108,7 +108,10 @@
       <div id="collapse4" class="panel-collapse collapse">
         <ul class="list-group">
           <% @user.reviews.each do |review| %>
-            <li class="list-group-item">Review of <%= link_to "#{Hike.find(review.hike_id).name}", hike_path(review.hike_id) %>: "<%= review.comment %>", Rating: <%= review.rating %></li>
+            <li class="list-group-item">
+              <%= link_to review.hike.name, hike_path(review.hike_id) %>: "<%= review.comment %>", Rating: <%= review.rating %>
+              <%= button_to "Delete", hike_review_path(review.hike_id, review.id), method: :delete %>
+            </li>
           <% end %>
         </ul>
       </div>

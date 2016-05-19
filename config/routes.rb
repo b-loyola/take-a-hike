@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'completed_hikes/create'
 
   resources :hikes, only: [:index, :create, :show] do
-    resources :reviews, only: [:new, :create]
+    resources :reviews, only: [:new, :create, :destroy]
     resources :fave_hikes, only: [:create, :destroy]
     resources :completed_hikes, only: [:create, :destroy]
     collection do
