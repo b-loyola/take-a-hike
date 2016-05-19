@@ -4,6 +4,8 @@
   var hikeCoordinates = <%=@hike_waypoints%>;
   var reviews = <%=@hike_reviews_json%>;
   var averageRating = <%=@average_rating_json%>;
+  var hike = <%=@hike_json%>;
+
 </script>
 
 <%= link_to "Back to all hikes", hikes_path %><br/>
@@ -13,7 +15,8 @@
 <div class="container-fluid">
   
   <div class="row">
-    
+
+    <!-- HIKE DESCRIPTION SECTION -->
     <div class="col-xs-6">
       <div class="well">
         <h2><%= link_to @hike.name, hike_path(@hike) %></h2>
@@ -22,15 +25,27 @@
         <h4>Difficulty Rating:<%= @hike.difficulty_description %></h4>
         <h4><%=@hike.seasons.join(", ")%></h4>
         <h4> Description </h4>
-        <p><%= @hike.description %></p>
+        <p id="hike-description-trunc"><%= truncate(@hike.description, :omission => "...", :length => 300) %></p>
+        <% if @hike.description.length >= 300 %>
+          <button class="hike-description btn btn-default" role="button">More</button>
+          <button class="hide-hike-description btn btn-default" style="display: none;" role="button">Less</button>
+        <% end %>
+
+<!-- Need to remove fave button if user has already marked as fave (and replace with unfave) -->
+        <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %>
+
+        <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %>
+
       </div>
-         
+  
+  <!-- REVIEW SECTION -->
       <div class="well">
         <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
         <%= render partial: 'review' %>
       </div>
     </div>
 
+    <!-- HIKE MAP AND ELEVATION -->
     <div class="col-xs-6">
       <div class="well">
         <div class="fixed_map">

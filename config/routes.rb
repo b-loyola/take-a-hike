@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
 
-  get 'hikes/nearby'
-
-  get 'hikes/filter'
+  get 'completed_hikes/create'
 
   resources :hikes, only: [:index, :create, :show] do
     resources :reviews, only: [:new, :create]
+    resources :fave_hikes, only: [:create]
+    resources :completed_hikes, only: [:create]
+    collection do
+      get :nearby
+      get :filter
+    end
   end
 
-  resources :users
+  resources :users 
 
   resource :session, only: [:new, :create, :destroy]
 

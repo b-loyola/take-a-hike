@@ -1,0 +1,2 @@
+module CompletedHikesHelper
+end
