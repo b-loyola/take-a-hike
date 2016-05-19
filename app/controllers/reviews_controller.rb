@@ -18,6 +18,15 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    @review = Review.find(params[:id])
+    if @review.destroy
+      redirect_to :back, notice: "Review has been deleted"
+    else
+      redirect_to :back, notice: "Unable to delete Review"
+    end
+  end
+
   protected
 
   def review_params
