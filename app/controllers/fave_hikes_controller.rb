@@ -7,7 +7,7 @@ class FaveHikesController < ApplicationController
     if @fave_hike.save
       redirect_to @hike, notice: "Succesfully Saved to Faves"
     else
-      render :new
+      redirect_to @hike, notice: "Unable to Save to Faves"
     end
   end
 

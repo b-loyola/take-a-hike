@@ -7,7 +7,7 @@ class CompletedHikesController < ApplicationController
     if @completed_hike.save
       redirect_to @hike, notice: "Succesfully Marked as Complete!"
     else
-      render :new
+      redirect_to @hike, notice: "Unable to Mark as Complete"
     end
   end
 
