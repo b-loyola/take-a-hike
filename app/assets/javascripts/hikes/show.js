@@ -50,7 +50,7 @@
     });
 
     //----ELEVATION CHART----//
-    var elevator = new google.maps.ElevationService;
+    var elevator = new google.maps.ElevationService();
     displayPathElevation(hikeCoordinates, elevator, map);
   }
 

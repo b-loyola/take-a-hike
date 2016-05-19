@@ -1,0 +1,61 @@
+<!-- (WS) Functioning temporary rating form -->
+
+<%= form_for([@hike, @review], remote: true) do |f| %>
+
+  <% if @review.errors.any? %>
+    <div>
+      <%= pluralize(@review.errors.count, "error") %> prevented the review from being saved:
+      <ul>
+        <% @review.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :rating %>
+  <%= f.select :rating do %>
+    <% [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]].each do |c| -%>
+      <%= content_tag(:option, c.first, value: c.last) %>
+    <% end %>
+  <% end %>
+
+  <%= f.label :comment %>
+  <%= f.text_area "comment" %>
+
+  <%= f.submit "Submit" %>
+
+<% end %>
+
+<%= link_to "Back to hike", hike_path(@hike) %>
+
+<%= javascript_include_tag 'jquery.barrating.min.js' %>
+
+<script type="text/javascript">
+  $(function() {
+    $('#review_rating').barrating({
+      theme: 'bootstrap-trees'
+    });
+    $('#new_review').on('submit', function(e){
+      e.preventDefault();
+      var rating = $('#review_rating').val();
+      var comment = $('#review_comment').val();
+      console.log(window.location.pathname);
+
+      $.ajax({
+        method: 'POST',
+        url: window.location.pathname + '/reviews',
+        data: {rating: rating, comment: comment},
+        success: function(data){
+          console.log(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+          console.log(jqXHR);
+          console.log(textStatus);
+          console.log(errorThrown);
+        }
+      });
+      return false;
+    });
+   });
+</script>

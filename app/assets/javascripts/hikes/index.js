@@ -108,9 +108,32 @@ function initMap() {
 
     hikes.forEach(function(hike){
 
+      console.log(hike.difficulty);
+
+      var hikeIcon;
+      var hikeClass;
+
+      switch (hike.difficulty){
+        case 1:
+          hikeIcon = 'media/hiking-medium.png';
+          hikeClass = 'medium-difficulty';
+          break;
+        case 2:
+          hikeIcon = 'media/hiking-hard.png';
+          hikeClass = 'hard-difficulty';
+          break;
+        case 3:
+          hikeIcon = 'media/hiking-extreme.png';
+          hikeClass = 'extreme-difficulty';
+          break;
+        default:
+          hikeIcon = 'media/hiking.png';
+          hikeClass = 'easy-difficulty';
+      }
+
       var marker = new google.maps.Marker({
       position: {lat:hike.start_lat, lng:hike.start_lng},
-      icon: 'media/hiking.png',
+      icon: hikeIcon,
       map: map,
       name: hike.name,
       id: hike.id,
@@ -132,12 +155,13 @@ function initMap() {
       //------ POPULATE TABLE WITH DATA ----------//
 
       var name = $('<td>').append($('<a>').attr('href', '/hikes/' + hike.id).text(hike.name));
-      var dist = $('<td>').text(hike.distance_in_km);
-      var difficulty = $('<td>').text(hike.difficulty);
-      var time = $('<td>').text(hike.time_in_hours);
+      var dist = $('<td>').text(hike.distance_in_km).addClass('distance');
+      var difficulty = $('<td>').text(hike.difficulty).addClass('difficulty');
+      var time = $('<td>').text(hike.time_in_hours).addClass('time');
 
       var row = $('<tr>')
         .addClass('hike-row')
+        .addClass(hikeClass)
         .attr('data-difficulty', hike.difficulty)
         .attr('data-distance', hike.distance_in_km)
         .append(name)
