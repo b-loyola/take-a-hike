@@ -37,3 +37,24 @@ body {
 		}
 	}
 }
+.img-circle {
+    border-radius: 50%;
+    background-image: url(https://static.pexels.com/photos/4062/landscape-mountains-nature-lake-large.jpeg	);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 0;
+    padding-bottom: 100%;
+    border-style:solid;
+}
+
+.img-circle2 {
+    border-radius: 50%;
+    background-image: url(https://static.pexels.com/photos/1368/landscape-mountains-nature-hiking-large.jpg	);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 0;
+    padding-bottom: 100%;
+    border-style:solid;
+}
