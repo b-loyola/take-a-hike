@@ -18,6 +18,13 @@
       <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %>
       <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %>
       <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
+
+        <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+    <!-- Your share button code -->
+  <div class="fb-share-button" 
+    data-layout="button_count">
+  </div>
       <br>
       <br>  
     </div>
@@ -44,9 +51,6 @@
           <button class="hike-description btn btn-default" role="button">More</button>
           <button class="hide-hike-description btn btn-default" style="display: none;" role="button">Less</button>
         <% end %>
-
-
-
       </div>
   
   <!-- REVIEW SECTION -->
@@ -73,8 +77,6 @@
 
 
 
-
-
 <!-- NEW WEATHER IFRAME FROM FORECAST.IO -->
 
 <%src="http://forecast.io/embed/#lat="+@hike.start_lat.to_s+"&lon="+@hike.start_lng.to_s+"&name="+@hike.name.gsub(" ","%20")+"&units=ca"%>
@@ -90,10 +92,19 @@
   google.load('visualization', '1', {packages: ['columnchart']});
 </script>
 
+<%= javascript_include_tag 'hikes/show.js' %>
+
 
  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-<%= javascript_include_tag 'hikes/show.js' %>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  </script>
 
 
 
