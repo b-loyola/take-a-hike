@@ -4,33 +4,58 @@
   var hikeCoordinates = <%=@hike_waypoints%>;
   var reviews = <%=@hike_reviews_json%>;
   var averageRating = <%=@average_rating_json%>;
+  var hike = <%=@hike_json%>;
+
 </script>
 
 <%= link_to "Back to all hikes", hikes_path %><br/>
 <%text = "https://twitter.com/intent/tweet?button_hashtag=TakeAHike&text=I%20just%20finished%20" +@hike.name.gsub(" ","%20") +"!!" %>
 
-
 <div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6">
+      <h2><%= link_to @hike.name, hike_path(@hike) %></h2>
+      <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %>
+      <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %>
+      <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
+      <br>
+      <br>  
+    </div>
+  <!-- Need to remove fave button if user has already marked as fave (and replace with unfave) -->
+    <div class="col-xs-6">
+    <br>
+    <br>
+      <small>Distance:<%= pluralize(@hike.distance_in_km, 'Km') %> </small>
+      <small>Time:<%= pluralize(@hike.time_in_hours, 'Hour') %></small>
+      <small>Difficulty Rating:<%= @hike.difficulty_description %></small>
+      <small>Seasons:<%=@hike.seasons.join(", ")%></small>
+
+    </div>
+  </div>
   
   <div class="row">
-    
+
+    <!-- HIKE DESCRIPTION SECTION -->
     <div class="col-xs-6">
       <div class="well">
-        <h2><%= link_to @hike.name, hike_path(@hike) %></h2>
-        <h4><%= pluralize(@hike.distance_in_km, 'Km') %> </h4>
-        <h4><%= pluralize(@hike.time_in_hours, 'Hour') %></h4>
-        <h4>Difficulty Rating:<%= @hike.difficulty_description %></h4>
-        <h4><%=@hike.seasons.join(", ")%></h4>
         <h4> Description </h4>
-        <p><%= @hike.description %></p>
+        <p id="hike-description-trunc"><%= truncate(@hike.description, :omission => "...", :length => 300) %></p>
+        <% if @hike.description.length >= 300 %>
+          <button class="hike-description btn btn-default" role="button">More</button>
+          <button class="hide-hike-description btn btn-default" style="display: none;" role="button">Less</button>
+        <% end %>
+
+
+
       </div>
-         
+  
+  <!-- REVIEW SECTION -->
       <div class="well">
-        <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
         <%= render partial: 'review' %>
       </div>
     </div>
 
+    <!-- HIKE MAP AND ELEVATION -->
     <div class="col-xs-6">
       <div class="well">
         <div class="fixed_map">
@@ -51,10 +76,13 @@
 
 
 <!-- NEW WEATHER IFRAME FROM FORECAST.IO -->
+
 <%src="http://forecast.io/embed/#lat="+@hike.start_lat.to_s+"&lon="+@hike.start_lng.to_s+"&name="+@hike.name.gsub(" ","%20")+"&units=ca"%>
-<div id="weather">
-  <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src=<%=src%>> 
-  </iframe>
+<div class="well">
+  <div id="weather">
+    <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src=<%=src%>> 
+    </iframe>
+  </div>
 </div>
 <!-- NEW WEATHER IFRAME FROM FORECAST.IO -->
 

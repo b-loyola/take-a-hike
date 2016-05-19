@@ -65,15 +65,16 @@
         <hr>
       <% end %>
     </div>
-    <button type="button" class="btn btn-default hide-button">Hide Reviews </button>
-    <button type="button" class="btn btn-default show-button">Show Reviews </button>    
+    <% if @hike.reviews.count > 0 %>
+      <button type="button" class="btn btn-default hide-button" style="display: none;">Hide Reviews </button>
+      <button type="button" class="btn btn-default show-button">Show Reviews </button>  
+    <% end %>  
     </div>
 </div>
 
 <!-- MOVE TO JS FILE -->
 <script>
 $(".review-block").hide();
-$(".hide-button").hide();
 
  for (var i=0; i<averageRating+2; i++){
   var star="#rating-block button:nth-child(" + i + ")"

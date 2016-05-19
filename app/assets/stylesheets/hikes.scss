@@ -10,20 +10,31 @@
   height:100%
 }
 
-.gm-style-mtc {
-  display: none;
+.search-wrapper {
+	background-color: #449d44;
+	h3 {
+		color: white;
+		padding-left: 15px;
+	}
 }
-//
- // Colour customisation
- //
- // `!default` allows overriding variables that are defined before @import
- //
 
-.hike-row {
-	cursor: pointer;
-	a {
+#searched_hikes {
+	margin-top: 15px;
+	.hike-row {
+		transition: 0.5s all;
+		cursor: pointer;
 		&:hover {
-			text-decoration: none;
+			color: white;
+			background-color: #449d44;
+			a {
+				color: white;
+			}
+		}
+		a {
+			color: black;
+			&:hover {
+				text-decoration: none;
+			}
 		}
 	}
 }
