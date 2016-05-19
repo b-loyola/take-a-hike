@@ -131,11 +131,10 @@ function initMap() {
 
       //------ POPULATE TABLE WITH DATA ----------//
 
-
       var name = $('<td>').append($('<a>').attr('href', '/hikes/' + hike.id).text(hike.name));
-      var dist = $('<td>').text(hike.distance_in_km + ' km');
+      var dist = $('<td>').text(hike.distance_in_km);
       var difficulty = $('<td>').text(hike.difficulty);
-      var time = $('<td>').text(hike.time_in_hours + (hike.time_in_hours == 1 ? ' hour' : ' hours'));
+      var time = $('<td>').text(hike.time_in_hours);
 
       var row = $('<tr>')
         .addClass('hike-row')
@@ -152,17 +151,7 @@ function initMap() {
       $('#searched_hikes').append(row);
     });
 
-    $('#searched_hikes').dataTable({
-      "bDestroy": true,
-      "iDisplayLength": 25,
-      "columns": [
-        { "width": "55%" },
-        { "width": "15%" },
-        { "width": "15%" },
-        { "width": "15%" }
-      ]
-    });
-
+    addDataTable();
   }
 
   //--------------------------------GEO LOCATION STUFF-----------------------//
