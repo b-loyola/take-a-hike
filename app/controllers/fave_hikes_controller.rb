@@ -11,6 +11,15 @@ class FaveHikesController < ApplicationController
     end
   end
 
+  def destroy
+    @fave_hike = FaveHike.find(params[:id])
+    if @fave_hike.destroy
+      redirect_to :back, notice: "Removed Hike from Faves"
+    else
+      redirect_to :back, notice: "Unable to remove hike from Faves"
+    end
+  end
+
   protected
 
   def load_hike

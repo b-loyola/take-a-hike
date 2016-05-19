@@ -11,6 +11,15 @@ class CompletedHikesController < ApplicationController
     end
   end
 
+  def destroy
+    @completed_hike = CompletedHike.find(params[:id])
+    if @completed_hike.destroy
+      redirect_to :back, notice: "Removed Completed Hike Entry"
+    else
+      redirect_to :back, notice: "Unable to remove Completed Hike"
+    end
+  end
+
   protected
 
   def load_hike

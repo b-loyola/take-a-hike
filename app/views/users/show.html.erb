@@ -78,7 +78,10 @@
       <div id="collapse2" class="panel-collapse collapse">
         <ul class="list-group">
           <% @completed_hikes.each do |hike| %>
-            <li class="list-group-item"><%= link_to hike.hike.name, hike_path(hike.hike_id) %></li>
+            <li class="list-group-item">
+              <%= link_to hike.hike.name, hike_path(hike.hike_id) %>
+              <%= button_to "Delete", hike_completed_hike_path(hike.hike_id, hike.id), method: :delete %>
+            </li>
           <% end %>
         </ul>
       </div>
@@ -90,7 +93,10 @@
       <div id="collapse3" class="panel-collapse collapse">
         <ul class="list-group">
           <% @fave_hikes.each do |hike| %>
-            <li class="list-group-item"><%= link_to hike.hike.name, hike_path(hike.hike_id) %></li>
+            <li class="list-group-item">
+              <%= link_to hike.hike.name, hike_path(hike.hike_id) %>
+              <%= button_to "Delete", hike_fave_hike_path(hike.hike_id, hike.id), method: :delete %>
+            </li>
           <% end %>
         </ul>
       </div>

@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   resources :hikes, only: [:index, :create, :show] do
     resources :reviews, only: [:new, :create]
-    resources :fave_hikes, only: [:create]
-    resources :completed_hikes, only: [:create]
+    resources :fave_hikes, only: [:create, :destroy]
+    resources :completed_hikes, only: [:create, :destroy]
     collection do
       get :nearby
       get :filter
