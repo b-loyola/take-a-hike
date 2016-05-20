@@ -1,12 +1,12 @@
 #navbar-spacer {
 	height: 50px;
-	background-color: #000;
+	background-color: #363432;
 }
 
 #navbar.navbar-default {
-	color: #fff;
+	color: #white;
 	border: none;
-	background-color: #000;
+	background-color: #363432;
 	margin-bottom: 0;
 	.navbar-toggle {
 		border-color: #777;
@@ -19,27 +19,27 @@
 		border: none;
 	}
 	.navbar-nav > li > a {
-		color: #004000;
+		color: #363432;
 		transition: .5s all;
 		&:hover {
 			color: white;
 		}
 	}
 	a {
-		color: #004000;
+		color: #363432;
 		transition: .5s all;
 		&:hover {
 			color: white;
 		}
 	}
 	.navbar-nav > .navbar-btn {
-		background-color: rgba(255,255,255,0.95);
+		background-color: #363432;
 	}
 	.dropdown {
 		.dropdown-menu {
 			border: none;
 			border-radius: 0;
-			background-color: rgba(255,255,255,0.95);
+			background-color: #363432;
 			a {
 				background-color: rgba(255,255,255,0);
 			}
