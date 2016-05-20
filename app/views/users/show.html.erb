@@ -8,13 +8,11 @@
       <%= link_to image_tag('avatar.png', width: '75', height: '75', id: '#', alt: 'user avatar') %>
     </div>
 
-    <div id="user-name" class="col-xs-14 col-sm-10 col-lg-10">
+    <div id="user-name" class="col-xs-10 col-sm-10 col-lg-10">
       <h3><%= @user.full_name %></h3>
-      <div>
-        <h5>(Insert funny hiker level here)</h5>
-        <br>
-        <h5>Total KMs Hiked = <%= @user.kms_hiked %></h5>
-      </div>
+        <h4>Level: <%= @user.hiker_level.upcase %> </h4>
+        <h3><span class="glyphicon glyphicon-dashboard"></span>
+          <%= @user.kms_hiked %> kms </h3>
     </div>
 
   </div> <!-- end of row -->

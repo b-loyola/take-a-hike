@@ -18,9 +18,7 @@ class User < ActiveRecord::Base
   end
 
   def kms_hiked
-
     self.completed_hikes.joins(:hike).references(:hike).sum('hikes.distance_in_km')
-
     # Option 1 - longest and least efficient
     # kms = 0
     # self.saved_hikes.where('times_completed >= ?', 1).each do |saved_hike|
@@ -36,7 +34,21 @@ class User < ActiveRecord::Base
     
     # Option 4 - Most efficient by only using database - Note: there appears to be an error when running
     # SELECT SUM(hikes.distance_in_km * saved_hikes.times_completed) FROM "saved_hikes" INNER JOIN "hikes" ON "hikes"."id" = "saved_hikes"."hike_id" WHERE "saved_hikes"."user_id" = 1 AND (times_completed >= 1)
+  end
 
+  def hiker_level
+    dist = self.kms_hiked
+    if dist == 0
+      "Nature Neophyte"
+    elsif dist >= 1
+      "Wayward Wanderer"
+    elsif dist >= 15
+      "Tenacious Trekker"
+    elsif dist >= 40
+      "Expert Explorer"
+    elsif dist >= 100
+      "Master Mountaineer"
+    end
   end
 
 end
