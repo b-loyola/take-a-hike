@@ -29,5 +29,52 @@
   }
 }
 
+// Experimenting
+
+.panel.with-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+  border-bottom: none;
+}
+.panel.with-nav-tabs .nav-justified{
+  margin-bottom: -1px;
+}
+/********************************************************************/
+/*** PANEL DEFAULT ***/
+.with-nav-tabs.panel-default .nav-tabs > li > a,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+  color: $colour-dark;
+  padding: 0px;
+}
+.with-nav-tabs.panel-default .nav-tabs > .open > a,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+  color: $colour-dark;
+  background-color: $colour-secondary;
+  border-color: transparent;
+  font-weight: bold;
+  padding: 0px;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.active > a,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+  color: $colour-bright;
+  background-color: $colour-primary;
+  border-color: #ddd;
+  border-bottom-color: transparent;
+  padding: 0px;
+}
+
+.with-nav-tabs.panel-default .panel-body {
+  background-color: $colour-primary;
+  color: $colour-bright;
+}
+
+
+
 
 
