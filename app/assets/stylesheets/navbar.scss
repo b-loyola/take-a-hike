@@ -1,14 +1,23 @@
 #navbar-spacer {
 	height: 50px;
-	background-color: $colour-dark;
+	background-color: #363432;
 }
 
 #navbar.navbar-default {
 	color: $colour-bright;
 	border: none;
-	// background-color: #000;
 	background-image: linear-gradient(to bottom,#484C3B 0,$colour-dark 100%);
 	margin-bottom: 0;
+	.navbar-header {
+		.navbar-brand {
+			padding: 0;
+			padding-left: 20px;
+			img {
+				position: static;
+				display: inline-block;
+			}
+		}
+	}
 	.navbar-toggle {
 		border-color: #777;
 	}
@@ -20,32 +29,33 @@
 		border: none;
 	}
 	.navbar-nav > li > a {
-		color: $colour-dark;
+		color: white;
 		transition: .5s all;
 		&:hover {
-			color: $colour-bright;
+			color: $colour-dark;
 		}
 	}
 	a {
-		color: #004000;
+		color: #363432;
 		transition: .5s all;
 		&:hover {
-			color: $colour-bright;
+			color: $colour-dark;
 		}
 	}
 	.navbar-nav > .navbar-btn {
-		background-color: $colour-bright;
+		background-color: linear-gradient(to bottom,#484C3B 0,$colour-dark 100%);
 	}
 	.dropdown {
 		.dropdown-menu {
 			border: none;
-			border-radius: 0;
-			background-color: $colour-bright;
+			background-color: rgba(255, 255, 255, 0.9);
 			a {
-				// background-color: rgba(255,255,255,0);
+				color: black;
+				background-color: white;
 			}
 			.divider {
-				background-color: $colour-primary;
+				background-color: #BDB390;
+
 			}
 		}
 	}
@@ -55,10 +65,12 @@
 			a {
 				background-color: rgba(255,255,255,0);
 				&:hover {
-					color: $colour-bright;
-					background-color: $colour-primary;
+					color: #FFFCF3;
+					background: linear-gradient(to bottom,#484C3B 0,#9DAB8C 100%);
+
 				}
 			}
 		}
+
 	}
 }

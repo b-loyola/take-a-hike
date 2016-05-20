@@ -2,8 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$primary-accent: #449d44;
-
 $easy-hike: #449d44;
 $medium-hike: #D79C08;
 $hard-hike: #D75708;
@@ -19,7 +17,7 @@ $extreme-hike: #B10000;
 }
 
 .search-wrapper {
-	background-color: $primary-accent;
+	background-color: $colour-primary;
 	h3 {
 		color: white;
 		padding-left: 15px;
@@ -56,7 +54,7 @@ $extreme-hike: #B10000;
 		}
 		&:hover {
 			color: white;
-			background-color: $primary-accent;
+			background-color: $colour-primary;
 			a {
 				color: white;
 			}

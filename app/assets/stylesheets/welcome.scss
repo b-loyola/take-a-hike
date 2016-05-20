@@ -22,7 +22,10 @@ body {
 		color: $colour-bright;
 		text-align: center;
 		transition: .5s all;
-		padding: 15px;
+		padding: 10px;
+		.row {
+			margin-left: 10%;
+		}
 		&:hover {
 			color: $colour-dark;
 			text-decoration: none;
@@ -37,6 +40,12 @@ body {
 		}
 	}
 }
+
+#search-hike-name {
+	background-color: $colour-secondary;
+	padding-top: 15px;
+}
+
 .img-circle {
     border-radius: 50%;
     background-image: url(https://static.pexels.com/photos/4062/landscape-mountains-nature-lake-large.jpeg	);
@@ -57,4 +66,8 @@ body {
     height: 0;
     padding-bottom: 100%;
     border-style:solid;
+}
+
+.feature-wrapper {
+	margin: 40px;
 }
