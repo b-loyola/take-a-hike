@@ -37,6 +37,18 @@ class User < ActiveRecord::Base
   end
 
   def hiker_level
+
+    # level = { 1 => "Nature Neophyte",
+    #           2 => "Wayward Wanderer",
+    #           3 => "Tenacious Trekker",
+    #           4 => "Expert Explorer",
+    #           5 => "Master Mountaineer" }
+    # distance_range_1 = 0
+    # distance_range_2 = (1..14)
+    # distance_range_3 = (15..39)
+    # distance_range_4 = (40..99)
+    # distance_range_5 = (100..100000)
+
     dist = self.kms_hiked
     if dist == 0
       "Nature Neophyte"
@@ -49,6 +61,13 @@ class User < ActiveRecord::Base
     elsif dist >= 100
       "Master Mountaineer"
     end
+  end
+
+  def 
+
+  def kms_to_next_level
+    current_level = hiker_level
+
   end
 
 end
