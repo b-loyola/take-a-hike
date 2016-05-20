@@ -6,21 +6,11 @@
       <div id="rating-block">
         <h4 class="bold padding-bottom-7">Average User Rating: <%= @hike.average_rating %> <small>/ 5</small></h4>
         <!-- AVERAGE STAR RATING -->
-        <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        </button>
-        <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        </button>
-        <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        </button>
-        <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        </button>
-        <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        </button>
+        <div class="total-rating" data-rating="<%= @hike.average_rating %>">
+          <% 5.times do %>
+            <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <% end %>
+        </div>
       </div>
     <% end %>
 
@@ -29,11 +19,13 @@
       <button type="button" class="btn btn-default show-button">Show Reviews </button>  
     <% end %>
 
-    <%= render partial: 'reviews/new' %>
+    <div id="new-review-block">
+      <%= render partial: 'reviews/new' %>
+    </div>
 
     <div class="review-block">
       <% @hike.reviews.each do |review| %>
-        <div class="row">
+        <div class="individual-review row">
               
           <div class="col-sm-3">
             <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
@@ -43,28 +35,16 @@
           </div>
           
           <div class="col-sm-9">
-            <div id="review-block-rate-<%= review.id %>">
-              <!-- STAR RATING FOR EACH REVIEW-->
-              <button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              </button>
-          </div>
+            <div class="review-block-rate" data-rating="<%= review.rating %>">
+              <!-- RATING FOR EACH REVIEW -->
+              <% 5.times do %>
+                <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+              <% end %>
+            </div>
 
-          <div class="review-block-description"> Rating: <%= review.rating %> 
-            <h4><%= review.comment %></h4>
-          </div>
+            <div class="review-block-description"> Rating: <%= review.rating %> 
+              <h4><%= review.comment %></h4>
+            </div>
 
           </div>
         </div>
@@ -75,38 +55,6 @@
   </div>
 </div>
 
-<!-- MOVE TO JS FILE -->
-<script>
-$(".review-block").hide();
-
- for (var i=0; i<averageRating+2; i++){
-  var star="#rating-block button:nth-child(" + i + ")"
-  $(star).removeClass("btn-default");
-  $(star).addClass("btn-warning");
-}
-
-reviews.forEach(function(review){
-  for (var i=0; i<review.rating+1; i++){
-    var star="#review-block-rate-"+ review.id +" button:nth-child(" + i + ")"
-    $(star).removeClass("btn-default");
-    $(star).addClass("btn-warning");
-  }
-})
-
-$(".hide-button").on('click',function(){
-  $(".review-block").hide();
-  $(".hide-button").hide();
-  $(".show-button").show();
-})
-
-$(".show-button").on('click', function(){
-  $(".review-block").show();
-  $(".hide-button").show();
-  $(".show-button").hide();
-})
-
-</script>
-
-<!-- MOVE TO JS FILE -->
+<%= javascript_include_tag 'reviews/reviews.js' %>
 
 

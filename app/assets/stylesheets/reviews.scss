@@ -1,3 +1,34 @@
 // Place all the styles related to the Reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$rating-filled: #03693A;
+$rating-empty: #DDD;
+
+.total-rating {
+	font-size: 20px;
+	color: $rating-filled;
+	.rate-tree {
+		&.filled {
+			color: $rating-filled;
+		}
+		&.empty {
+			color: $rating-empty;
+		}
+	}
+}
+
+.review-block {
+	.review-block-rate {
+		font-size: 18px;
+		color: $rating-filled;
+		.rate-tree {
+			&.filled {
+				color: $rating-filled;
+			}
+			&.empty {
+				color: $rating-empty;
+			}
+		}
+	}
+}
