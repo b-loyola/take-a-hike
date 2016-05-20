@@ -14,7 +14,7 @@
 
 		<div id="navbar" class="navbar-collapse collapse">
 		  <ul class="nav navbar-nav navbar-right">
-		  	<li class="hike_index">
+		  	<li class="hike_index navbar-btn">
 		  		<%= link_to "All Hikes", hikes_path %>
 		  	</li>
 
@@ -24,11 +24,9 @@
 			    		<%= current_user.full_name %><span class="caret"></span>
 			    	</a>
 			    	<ul class="dropdown-menu">
-			    		<li class="navbar-btn"><a href="">My Profile</a></li>
-			    		<li class="navbar-btn"><a href="">My Hikes</a></li>
-			    		<li class="navbar-btn"><a href="">Settings</a></li>
+			    		<li class="navbar-btn drop-btn"><%= link_to "My Profile", user_path(id: current_user.id) %></li>
 			    		<li role="separator" class="divider"></li>
-			    		<li class="navbar-btn"><%= link_to "Log out", session_path("current"), method: :delete %></li>
+			    		<li class="navbar-btn drop-btn"><%= link_to "Log out", session_path("current"), method: :delete %></li>
 			    	</ul>
 			    </li>
 			  <% else %>
