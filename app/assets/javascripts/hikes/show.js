@@ -5,6 +5,7 @@
   script.appendTo($('body'));
   //--------------LOAD API KEY--------------//
   var map;
+  var markers=[];
 
   function initMap() {
     //---- GENERATE MAP ---//
@@ -101,20 +102,16 @@ function plotElevation(elevations, status, path) {
 
   google.visualization.events.addListener(chart, 'select', selectHandler);
   function selectHandler(e) {
-  var lat = path[chart.getSelection()[0].row].lat
-  var lng = path[chart.getSelection()[0].row].lng
-  console.log(lat,lng);
-  console.log(map)
-
-  var  latlngbounds = new google.maps.LatLngBounds(),
-     position = new google.maps.LatLng(lat,lng),
-     marker = new google.maps.Marker({
-            position : position,
-            map : map
-        }); 
-
-
-
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+    var position = path[chart.getSelection()[0].row]
+    var marker = new google.maps.Marker({
+      position : position,
+      map : map,
+      icon: 'http://maps.google.com/mapfiles/ms/micons/hiker.png'
+    }); 
+    markers.push(marker)
   }
 
 }
