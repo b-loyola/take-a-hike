@@ -49,6 +49,45 @@
       icon: '../../media/finish.png'
     });
 
+   
+
+    startMarker.addListener('click', function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          console.log("Current Pos",pos);
+          console.log("Marker Lat",startMarker.position.lat());
+          console.log("Marker Lng",startMarker.position.lng());
+          
+          var directionsService = new google.maps.DirectionsService;
+          var directionsDisplay = new google.maps.DirectionsRenderer;
+
+          directionsDisplay.setMap(map);
+          var start = new google.maps.LatLng(pos.lat, pos.lng);
+          var end = new google.maps.LatLng(startMarker.position.lat(), startMarker.position.lng());
+          startMarker.setMap(null);
+          endMarker.setMap(null);
+          directionsService.route({
+              origin: start,
+              destination: end,
+              travelMode: google.maps.TravelMode.DRIVING,
+            }, function(response, status) {
+              console.log(response);
+              if (status === google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+              } else {
+                window.alert('Directions request failed due to ' + status);
+              }
+            });
+        });
+      }
+
+    
+    });
+
     //----ELEVATION CHART----//
     var elevator = new google.maps.ElevationService();
     displayPathElevation(hikeCoordinates, elevator, map);
@@ -89,7 +128,6 @@ function plotElevation(elevations, status, path) {
   for (var i = 0; i < elevations.length; i++) {
     data.addRow(['', elevations[i].elevation]);
   }
-
 
   // Draw the chart using the data within its DIV.
   chart.draw(data, {
