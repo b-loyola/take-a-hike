@@ -4,12 +4,13 @@
     .attr('async','').attr('defer','');
   script.appendTo($('body'));
   //--------------LOAD API KEY--------------//
-
+  var map;
+  var markers=[];
 
   function initMap() {
     //---- GENERATE MAP ---//
     midPoint = Math.floor(hikeCoordinates.length/2);
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
       zoom: 13,
       center: hikeCoordinates[midPoint],
       mapTypeId: google.maps.MapTypeId.TERRAIN,
@@ -55,19 +56,19 @@
 
 //--- ELEVATION CHART FUNCTIONS--//
 function displayPathElevation(path, elevator, map) {
-
   // Create a PathElevationRequest object using this array.
   // Ask for 256 samples along that path.
   // Initiate the path request.
   elevator.getElevationAlongPath({
     'path': path,
-    'samples': 256
-  }, plotElevation);
+    'samples': path.length
+  }, function(elevations, status) {
+    plotElevation(elevations, status, path)
+  });
 }
-
 // Takes an array of ElevationResult objects, draws the path on the map
 // and plots the elevation profile on a Visualization API ColumnChart.
-function plotElevation(elevations, status) {
+function plotElevation(elevations, status, path) {
   var chartDiv = document.getElementById('elevation_chart');
   if (status !== google.maps.ElevationStatus.OK) {
     // Show the error code inside the chartDiv.
@@ -77,7 +78,6 @@ function plotElevation(elevations, status) {
   }
   // Create a new chart in the elevation_chart DIV.
   var chart = new google.visualization.ColumnChart(chartDiv);
-
   // Extract the data from which to populate the chart.
   // Because the samples are equidistant, the 'Sample'
   // column here does double duty as distance along the
@@ -85,9 +85,11 @@ function plotElevation(elevations, status) {
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Sample');
   data.addColumn('number', 'Elevation');
+
   for (var i = 0; i < elevations.length; i++) {
     data.addRow(['', elevations[i].elevation]);
   }
+
 
   // Draw the chart using the data within its DIV.
   chart.draw(data, {
@@ -97,10 +99,22 @@ function plotElevation(elevations, status) {
     colors: ['darkgreen'],
     backgroundColor: '#E4E4E4',
   });
+
+  google.visualization.events.addListener(chart, 'select', selectHandler);
+  function selectHandler(e) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+    var position = path[chart.getSelection()[0].row]
+    var marker = new google.maps.Marker({
+      position : position,
+      map : map,
+      icon: 'http://maps.google.com/mapfiles/ms/micons/hiker.png'
+    }); 
+    markers.push(marker)
+  }
+
 }
-
-
-
 // Hike Description Show More Button
 $(function(){
   $('.fe_forecast_link').hide();
