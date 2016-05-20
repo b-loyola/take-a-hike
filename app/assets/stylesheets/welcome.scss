@@ -17,19 +17,19 @@ body {
 }
 
 .main-btn-wrapper {
-	background-color: #449d44;
+	background-color: #5c821a;
 	.main-btn {
 		color: #fff;
 		text-align: center;
 		transition: .5s all;
 		padding: 15px;
 		&:hover {
-			color: #085808;
+			color: #0f1b07;
 			text-decoration: none;
-			background-color: #71BE71;
+			background-color: #c6d166;
 		}
 		&:focus {
-			color: #085808;
+			color: #0f1b07;
 			text-decoration: none;
 		}
 		.main-btn-txt {
