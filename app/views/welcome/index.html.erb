@@ -16,38 +16,35 @@
 		<div class="container">
 			<a href="<%= hikes_path %>" class="col-xs-4 main-btn">
 				<div class="row">
-					<div class="col-md-2 hidden-xs hidden-sm"></div>
 					<div class="col-xs-12 col-md-2">
 						<h1><span class="glyphicon glyphicon-record" aria-hidden="true"></span></h1>
-						<h4 class="hidden-md hidden-lg">Browse</h4>
+						<h5 class="hidden-md hidden-lg">Browse</h5>
 					</div>
-					<div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+					<div class="main-btn-txt hidden-xs hidden-sm col-md-10">
 						<h3>Start Exploring</h3>
-						<p>Browse all hikes</p>
+						<p>Browse hikes around your area</p>
 					</div>
 				</div>
 			</a>
-			<a href="<%= hikes_path %>" class="col-xs-4 main-btn">
+			<a href="" id="seek-hike-name" class="col-xs-4 main-btn">
 				<div class="row">
-					<div class="col-md-2 hidden-xs hidden-sm"></div>
 					<div class="col-xs-12 col-md-2">
 						<h1><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></h1>
-						<h4 class="hidden-md hidden-lg">Search</h4>
+						<h5 class="hidden-md hidden-lg">Search</h5>
 					</div>
-					<div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+					<div class="main-btn-txt hidden-xs hidden-sm col-md-10">
 						<h3>Seek Adventure</h3>
-						<p>Find the perfect trail</p>
+						<p>Find a trail by name</p>
 					</div>
 				</div>
 			</a>
 			<a href="<%= new_user_path %>" class="col-xs-4 main-btn">
 				<div class="row">
-					<div class="col-md-2 hidden-xs hidden-sm"></div>
 					<div class="col-xs-12 col-md-2">
 						<h1><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></h1>
-						<h4 class="hidden-md hidden-lg">Join</h4>
+						<h5 class="hidden-md hidden-lg">Join</h5>
 					</div>
-					<div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+					<div class="main-btn-txt hidden-xs hidden-sm col-md-10">
 						<h3>Get Started</h3>
 						<p>Join our community</p>
 					</div>
@@ -56,69 +53,82 @@
 		</div>
 	</div>
 
-	<br>
-
-</div>
-<div class="container">
-	<div class = "row">
-		<div class = "col-sm-3">
-		 	<div class="img-circle">
-		 </div>
-		</div>
-
-		<div class="col-sm-3">
-			<h2> Featured Hike </h2>
-			<h3> <%= link_to @featured.name, hike_path(@featured) %> </h3>
-		 	<p>  <%= truncate(@featured.description, :omission => "...", :length => 250) %> </p>
-		 	<p> Distance: <%= @featured.distance_in_km %> km </p>
-		</div>
-
-		<div class= "col-sm-3">
-		 	<div class="img-circle2">
-		 </div>
-		</div>
-
-		 <div class="col-sm-3">
-		 	<h2> Top Rated Hike:</h2>
-		 	<h3> <%= link_to @top_rated.name, hike_path(@top_rated) %> </h3>
-		 	<p> <%= truncate(@top_rated.description, :omission => "...", :length => 150) %> </p>
-		 	<p> Distance: <%= @top_rated.distance_in_km %> km </p>
-		 </div>
+	<div id="search-hike-name" class="row main-btn-wrapper">
+		<div class="container">
+			<form>
+				<div class="col-xs-12 form-group">
+	        <%= text_field_tag :search_name, nil, class: "form-control", placeholder: "Enter hike name here..." %>
+	      </div>
+			</form>
+		</div>	
 	</div>
 
-	<br>
-	<div class = "row">
-		<hr/>
-		<h2> What people are saying ... </h2>
-		<div class="col-sm-4">
-			<h3> Twitter </h3>
-			<a class="twitter-timeline"
-			href="https://twitter.com/hashtag/takeahike"
-			data-widget-id="733385150591946752">#takeahike Tweets</a>
+	<div class="container">
+		<div class = "row">
+			<div class="feature-wrapper">
+				<div class = "col-sm-3">
+				 	<div class="img-circle">
+				 </div>
+				</div>
+
+				<div class="col-sm-3">
+					<h2> Featured Hike </h2>
+					<h3> <%= link_to @featured.name, hike_path(@featured) %> </h3>
+				 	<p>  <%= truncate(@featured.description, :omission => "...", :length => 250) %> </p>
+				 	<p> Distance: <%= @featured.distance_in_km %> km </p>
+				</div>
+
+				<div class= "col-sm-3">
+				 	<div class="img-circle2">
+				 </div>
+				</div>
+
+				 <div class="col-sm-3">
+				 	<h2> Top Rated Hike:</h2>
+				 	<h3> <%= link_to @top_rated.name, hike_path(@top_rated) %> </h3>
+				 	<p> <%= truncate(@top_rated.description, :omission => "...", :length => 150) %> </p>
+				 	<p> Distance: <%= @top_rated.distance_in_km %> km </p>
+				 </div>
+			</div>
 		</div>
 
-		<div class="col-sm-4">
-			<center>
-				<h1>"Insert Inspirtional Quote Here"</h1>
-				<p> -Inspirer </p>
-			</center>
-		</div>
+		<br>
+		<div class = "row">
+			<hr/>
+			<h2>What people are saying...</h2>
+			<div class="col-sm-4">
+				<h3> Twitter </h3>
+				<a class="twitter-timeline"
+				href="https://twitter.com/hashtag/takeahike"
+				data-widget-id="733385150591946752">#takeahike Tweets</a>
+			</div>
 
-		<div class="col-sm-4">
-			<h3> Instagram </h3>
-			<iframe src="//lightwidget.com/widgets/e39362d88cda51a88eee9f13cafa2c4b.html"
-			id="lightwidget_e39362d88c"
-			name="lightwidget_e39362d88c"
-			scrolling="no"
-			allowtransparency="true"
-			class="lightwidget-widget"
-			style="width: 100%; border: 0; overflow: hidden;">
-			</iframe>
+			<div class="col-sm-4">
+				<center>
+					<h1>"Insert Inspirtional Quote Here"</h1>
+					<p> -Inspirer </p>
+				</center>
+			</div>
+
+			<div class="col-sm-4">
+				<h3> Instagram </h3>
+				<iframe src="//lightwidget.com/widgets/e39362d88cda51a88eee9f13cafa2c4b.html"
+				id="lightwidget_e39362d88c"
+				name="lightwidget_e39362d88c"
+				scrolling="no"
+				allowtransparency="true"
+				class="lightwidget-widget"
+				style="width: 100%; border: 0; overflow: hidden;">
+				</iframe>
+			</div>
 		</div>
 	</div>
+
 </div>
 
 <!-- LightWidget WIDGET -->
 <script src="//lightwidget.com/widgets/lightwidget.js"></script>
 <!-- Twitter Widget -->
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<%= javascript_include_tag 'welcome/index.js' %>
