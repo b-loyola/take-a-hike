@@ -1,12 +1,13 @@
-<h1>Log In</h1>
-<%= form_tag session_path do %>
-  <div>
-    <%= label_tag :email %><br/>
-    <%= text_field_tag :email %>
-  </div>
-  <div>
-    <%= label_tag :password %><br/>
-    <%= password_field_tag :password %>
-  </div>
-  <div><%= submit_tag "Log In" %></div>
-<% end %>
+<div class="container theme-showcase new-session-cont">
+  <h3 class ="form-signin-heading">Log In</h3>
+  <%= form_tag session_path do %>
+    <div>
+      <%= text_field_tag :email, nil, placeholder: "Email Address", class: "form-control" %>
+    </div>
+    <div>
+       <%= password_field_tag :password, nil, placeholder: "Password", class: "form-control" %>
+    </div>
+  <div class="spacer"></div>
+    <div><%= submit_tag "Submit", class: "btn btn-lg btn-default btn-block login-btn", style: "background-color: #C6D166;" %></div>
+  <% end %>
+</div>
