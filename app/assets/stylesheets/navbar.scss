@@ -1,12 +1,13 @@
 #navbar-spacer {
 	height: 50px;
-	background-color: #000;
+	background-color: $colour-dark;
 }
 
 #navbar.navbar-default {
-	color: #fff;
+	color: $colour-bright;
 	border: none;
-	background-color: #000;
+	// background-color: #000;
+	background-image: linear-gradient(to bottom,#484C3B 0,$colour-dark 100%);
 	margin-bottom: 0;
 	.navbar-toggle {
 		border-color: #777;
@@ -19,17 +20,17 @@
 		border: none;
 	}
 	.navbar-nav > li > a {
-		color: #004000;
+		color: $colour-dark;
 		transition: .5s all;
 		&:hover {
-			color: white;
+			color: $colour-bright;
 		}
 	}
 	a {
 		color: #004000;
 		transition: .5s all;
 		&:hover {
-			color: white;
+			color: $colour-bright;
 		}
 	}
 	.navbar-nav > .navbar-btn {
@@ -54,7 +55,7 @@
 			a {
 				background-color: rgba(255,255,255,0);
 				&:hover {
-					color: white;
+					color: $colour-bright;
 					background-color: #449d44;
 				}
 			}
