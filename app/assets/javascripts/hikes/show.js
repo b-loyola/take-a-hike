@@ -6,6 +6,23 @@
   //--------------LOAD API KEY--------------//
   var map;
   var markers=[];
+  var globalPos;
+  var globalStartMarker;
+  var globalEndMarker;
+  var globalHikePath;
+  var globalChart;
+  var globalHikerMarker;
+  
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      globalPos = pos;
+    });
+  }
+
 
   function initMap() {
     //---- GENERATE MAP ---//
@@ -34,6 +51,7 @@
       strokeWeight: 4
     });       
     hikePath.setMap(map);
+    globalHikePath=hikePath;
 
     //---START AND END MARKERS---//
     var startMarker = new google.maps.Marker({
@@ -42,51 +60,15 @@
       title: 'Start',
       icon: '../../media/start.png'
     });
+    globalStartMarker=startMarker;
+    
     var endMarker = new google.maps.Marker({
       position: hikeCoordinates[hikeCoordinates.length-1],
       map: map,
       title: 'End',
       icon: '../../media/finish.png'
     });
-
-   
-
-    startMarker.addListener('click', function() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          console.log("Current Pos",pos);
-          console.log("Marker Lat",startMarker.position.lat());
-          console.log("Marker Lng",startMarker.position.lng());
-          
-          var directionsService = new google.maps.DirectionsService;
-          var directionsDisplay = new google.maps.DirectionsRenderer;
-
-          directionsDisplay.setMap(map);
-          var start = new google.maps.LatLng(pos.lat, pos.lng);
-          var end = new google.maps.LatLng(startMarker.position.lat(), startMarker.position.lng());
-          startMarker.setMap(null);
-          endMarker.setMap(null);
-          directionsService.route({
-              origin: start,
-              destination: end,
-              travelMode: google.maps.TravelMode.DRIVING,
-            }, function(response, status) {
-              console.log(response);
-              if (status === google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(response);
-              } else {
-                window.alert('Directions request failed due to ' + status);
-              }
-            });
-        });
-      }
-
-    
-    });
+    globalEndMarker=endMarker;
 
     //----ELEVATION CHART----//
     var elevator = new google.maps.ElevationService();
@@ -138,18 +120,19 @@ function plotElevation(elevations, status, path) {
     backgroundColor: '#E4E4E4',
   });
 
-  google.visualization.events.addListener(chart, 'select', selectHandler);
+  globalChart = google.visualization.events.addListener(chart, 'select', selectHandler);
   function selectHandler(e) {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
     }
     var position = path[chart.getSelection()[0].row]
-    var marker = new google.maps.Marker({
+    var hikeMarker = new google.maps.Marker({
       position : position,
       map : map,
       icon: 'http://maps.google.com/mapfiles/ms/micons/hiker.png'
     }); 
-    markers.push(marker)
+    globalHikerMarker = hikeMarker;
+    markers.push(hikeMarker)
   }
 
 }
@@ -169,4 +152,43 @@ $(function(){
     $(this).hide();
     $('.hike-description').show();
   });
+
+  $("#directions").on('click', function(){
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    directionsDisplay.setMap(map);
+    
+
+    var start = new google.maps.LatLng(globalPos.lat, globalPos.lng);
+    var end = new google.maps.LatLng(hikeCoordinates[0].lat, hikeCoordinates[0].lng);
+    directionsService.route({
+        origin: start,
+        destination: end,
+        travelMode: google.maps.TravelMode.DRIVING,
+      }, function(response, status) {
+        console.log(response);
+        if (status === google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+
+          globalEndMarker.setMap(null);
+          globalHikePath.setMap(null);
+          globalStartMarker.setMap(null);
+          if(globalHikerMarker){
+            globalHikerMarker.setMap(null);
+          }
+      google.visualization.events.removeListener(globalChart);
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+
+    $("#showmap").show();
+    $(this).hide();
+   });
+
+  $("#showmap").on('click', function(){
+    initMap();
+    $(this).hide();
+    $("#directions").show();
+  })
 });
