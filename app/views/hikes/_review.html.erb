@@ -1,26 +1,20 @@
+<%text = "https://twitter.com/intent/tweet?button_hashtag=TakeAHike&text=I%20just%20finished%20" +@hike.name.gsub(" ","%20") +"!!" %>
+
 <div>
   <div>
     <%#= link_to "Rate this hike!", new_hike_review_path(@hike) %>
 
-    <% unless @hike.reviews.count == 0 %>
-      <div id="rating-block">
-        <h4 class="bold padding-bottom-7">Average User Rating: <%= @hike.average_rating %> <small>/ 5</small></h4>
-        <!-- AVERAGE STAR RATING -->
-        <div class="total-rating" data-rating="<%= @hike.average_rating %>">
-          <% 5.times do %>
-            <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-
-    <% if @hike.reviews.count > 0 %>
-      <button type="button" class="btn btn-default hide-button" style="display: none;">Hide Reviews </button>
-      <button type="button" class="btn btn-default show-button">Show Reviews </button>  
-    <% end %>
-
     <div id="new-review-block">
       <%= render partial: 'reviews/new' %>
+    </div>
+
+    <div>
+      <% if @hike.reviews.count > 0 %>
+        <button type="button" class="btn btn-default hide-button show-hikes" style="display: none;">Hide Reviews </button>
+        <button type="button" class="btn btn-default show-button show-hikes">Show Reviews </button>  
+        <br>
+      <% end %>
+      <br>
     </div>
 
     <div class="review-block">
@@ -51,7 +45,15 @@
         <hr>
       <% end %>
     </div>
-     
+
+    <div align="right">
+      <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
+      <!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+        <!-- Your share button code -->
+      <div class="fb-share-button" data-layout="button_count"></div>
+    </div>
+
   </div>
 </div>
 
