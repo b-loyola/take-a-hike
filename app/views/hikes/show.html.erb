@@ -7,16 +7,29 @@
   var hike = <%=@hike_json%>;
 </script>
 
-<%text = "https://twitter.com/intent/tweet?button_hashtag=TakeAHike&text=I%20just%20finished%20" +@hike.name.gsub(" ","%20") +"!!" %>
+
 <div class="container">
   
   <div class="row">
 
     <!-- HIKE DESCRIPTION SECTION -->
     <div class="col-xs-6">
-      <h1 id="hike-title"><%= link_to @hike.name, hike_path(@hike) %></h1> 
-      <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %>
-      <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %> 
+      <h1 id="hike-title"><%= @hike.name %></h1> 
+
+      <!-- AVERAGE STAR RATING -->
+      <% unless @hike.reviews.count == 0 %>
+        <div id="rating-block">
+          <div class="total-rating" data-rating="<%= @hike.average_rating %>">
+            <% 5.times do %>
+              <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn btn-default show-hikes" %>
+      <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn btn-default show-hikes" %> 
+
       <div class="hike_glyphicon_descriptions"> 
         <br>
         <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
@@ -34,8 +47,8 @@
       <h4> Description </h4>
       <p id="hike-description-trunc"><%= truncate(@hike.description, :omission => "...", :length => 300) %></p>
       <% if @hike.description.length >= 300 %>
-        <button class="hike-description btn btn-default" role="button">More</button>
-        <button class="hide-hike-description btn btn-default" style="display: none;" role="button">Less</button>
+        <button class="hike-description btn btn-default show-hikes" role="button">More</button>
+        <button class="hide-hike-description btn btn-default show-hikes" style="display: none;" role="button">Less</button>
         <br>
         <br>
       <% end %>
@@ -45,23 +58,18 @@
       <hr/>
  
   <!-- REVIEW SECTION -->
-      <div class="well">
+      <div>
+        <h4> Add Your Review </h4>
         <%= render partial: 'review' %>
-              <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
-        <!-- Load Facebook SDK for JavaScript -->
-  <div id="fb-root"></div>
-    <!-- Your share button code -->
-  <div class="fb-share-button" 
-    data-layout="button_count">
-  </div>
       </div>
+
     </div>
 
     <!-- HIKE MAP AND ELEVATION -->
     <div class="col-xs-6">
       <br>
-        <button class="btn btn-default" id="directions"> Show Directions </button>
-        <button class="btn btn-default" id="showmap" style="display:none"> Show Map </button>
+        <button class="btn btn-default show-hikes" id="directions"> Show Directions </button>
+        <button class="btn btn-default show-hikes" id="showmap" style="display:none"> Show Map </button>
         <div class="fixed_map">
         	<div id="map"></div>
         </div>

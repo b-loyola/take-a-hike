@@ -33,4 +33,9 @@ div.row .col-xs-6 .button_to{
 
 #hike-title{
   font-size:4 em;
+  color: $colour-primary;
+}
+
+.show-hikes:hover {
+  background-color: $colour-secondary;
 }
