@@ -20,6 +20,7 @@ class FaveHikesController < ApplicationController
     end
   end
 
+
   protected
 
   def load_hike

@@ -9,15 +9,15 @@
 
 <%text = "https://twitter.com/intent/tweet?button_hashtag=TakeAHike&text=I%20just%20finished%20" +@hike.name.gsub(" ","%20") +"!!" %>
 <div class="container">
-  
+
   <div class="row">
 
     <!-- HIKE DESCRIPTION SECTION -->
     <div class="col-xs-6">
-      <h1 id="hike-title"><%= link_to @hike.name, hike_path(@hike) %></h1> 
+      <h1 id="hike-title"><%= link_to @hike.name, hike_path(@hike) %></h1>
       <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %>
-      <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %> 
-      <div class="hike_glyphicon_descriptions"> 
+      <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn-sm btn-default" %>
+      <div class="hike_glyphicon_descriptions">
         <br>
         <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
         <%= pluralize(@hike.distance_in_km, 'Km') %><br>
@@ -30,7 +30,7 @@
         <br>
       </div>
       <hr/>
- 
+
       <h4> Description </h4>
       <p id="hike-description-trunc"><%= truncate(@hike.description, :omission => "...", :length => 300) %></p>
       <% if @hike.description.length >= 300 %>
@@ -43,7 +43,7 @@
         <p> There is currently no description available. </p>
       <% end %>
       <hr/>
- 
+
   <!-- REVIEW SECTION -->
       <div class="well">
         <%= render partial: 'review' %>
@@ -51,7 +51,7 @@
         <!-- Load Facebook SDK for JavaScript -->
   <div id="fb-root"></div>
     <!-- Your share button code -->
-  <div class="fb-share-button" 
+  <div class="fb-share-button"
     data-layout="button_count">
   </div>
       </div>
@@ -80,7 +80,7 @@
 <%src="http://forecast.io/embed/#lat="+@hike.start_lat.to_s+"&lon="+@hike.start_lng.to_s+"&name="+@hike.name.gsub(" ","%20")+"&units=ca"%>
  <div class="wrapper">
   <div id="weather">
-    <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src=<%=src%>> 
+    <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src=<%=src%>>
     </iframe>
   </div>
 </div>

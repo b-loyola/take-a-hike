@@ -36,6 +36,19 @@ class Hike < ActiveRecord::Base
     end
   end
 
+  def distance_description
+    case self.distance_in_km
+    when 0
+      "Under a km"
+    when 1
+      "1 km"
+    else
+      " #{ self.distance_in_km } km"
+    end
+  end
+
+
+
   def simplified_waypoints(array)
     simplified = []
     array.each_with_index do |point,i|

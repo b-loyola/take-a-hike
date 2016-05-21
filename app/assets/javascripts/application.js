@@ -18,3 +18,4 @@
 //= require _env
 //= require navbar.js
 //= require flash.js
+
