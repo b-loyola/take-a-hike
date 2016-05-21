@@ -1,10 +1,40 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.hero-profile {
+  background-image: url('/media/profileherocrop.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  margin-bottom:30px;
+}
 
 
-#profile-header {
-  /*background-color: $colour-secondary;*/
+#profile-header > * {
+  display: inline-block;
+}
+
+#profile-header{
+  background-color: rgba(92, 130, 26, 0.75);
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  height: 150px;
+  width:370px;
+  position:relative;
+  margin-top: 80px;
+  #user-avatar {
+    padding-left:5px;
+    position: absolute;
+    img {
+      border-radius:5px;
+    }
+  }
+  #user-name {
+    position:absolute;
+    left: 100px;
+  }
 }
 
 .main-btn-wrapper {
@@ -29,5 +59,76 @@
   }
 }
 
+// Experimenting
 
+.panel.with-nav-tabs .panel-heading{
+  padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+  border-bottom: none;
+}
+.panel.with-nav-tabs .nav-justified{
+  margin-bottom: -1px;
+}
+/********************************************************************/
+/*** PANEL DEFAULT ***/
+.with-nav-tabs.panel-default .nav-tabs > li > a,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+  color: $colour-dark;
+  padding: 0px;
+}
+.main-btn-txt h4 {
+  padding-top: 15px;
+  width: 200px;
+}
+.with-nav-tabs.panel-default .nav-tabs > .open > a,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+  color: $colour-dark;
+  background-color: $colour-secondary;
+  border-color: transparent;
+  font-weight: bold;
+  padding: 0px;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.active > a,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+  color: $colour-bright;
+  background-color: $colour-primary;
+  border-color: #ddd;
+  border-bottom-color: transparent;
+  padding: 0px;
+}
+
+.with-nav-tabs.panel-default .panel-body {
+  // background-color: $colour-primary;
+  // color: $colour-bright;
+}
+
+.glyph-tab::before {
+  padding: 15px;
+}
+
+#reviews-table tr {
+  td:nth-child(1){
+    width:20%;
+  }
+  td:nth-child(2){
+    width:50%;
+  }
+  td:nth-child(3){
+    width: 15%;
+    min-width: 101px;
+  }
+  td:nth-child(4){
+    width: 15%;
+  }
+}
+
+.rate-tree {
+  color: #5C821A;
+}
 
