@@ -7,6 +7,9 @@ class HikesController < ApplicationController
       :time_in_hours,
       :difficulty,
     )
+    respond_to do |format|
+      format.json {render json: @hikes}
+    end
   end
 
 
