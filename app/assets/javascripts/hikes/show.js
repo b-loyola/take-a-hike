@@ -34,6 +34,25 @@
       scrollwheel:false
     });
 
+      map.set('styles',[
+    {
+      featureType: 'landscape',
+      elementType: 'geometry',
+      stylers: [
+        { hue: '#7E6511' },
+        { saturation: 10 },
+        { lightness: -10 }
+      ]
+    },
+    {
+      featureType: 'road',
+      elementType: 'geometry',
+      stylers: [
+        { lightness: -5 }
+      ]
+    }
+  ]);
+
     //--- FIT MAP TO BOUNDS --//
     var bounds = new google.maps.LatLngBounds();
     hikeCoordinates.forEach(function(coord){
