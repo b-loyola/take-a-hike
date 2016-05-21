@@ -68,6 +68,17 @@ body {
 	}
 }
 
+.img-circle {
+	transition: transform 0.2s ease-in-out;
+	&:hover {
+		transform: scale(1.2);
+	}
+	img {
+		max-height: 100%;
+		max-width: 100%;
+	}
+}
+
 // .img-circle {
 //     border-radius: 50%;
 //     background-image: url(https://static.pexels.com/photos/4062/landscape-mountains-nature-lake-large.jpeg	);

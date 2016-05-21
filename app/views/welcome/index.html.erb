@@ -65,32 +65,40 @@
 
 	<div class="container">
 		<div class = "row">
+
 			<div class="feature-wrapper">
-				<div class = "col-sm-3">
-				 	<div class="img-circle">
-				 		<img alt="Top Rated Hike" src="/media/mountains.png">
-				 </div>
+				<div class = "col-xs-12 col-md-6">
+
+					<div class="col-xs-4">
+						<div class="img-circle">
+						 	<img alt="Featured Hike" src="/media/mountains.png">
+						</div>
+					</div>
+
+					<div class="col-xs-8">
+						<h2> Featured Hike </h2>
+						<h3> <%= link_to @featured.name, hike_path(@featured) %> </h3>
+					 	<p>  <%= truncate(@featured.description, :omission => "...", :length => 250) %> </p>
+					 	<p> Distance: <%= @featured.distance_in_km %> km </p>
+					</div>
+
 				</div>
 
-				<div class="col-sm-3">
-					<h2> Featured Hike </h2>
-					<h3> <%= link_to @featured.name, hike_path(@featured) %> </h3>
-				 	<p>  <%= truncate(@featured.description, :omission => "...", :length => 250) %> </p>
-				 	<p> Distance: <%= @featured.distance_in_km %> km </p>
-				</div>
+				<div class="col-xs-12 col-md-6">
+					<div class= "col-xs-4">
+					 	<div class="img-circle">
+					 		<img alt="Top Rated Hike" src="/media/backpack.png">
+					 </div>
+					</div>
 
-				<div class= "col-sm-3">
-				 	<div class="img-circle2">
-				 		<img alt="Top Rated Hike" src="/media/backpack.png">
-				 </div>
-				</div>
+					 <div class="col-xs-8">
+					 	<h2> Top Rated Hike:</h2>
+					 	<h3> <%= link_to @top_rated.name, hike_path(@top_rated) %> </h3>
+					 	<p> <%= truncate(@top_rated.description, :omission => "...", :length => 150) %> </p>
+					 	<p> Distance: <%= @top_rated.distance_in_km %> km </p>
+					 </div>
 
-				 <div class="col-sm-3">
-				 	<h2> Top Rated Hike:</h2>
-				 	<h3> <%= link_to @top_rated.name, hike_path(@top_rated) %> </h3>
-				 	<p> <%= truncate(@top_rated.description, :omission => "...", :length => 150) %> </p>
-				 	<p> Distance: <%= @top_rated.distance_in_km %> km </p>
-				 </div>
+				</div>
 			</div>
 		</div>
 
