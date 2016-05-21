@@ -69,26 +69,37 @@ body {
 }
 
 .img-circle {
-    border-radius: 50%;
-    background-image: url(https://static.pexels.com/photos/4062/landscape-mountains-nature-lake-large.jpeg	);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 0;
-    padding-bottom: 100%;
-    border-style:solid;
+	transition: transform 0.2s ease-in-out;
+	&:hover {
+		transform: scale(1.2);
+	}
+	img {
+		max-height: 100%;
+		max-width: 100%;
+	}
 }
 
-.img-circle2 {
-    border-radius: 50%;
-    background-image: url(https://static.pexels.com/photos/1368/landscape-mountains-nature-hiking-large.jpg	);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 0;
-    padding-bottom: 100%;
-    border-style:solid;
-}
+// .img-circle {
+//     border-radius: 50%;
+//     background-image: url(https://static.pexels.com/photos/4062/landscape-mountains-nature-lake-large.jpeg	);
+//     background-position: center center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     height: 0;
+//     padding-bottom: 100%;
+//     border-style:solid;
+// }
+
+// .img-circle2 {
+//     border-radius: 50%;
+//     background-image: url(https://static.pexels.com/photos/1368/landscape-mountains-nature-hiking-large.jpg	);
+//     background-position: center center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     height: 0;
+//     padding-bottom: 100%;
+//     border-style:solid;
+// }
 
 .feature-wrapper {
 	margin: 40px;
