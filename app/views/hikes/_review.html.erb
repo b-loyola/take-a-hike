@@ -8,19 +8,13 @@
       <%= render partial: 'reviews/new' %>
     </div>
 
-    <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
-    <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root"></div>
-      <!-- Your share button code -->
-    <div class="fb-share-button" data-layout="button_count"></div>
-
     <div>
       <% if @hike.reviews.count > 0 %>
-        <div>
         <button type="button" class="btn btn-default hide-button show-hikes" style="display: none;">Hide Reviews </button>
         <button type="button" class="btn btn-default show-button show-hikes">Show Reviews </button>  
-        </div>
+        <br>
       <% end %>
+      <br>
     </div>
 
     <div class="review-block">
@@ -51,7 +45,15 @@
         <hr>
       <% end %>
     </div>
-     
+
+    <div align="right">
+      <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
+      <!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+        <!-- Your share button code -->
+      <div class="fb-share-button" data-layout="button_count"></div>
+    </div>
+
   </div>
 </div>
 
