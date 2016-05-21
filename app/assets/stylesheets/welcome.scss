@@ -34,6 +34,7 @@ body {
 		&:focus {
 			color: $colour-dark;
 			text-decoration: none;
+			background-color: $colour-secondary;
 		}
 		.main-btn-txt {
 			text-align: left;

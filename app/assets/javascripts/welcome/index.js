@@ -66,6 +66,9 @@ $(function(){
 
 	$('#seek-hike-name').on('click', function(e){
 		e.preventDefault();
+		$('html, body').animate({
+        scrollTop: $('#seek-hike-name').offset().top
+    }, 800);
 		$searchFieldDiv.slideToggle();
 	});
 

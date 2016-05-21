@@ -8,6 +8,7 @@ class HikesController < ApplicationController
       :difficulty,
     )
     respond_to do |format|
+      format.html
       format.json {render json: @hikes}
     end
   end
