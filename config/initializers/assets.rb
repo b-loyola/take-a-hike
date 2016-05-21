@@ -18,6 +18,7 @@ Rails.application.config.assets.precompile += %w( hikes/weather.js )
 Rails.application.config.assets.precompile += %w( dataTables.bootstrap.js )
 Rails.application.config.assets.precompile += %w( jquery.dataTables.min.js )
 Rails.application.config.assets.precompile += %w( jquery.barrating.min.js )
+Rails.application.config.assets.precompile += %w( typeahead.bundle.min.js )
 Rails.application.config.assets.precompile += %w( reviews/reviews.js )
 Rails.application.config.assets.precompile += %w( welcome/index.js )
 
