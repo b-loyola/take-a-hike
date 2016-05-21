@@ -15,6 +15,7 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery.bootstrap-autohidingnavbar
+//= require handlebars
 //= require _env
 //= require navbar.js
 //= require flash.js

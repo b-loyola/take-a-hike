@@ -1,60 +1,80 @@
-<div>
-  <div>
-    <%#= link_to "Rate this hike!", new_hike_review_path(@hike) %>
 
-    <% unless @hike.reviews.count == 0 %>
-      <div id="rating-block">
-        <h4 class="bold padding-bottom-7">Average User Rating: <%= @hike.average_rating %> <small>/ 5</small></h4>
-        <!-- AVERAGE STAR RATING -->
-        <div class="total-rating" data-rating="<%= @hike.average_rating %>">
-          <% 5.times do %>
-            <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-          <% end %>
+<%#= link_to "Rate this hike!", new_hike_review_path(@hike) %>
+<div id="reviews">
+  <% unless @hike.reviews.count == 0 %>
+    <div id="rating-block">
+      <h4 class="bold padding-bottom-7">Average User Rating: <%= @hike.average_rating %> <small>/ 5</small></h4>
+      <!-- AVERAGE STAR RATING -->
+      <div class="total-rating" data-rating="<%= @hike.average_rating %>">
+        <% 5.times do %>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @hike.reviews.count > 0 %>
+    <button type="button" class="btn btn-default hide-button" style="display: none;">Hide Reviews </button>
+    <button type="button" class="btn btn-default show-button">Show Reviews </button>  
+  <% end %>
+
+  <div id="new-review-block">
+    <%= render partial: 'reviews/new' %>
+  </div>
+
+  <div id="review-block" class="review-block">
+    <script id="handlebars-review" type="text/x-handlebars-template">​
+      <div class="col-xs-3">
+        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+        <div class="review-block-name">
+          <a href="/users/1">{{username}}</a>
         </div>
       </div>
-    <% end %>
+      
 
-    <% if @hike.reviews.count > 0 %>
-      <button type="button" class="btn btn-default hide-button" style="display: none;">Hide Reviews </button>
-      <button type="button" class="btn btn-default show-button">Show Reviews </button>  
-    <% end %>
+      <div class="col-xs-9">
+        <div id="current-user-rating" class="review-block-rate" data-rating={{rating}}>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+        </div>
 
-    <div id="new-review-block">
-      <%= render partial: 'reviews/new' %>
-    </div>
+        <div class="review-block-description">
+          <h4>{{comment}}</h4>
+        </div>
 
-    <div class="review-block">
-      <% @hike.reviews.each do |review| %>
-        <div class="individual-review row">
-              
-          <div class="col-sm-3">
-            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-            <div class="review-block-name">
-             <%= link_to review.user.full_name, user_path(review.user.id) %>
-            </div>
-          </div>
-          
-          <div class="col-sm-9">
-            <div class="review-block-rate" data-rating="<%= review.rating %>">
-              <!-- RATING FOR EACH REVIEW -->
-              <% 5.times do %>
-                <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-              <% end %>
-            </div>
-
-            <div class="review-block-description"> Rating: <%= review.rating %> 
-              <h4><%= review.comment %></h4>
-            </div>
-
+      </div>
+    ​</script>
+    <% @hike.reviews.each do |review| %>
+      <div class="individual-review row">
+            
+        <div class="col-xs-3">
+          <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+          <div class="review-block-name">
+           <%= link_to review.user.full_name, user_path(review.user.id) %>
           </div>
         </div>
-        <hr>
-      <% end %>
-    </div>
-     
+        
+        <div class="col-xs-9">
+          <div class="review-block-rate" data-rating="<%= review.rating %>">
+            <!-- RATING FOR EACH REVIEW -->
+            <% 5.times do %>
+              <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+            <% end %>
+          </div>
+
+          <div class="review-block-description"> Rating: <%= review.rating %> 
+            <h4><%= review.comment %></h4>
+          </div>
+
+        </div>
+      </div>
+      <hr>
+    <% end %>
   </div>
 </div>
-
 <%= javascript_include_tag 'reviews/reviews.js' %>
 
 
