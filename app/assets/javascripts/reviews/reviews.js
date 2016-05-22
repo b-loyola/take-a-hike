@@ -21,7 +21,6 @@ $(function(){
 
   $individualRatings.each(function(i, div){
     var rating = $(this).data('rating');
-    console.log(rating);
     $(div).find('.rate-tree').each(function(i, span){
       fillRatings(i, span, rating);
     });
@@ -49,16 +48,33 @@ $(function(){
     e.preventDefault();
     var rating = $('#review_rating').val();
     var comment = $('#review_comment').val();
-    console.log(window.location.pathname);
 
     $.ajax({
       method: 'POST',
       url: window.location.pathname + '/reviews',
       data: {rating: rating, comment: comment},
       success: function(data){
-        console.log(data);
-        // TODO add review to page
-        // TODO hide review form
+
+        var rating = data.review.rating;
+
+        var theData = {
+          username: data.username, 
+          rating: rating,
+          comment: data.review.comment
+        };  
+
+        var theTemplateScript = $("#handlebars-review").html();  
+
+        var theTemplate = Handlebars.compile(theTemplateScript);  
+
+        $('#review-block').prepend(theTemplate(theData)).slideDown();
+
+        $('#new_review').fadeOut();
+
+        $('#current-user-rating').find('.rate-tree').each(function(i, span){
+          fillRatings(i, span, rating);
+        });
+
       },
       error: function (jqXHR, textStatus, errorThrown){
         // TODO handle error
