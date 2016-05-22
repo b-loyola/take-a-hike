@@ -1,5 +1,5 @@
 <div id="profile-page">
-  <div class="row">
+
     <section class="hero-profile">
     <div class="container">
       <div id="profile-header" class="row">
@@ -23,12 +23,6 @@
     </div>
 
     </section>
-  </div>
-
-
-
-
-
 
 
   <!-- New Tab Panels -->
@@ -93,7 +87,9 @@
                           <td>Distance</td>
                           <td>Difficulty</td>
                           <td>Date Completed</td>
-                          <td>Delete</td>
+                          <% if current_user == @user %>
+                            <td>Delete</td>
+                          <% end %>
                         </tr>
                       </thead>
                       <tbody>
@@ -103,11 +99,13 @@
                             <td><%= hike.hike.distance_in_km %></td>
                             <td><%= hike.hike.difficulty %></td>
                             <td><%= hike.created_at.strftime("%b %d, %Y") %></td>
-                            <td><%= button_to "Delete", hike_completed_hike_path(hike.hike_id, hike.id),
-                                    method: :delete,
-                                    style: "background-color: #C6D166;",
-                                    class: "btn btn-default btn-sm" %>
-                            </td>
+                            <% if current_user == @user %>
+                              <td><%= button_to "Delete", hike_completed_hike_path(hike.hike_id, hike.id),
+                                      method: :delete,
+                                      style: "background-color: #C6D166;",
+                                      class: "btn btn-default btn-sm" %>
+                              </td>
+                            <% end %>
                           </tr>
                         <% end %>
                       </tbody>
@@ -120,7 +118,9 @@
                           <td>Name</td>
                           <td>Distance</td>
                           <td>Difficulty</td>
-                          <td>Delete</td>
+                          <% if current_user == @user %>
+                            <td>Delete</td>
+                          <% end %>
                         </tr>
                       </thead>
                       <tbody>
@@ -129,11 +129,13 @@
                             <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
                             <td><%= hike.hike.distance_in_km %></td>
                             <td><%= hike.hike.difficulty %></td>
-                            <td><%= button_to "Delete", hike_fave_hike_path(hike.hike_id, hike.id),
-                                    method: :delete,
-                                    style: "background-color: #C6D166;",
-                                    class: "btn btn-default btn-sm" %>
-                            </td>
+                            <% if current_user == @user %>
+                              <td><%= button_to "Delete", hike_fave_hike_path(hike.hike_id, hike.id),
+                                      method: :delete,
+                                      style: "background-color: #C6D166;",
+                                      class: "btn btn-default btn-sm" %>
+                              </td>
+                            <% end %>
                           </tr>
                         <% end %>
                       </tbody>
@@ -146,7 +148,9 @@
                           <td>Name</td>
                           <td>Review</td>
                           <td>Rating</td>
-                          <td>Delete</td>
+                          <% if current_user == @user %>
+                            <td>Delete</td>
+                          <% end %>
                         </tr>
                       </thead>
                       <tbody>
@@ -158,11 +162,14 @@
                                   <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
                                 <% end %>
                             </td>
-                            <td><%= button_to "Delete", hike_review_path(review.hike_id, review.id),
+                            <% if current_user == @user %>
+                              <td>
+                                <%= button_to "Delete", hike_review_path(review.hike_id, review.id),
                                     method: :delete,
                                     style: "background-color: #C6D166;",
                                     class: "btn btn-default btn-sm" %>
-                            </td>
+                              </td>
+                            <% end %>
                           </tr>
                         <% end %>
                       </tbody>

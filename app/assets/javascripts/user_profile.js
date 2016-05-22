@@ -28,7 +28,6 @@ $(function(){
     "filter": false,
     "responsive": true
     // "bDestroy": true,
-
   });
 
   $('#fave_hikes_table').dataTable({
@@ -59,9 +58,20 @@ $(function(){
     "filter": false,
     "responsive": true
   })
+
   $('#reviews-table').dataTable({
     "paging": false,
     "filter": false,
     "responsive": true
   });
+
+  $(window).on('scroll', function() {
+    if ($(this).scrollTop() > 0) {
+      $('#profile-header').fadeOut('slow');
+    }
+    else {
+      $('#profile-header').fadeIn('fast');
+    }
+  });
+
 })
