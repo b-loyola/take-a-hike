@@ -59,4 +59,9 @@ $(function(){
     "filter": false,
     "responsive": true
   })
+  $('#reviews-table').dataTable({
+    "paging": false,
+    "filter": false,
+    "responsive": true
+  });
 })
