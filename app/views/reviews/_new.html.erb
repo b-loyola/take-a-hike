@@ -1,4 +1,4 @@
-<%= form_for([@hike, @review], remote: true) do |f| %>
+<%= form_for([@hike, @review], remote: true, class:"form-horizontal") do |f| %>
 
   <% if @review.errors.any? %>
     <div>
@@ -11,21 +11,32 @@
     </div>
   <% end %>
 
-  <%= f.label :rating %>
-  <%= f.select :rating do %>
-    <% [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]].each do |c| -%>
-      <%= content_tag(:option, c.first, value: c.last) %>
-    <% end %>
-  <% end %>
+  <div class="form-group">
+    <%= f.label :rating, class:"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.select :rating do %>
+        <% [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]].each do |c| -%>
+          <%= content_tag(:option, c.first, value: c.last) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
-  <%= f.label :comment %>
-  <%= f.text_area "comment" %>
+  <div class="form-group">
+    <%= f.label :comment, class:"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area "comment", class:"form-control", placeholder:"Comment", cols:"10", rows:"1" %>
+    </div>
+  </div>
 
-  <%= f.submit "Submit"%>
-  <hr/>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10" style="padding-top: 5px;">
+      <%= f.submit "Submit", class: "btn btn-sm btn-default show-hikes" %>
+        <br><br>
+    </div>
+  </div>
 
 <% end %>
-
 
 
 <%= javascript_include_tag 'jquery.barrating.min.js' %>

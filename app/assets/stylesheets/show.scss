@@ -31,10 +31,11 @@ div.row .col-xs-6 .button_to{
   font-size:1.3em;
 }
 
-#hike-title{
+#hike-title {
   font-size:4 em;
+  color: $colour-primary;
 }
 
-span.fe_forecast_link {
-  display: none;
+.show-hikes:hover {
+  background-color: $colour-secondary;
 }

@@ -14,7 +14,11 @@ class ReviewsController < ApplicationController
 
     if @review.save
       respond_to do |format|
-        format.json { render json: @review }
+        @response = {
+          review: @review,
+          username: @review.user.full_name
+        }
+        format.json { render json: @response}
       end
     else
       respond_to do |format|
