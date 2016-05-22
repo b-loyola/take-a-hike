@@ -58,6 +58,7 @@ $(function(){
         var rating = data.review.rating;
 
         var theData = {
+          userID: data.review.user_id,
           username: data.username, 
           rating: rating,
           comment: data.review.comment
