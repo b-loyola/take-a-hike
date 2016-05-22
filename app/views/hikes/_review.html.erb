@@ -1,4 +1,3 @@
-<%text = "https://twitter.com/intent/tweet?button_hashtag=TakeAHike&text=I%20just%20finished%20" +@hike.name.gsub(" ","%20") +"!!" %>
 <%#= link_to "Rate this hike!", new_hike_review_path(@hike) %>
 
 <div id="new-review-block">
@@ -66,13 +65,7 @@
     </div>
   <% end %>
 
-  <div align="right">
-    <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
-    <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root"></div>
-      <!-- Your share button code -->
-    <div class="fb-share-button" data-layout="button_count"></div>
-  </div>
+
 </div>
 
 <%= javascript_include_tag 'reviews/reviews.js' %>
