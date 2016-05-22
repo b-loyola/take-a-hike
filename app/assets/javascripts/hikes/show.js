@@ -135,8 +135,8 @@ function plotElevation(elevations, status, path) {
     height: 150,
     legend: 'none',
     titleY: 'Elevation (m)',
-    colors: ['darkgreen'],
-    backgroundColor: '#E4E4E4',
+    colors: ['#5c821a'],
+    backgroundColor: '#fff',
   });
 
   globalChart = google.visualization.events.addListener(chart, 'select', selectHandler);

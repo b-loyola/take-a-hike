@@ -33,13 +33,13 @@
 
       <div class="hike_glyphicon_descriptions"> 
         <br>
-        <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-record" aria-hidden="true" style="color:red;"></span>
         <%= pluralize(@hike.distance_in_km, 'Km') %><br>
         <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
         <%= pluralize(@hike.time_in_hours, 'Hour') %><br>
-        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-cog" aria-hidden="true" style="color:orange;"></span>
         <%= @hike.difficulty_description %> <br>
-        <span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-leaf" aria-hidden="true" style="color:green;"></span>
         <%=@hike.seasons.join(", ")%>
         <br>
       </div>
@@ -86,7 +86,7 @@
 </div>
 
 <!-- NEW WEATHER IFRAME FROM FORECAST.IO -->
-<%src="http://forecast.io/embed/#lat="+@hike.start_lat.to_s+"&lon="+@hike.start_lng.to_s+"&name="+@hike.name.gsub(" ","%20")+"&units=ca"%>
+<%src="http://forecast.io/embed/#lat="+@hike.start_lat.to_s+"&lon="+@hike.start_lng.to_s+"&name="+@hike.name.gsub(" ","%20")+"&units=ca&color=#484C3B"%>
  <div class="wrapper">
   <div id="weather">
     <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src=<%=src%>>
