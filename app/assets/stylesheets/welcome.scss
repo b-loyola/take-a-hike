@@ -65,6 +65,11 @@ body {
 				cursor: pointer;
 			}
 		}
+		.tt-cursor {
+			color: $colour-bright;
+			background-color: $colour-primary;
+			cursor: pointer;
+		}
 	}
 }
 

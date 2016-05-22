@@ -70,6 +70,7 @@ $(function(){
         scrollTop: $('#seek-hike-name').offset().top
     }, 800);
 		$searchFieldDiv.slideToggle();
+		$searchField.trigger('focus');
 	});
 
 });
