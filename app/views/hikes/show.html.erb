@@ -8,6 +8,14 @@
   var hike = <%=@hike_json%>;
 </script>
 
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=525951207607453";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 
 <div class="container">
 
@@ -67,10 +75,7 @@
       
       <div align="right">
          <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
-        <!-- Load Facebook SDK for JavaScript -->
-        <div id="fb-root"></div>
-        <!-- Your share button code -->
-        <div class="fb-share-button" data-layout="button_count"></div>
+        <div class="fb-send" data-href="http://www.takeahike.co" data-layout="button_count"></div>
         <hr/>
       </div>
 
@@ -113,13 +118,8 @@
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
 </script>
 
 <%= javascript_include_tag 'hikes/show.js' %>
+
+
