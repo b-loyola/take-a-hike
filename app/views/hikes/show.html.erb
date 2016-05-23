@@ -1,3 +1,4 @@
+<%text = "https://twitter.com/intent/tweet?button_hashtag=TakeAHike&text=I%20just%20finished%20" +@hike.name.gsub(" ","%20") +"!!" %>
 <script src="https://www.google.com/jsapi"></script>
 
 <script type="text/javascript">
@@ -6,6 +7,14 @@
   var averageRating = <%=@average_rating_json%>;
   var hike = <%=@hike_json%>;
 </script>
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=525951207607453";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 
 <div class="container-fluid">
@@ -91,6 +100,12 @@
           <%= render partial: 'review' %>
         </div>
       </div>
+      
+      <div align="right">
+         <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
+        <div class="fb-send" data-href="http://www.takeahike.co" data-layout="button_count"></div>
+        <hr/>
+      </div>
 
     </div>
 
@@ -130,13 +145,8 @@
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
 </script>
 
 <%= javascript_include_tag 'hikes/show.js' %>
+
+

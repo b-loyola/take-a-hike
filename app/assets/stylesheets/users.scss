@@ -17,17 +17,20 @@
 }
 
 #profile-header{
-  background-color: rgba(92, 130, 26, 0.75);
+  color: white;
+  background-color: rgba(82, 99, 50, 0.8);
   border: 1px solid lightgray;
   border-radius: 5px;
   height: 150px;
   width:370px;
   position:relative;
   margin-top: 80px;
+
   #user-avatar {
-    padding-left:5px;
+    padding-left:15px;
     position: absolute;
     img {
+      border: 0.5px #D3D3D3 solid;
       border-radius:5px;
     }
   }
@@ -80,7 +83,8 @@
 }
 .main-btn-txt h4 {
   padding-top: 15px;
-  width: 200px;
+  width: 156px;
+  padding-left: 10px;
 }
 .with-nav-tabs.panel-default .nav-tabs > .open > a,
 .with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
