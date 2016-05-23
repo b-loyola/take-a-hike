@@ -44,4 +44,8 @@ class User < ActiveRecord::Base
     self.completed_hikes.pluck(:hike_id).count(hike.id)
   end
 
+  def has_favourited?(hike)
+    self.fave_hikes.pluck(:hike_id).include?(hike.id)
+  end
+
 end

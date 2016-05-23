@@ -33,6 +33,10 @@ div.row .col-xs-6 .button_to{
   color: $colour-bright;
 }
 
+#times-completed {
+  color: $colour-bright;
+}
+
 .hike-std-btn {
   background-color: $colour-primary;
   color: $colour-bright;
@@ -40,6 +44,15 @@ div.row .col-xs-6 .button_to{
   &:hover {
     background-color: $colour-secondary;
     color: $colour-dark;
+  }
+}
+
+.favourite {
+  background-color: #d9534f;
+  cursor: default;
+  &:hover {
+    background-color: #d9534f;
+    color: $colour-bright;
   }
 }
 

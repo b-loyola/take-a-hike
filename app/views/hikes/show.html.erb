@@ -24,7 +24,7 @@
       <div class="col-xs-12">
         <h1 id="hike-title"><%= @hike.name %></h1>
         <% if current_user && current_user.number_of_times_completed(@hike) >= 1 %>
-          <h5>You have completed this hike <%= pluralize(current_user.number_of_times_completed(@hike), 'time') %></h5>
+          <h5 id="times-completed">You have completed this hike <%= pluralize(current_user.number_of_times_completed(@hike), 'time') %></h5>
         <% end %>
         <!-- AVERAGE STAR RATING -->
         <% unless @hike.reviews.count == 0 %>
@@ -38,8 +38,18 @@
             </div>
           </div>
         <% end %>
-        <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn btn-default hike-std-btn" %>
-        <%= button_to 'Mark Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn btn-default hike-std-btn" %>
+          <% if current_user && current_user.has_favourited?(@hike) %>
+            <div class="btn btn-default hike-std-btn favourite">
+              <i class="glyphicon glyphicon-heart"></i> Marked as Favourite
+            </div>
+          <% else %>
+            <%= button_to hike_fave_hikes_path(params[:id]), method: :post, class: "btn btn-default hike-std-btn" do %>
+              <i class="glyphicon glyphicon-heart-empty"></i> Add to Favourites
+            <% end %>  
+          <% end %>
+        <%= button_to hike_completed_hikes_path(params[:id]), method: :post, class: "btn btn-default hike-std-btn" do %>
+          <i class="glyphicon glyphicon-ok"></i> Mark Completed
+        <% end %>
       </div>
     </div>
   </div>
