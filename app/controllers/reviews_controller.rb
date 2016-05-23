@@ -8,7 +8,6 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    puts params
     @review = @hike.reviews.build(review_params)
     @review.user_id = current_user.id
 

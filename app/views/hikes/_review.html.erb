@@ -1,48 +1,50 @@
 <%text = "https://twitter.com/intent/tweet?button_hashtag=TakeAHike&text=I%20just%20finished%20" +@hike.name.gsub(" ","%20") +"!!" %>
 <%#= link_to "Rate this hike!", new_hike_review_path(@hike) %>
 
-<div id="new-review-block">
-  <%= render partial: 'reviews/new' %>
-</div>
+<% if current_user && current_user.has_not_rated?(@hike) %>
+  <div id="new-review-block">
+    <h4>Add Your Review of <%= @hike.name %></h4>
+    <%= render partial: 'reviews/new' %>
+  </div>
+<% end %>
 
-<div>
-  <% if @hike.reviews.count > 0 %>
-    <button type="button" class="btn btn-default hide-button show-hikes" style="display: none;">Hide Reviews </button>
-    <button type="button" class="btn btn-default show-button show-hikes">Show Reviews </button>  
-    <br>
-  <% end %>
+<% if @hike.reviews.count > 0 %>
+  <button type="button" class="btn btn-default hide-button hike-std-btn" style="display: none;">Hide Reviews </button>
+  <button type="button" class="btn btn-default show-button hike-std-btn">Show Reviews </button>  
   <br>
-</div>
+<% end %>
 
 <div id="review-block" class="review-block">
-  <script id="handlebars-review" type="text/x-handlebars-template">​
-    <div class="col-xs-3">
-      <img src="http://lorempixel.com/60/60/nature/{{userID}}" class="img-rounded">
-      <div class="review-block-name">
-        <a href="/users/1">{{username}}</a>
-      </div>
-    </div>
-    
 
-    <div class="col-xs-9">
-      <div id="current-user-rating" class="review-block-rate" data-rating={{rating}}>
-        <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-        <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-        <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-        <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-        <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+    <script id="handlebars-review" type="text/x-handlebars-template">​
+      <div class="col-xs-3 avatar">
+        <img src="http://lorempixel.com/60/60/nature/{{userID}}" class="img-rounded">
+        <div class="review-block-name">
+          <a href="/users/1">{{username}}</a>
+        </div>
       </div>
+      
 
-      <div class="review-block-description">
-        <h4>{{comment}}</h4>
+      <div class="col-xs-9">
+        <div id="current-user-rating" class="review-block-rate" data-rating={{rating}}>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+        </div>
+
+        <div class="review-block-description">
+          <h4>{{comment}}</h4>
+        </div>
+
       </div>
-
-    </div>
-  ​</script>
+    ​</script>
+  
   <% @hike.reviews.each do |review| %>
     <div class="individual-review row">
           
-      <div class="col-xs-3">
+      <div class="col-xs-3 avatar">
         <img src="http://lorempixel.com/60/60/nature/<%= review.user.id %>" class="img-rounded">
         <div class="review-block-name">
          <%= link_to review.user.full_name, user_path(review.user.id) %>
@@ -75,6 +77,5 @@
   </div>
 </div>
 
+<%= javascript_include_tag 'jquery.barrating.min.js' %>
 <%= javascript_include_tag 'reviews/reviews.js' %>
-
-

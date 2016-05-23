@@ -8,69 +8,96 @@
 </script>
 
 
-<div class="container">
+<div class="container-fluid">
 
-  <div class="row">
+  <div class="hike-header">
+    <div class="container">
+      <div class="col-xs-12">
+        <h1 id="hike-title"><%= @hike.name %></h1>
+        <% if current_user && current_user.number_of_times_completed(@hike) >= 1 %>
+          <h5>You have completed this hike <%= pluralize(current_user.number_of_times_completed(@hike), 'time') %></h5>
+        <% end %>
+        <!-- AVERAGE STAR RATING -->
+        <% unless @hike.reviews.count == 0 %>
+          <div id="rating-block">
+            <div class="total-rating" data-rating="<%= @hike.average_rating %>">
+              <p>
+                <% 5.times do %>
+                  <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+                <% end %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+        <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn btn-default hike-std-btn" %>
+        <%= button_to 'Mark Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn btn-default hike-std-btn" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
 
     <!-- HIKE DESCRIPTION SECTION -->
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-md-6">
 
-      <h1 id="hike-title"><%= @hike.name %></h1> 
-
-      <!-- AVERAGE STAR RATING -->
-      <% unless @hike.reviews.count == 0 %>
-        <div id="rating-block">
-          <div class="total-rating" data-rating="<%= @hike.average_rating %>">
-            <% 5.times do %>
-              <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-            <% end %>
+      <div class="row hike_glyphicon_descriptions">
+        <div class="col-xs-12 col-md-6">
+          <div class="hike-desc-item">
+            <span class="glyphicon glyphicon-record distance-icon" aria-hidden="true"></span>
+            <%= pluralize(@hike.distance_in_km, 'Km') %>
           </div>
         </div>
-      <% end %>
-
-      <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn btn-default show-hikes" %>
-      <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn btn-default show-hikes" %> 
-
-      <div class="hike_glyphicon_descriptions"> 
-        <br>
-        <span class="glyphicon glyphicon-record" aria-hidden="true" style="color:red;"></span>
-        <%= pluralize(@hike.distance_in_km, 'Km') %><br>
-        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-        <%= pluralize(@hike.time_in_hours, 'Hour') %><br>
-        <span class="glyphicon glyphicon-cog" aria-hidden="true" style="color:orange;"></span>
-        <%= @hike.difficulty_description %> <br>
-        <span class="glyphicon glyphicon-leaf" aria-hidden="true" style="color:green;"></span>
-        <%=@hike.seasons.join(", ")%>
-        <br>
+        <div class="col-xs-12 col-md-6">
+          <div class="hike-desc-item">
+            <span class="glyphicon glyphicon-time time-icon" aria-hidden="true"></span>
+            <%= pluralize(@hike.time_in_hours, 'Hour') %>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="hike-desc-item">
+            <span class="glyphicon glyphicon-cog difficulty-icon" aria-hidden="true"></span>
+            <%= @hike.difficulty_description %>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="hike-desc-item">
+            <span class="glyphicon glyphicon-leaf seasons-icon" aria-hidden="true"></span>
+            <%= @hike.seasons.join(", ") %>
+          </div>
+        </div>
       </div>
+
+      <div class="row">
+          <div class="col-xs-12">
+          <h4> Description </h4>
+          <p id="hike-description-trunc"><%= truncate(@hike.description, :omission => "...", :length => 300) %></p>
+          <% if @hike.description.length >= 300 %>
+            <button class="hike-description btn btn-default hike-std-btn" role="button">More</button>
+            <button class="hide-hike-description btn btn-default hike-std-btn" style="display: none;" role="button">Less</button>
+            <br>
+            <br>
+          <% end %>
+          <% if @hike.description=="" %>
+            <p> There is currently no description available. </p>
+          <% end %>
+        </div>
+      </div>
+
       <hr/>
 
-      <h4> Description </h4>
-      <p id="hike-description-trunc"><%= truncate(@hike.description, :omission => "...", :length => 300) %></p>
-      <% if @hike.description.length >= 300 %>
-        <button class="hike-description btn btn-default show-hikes" role="button">More</button>
-        <button class="hide-hike-description btn btn-default show-hikes" style="display: none;" role="button">Less</button>
-        <br>
-        <br>
-      <% end %>
-      <% if @hike.description=="" %>
-        <p> There is currently no description available. </p>
-      <% end %>
-      <hr/>
-
-  <!-- REVIEW SECTION -->
-      <div>
-        <h4> Add Your Review </h4>
-        <%= render partial: 'review' %>
+      <!-- REVIEW SECTION -->
+      <div class="row">
+        <div class="col-xs-12">
+          <%= render partial: 'review' %>
+        </div>
       </div>
 
     </div>
 
     <!-- HIKE MAP AND ELEVATION -->
-    <div class="col-xs-6">
-      <br>
-        <button class="btn btn-default show-hikes" id="directions"> Show Directions </button>
-        <button class="btn btn-default show-hikes" id="showmap" style="display:none"> Show Map </button>
+    <div class="col-xs-12 col-md-6">
+        <button class="btn btn-default hike-std-btn" id="directions"> Show Directions </button>
+        <button class="btn btn-default hike-std-btn" id="showmap" style="display:none"> Show Map </button>
         <div class="fixed_map">
         	<div id="map"></div>
         </div>

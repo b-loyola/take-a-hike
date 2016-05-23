@@ -7,9 +7,16 @@ $medium-hike: #D79C08;
 $hard-hike: #D75708;
 $extreme-hike: #B10000;
 
+.btn {
+	transition: 0.5s all;
+	margin: 10px 0;
+}
+
 .fixed_map{
   height:550px;
   width:100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 #map{

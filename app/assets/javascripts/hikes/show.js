@@ -103,7 +103,7 @@ function displayPathElevation(path, elevator, map) {
     'path': path,
     'samples': path.length
   }, function(elevations, status) {
-    plotElevation(elevations, status, path)
+    plotElevation(elevations, status, path);
   });
 }
 // Takes an array of ElevationResult objects, draws the path on the map
@@ -144,14 +144,14 @@ function plotElevation(elevations, status, path) {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
     }
-    var position = path[chart.getSelection()[0].row]
+    var position = path[chart.getSelection()[0].row];
     var hikeMarker = new google.maps.Marker({
       position : position,
       map : map,
       icon: 'http://maps.google.com/mapfiles/ms/micons/hiker.png'
     }); 
     globalHikerMarker = hikeMarker;
-    markers.push(hikeMarker)
+    markers.push(hikeMarker);
   }
 
 }
@@ -185,7 +185,6 @@ $(function(){
         destination: end,
         travelMode: google.maps.TravelMode.DRIVING,
       }, function(response, status) {
-        console.log(response);
         if (status === google.maps.DirectionsStatus.OK) {
           directionsDisplay.setDirections(response);
 
@@ -209,5 +208,5 @@ $(function(){
     initMap();
     $(this).hide();
     $("#directions").show();
-  })
+  });
 });
