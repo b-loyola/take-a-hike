@@ -38,7 +38,7 @@
       <% end %>
 
       <%= button_to 'Favourite', hike_fave_hikes_path(params[:id]), method: :post, class: "btn btn-default show-hikes" %>
-      <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn btn-default show-hikes" %> 
+      <%= button_to 'Hike Completed', hike_completed_hikes_path(params[:id]), method: :post, class: "btn btn-default show-hikes complete_hike" %> 
 
       <div class="hike_glyphicon_descriptions"> 
         <br>
@@ -74,7 +74,7 @@
       </div>
       
       <div align="right">
-         <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
+         <a href=<%=text%> id="twitter" class="twitter-hashtag-button">Tweet #TakeAHike</a>
         <div class="fb-send" data-href="http://www.takeahike.co" data-layout="button_count"></div>
         <hr/>
       </div>
@@ -116,7 +116,8 @@
 </script>
 
 
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
 
 </script>
 

@@ -52,7 +52,6 @@
       ]
     }
   ]);
-
     //--- FIT MAP TO BOUNDS --//
     var bounds = new google.maps.LatLngBounds();
     hikeCoordinates.forEach(function(coord){
@@ -60,7 +59,6 @@
       bounds.extend(point);
     });
     map.fitBounds(bounds);
-
     //--- GENERATE HIKE PATH POLYLINE --//
     var hikePath = new google.maps.Polyline({
       path: hikeCoordinates,
@@ -139,12 +137,13 @@ function plotElevation(elevations, status, path) {
     backgroundColor: '#fff',
   });
 
-  globalChart = google.visualization.events.addListener(chart, 'select', selectHandler);
+  globalChart = google.visualization.events.addListener(chart, 'onmouseover', selectHandler);
+  
   function selectHandler(e) {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
     }
-    var position = path[chart.getSelection()[0].row]
+    var position = path[e.row]
     var hikeMarker = new google.maps.Marker({
       position : position,
       map : map,
@@ -210,4 +209,5 @@ $(function(){
     $(this).hide();
     $("#directions").show();
   })
+
 });
