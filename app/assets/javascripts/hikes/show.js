@@ -117,7 +117,7 @@ function plotElevation(elevations, status, path) {
     return;
   }
   // Create a new chart in the elevation_chart DIV.
-  var chart = new google.visualization.AreaChart(chartDiv);
+  var chart = new google.visualization.ColumnChart(chartDiv);
   // Extract the data from which to populate the chart.
   // Because the samples are equidistant, the 'Sample'
   // column here does double duty as distance along the
