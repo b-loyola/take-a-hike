@@ -139,12 +139,12 @@ function plotElevation(elevations, status, path) {
     backgroundColor: '#fff',
   });
 
-  globalChart = google.visualization.events.addListener(chart, 'select', selectHandler);
+  globalChart = google.visualization.events.addListener(chart, 'onmouseover', selectHandler);
   function selectHandler(e) {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
     }
-    var position = path[chart.getSelection()[0].row];
+    var position = path[e.row];
     var hikeMarker = new google.maps.Marker({
       position : position,
       map : map,
