@@ -12,7 +12,7 @@ $rating-empty: #DDD;
 	color: $rating-filled;
 	.rate-tree {
 		&.filled {
-			color: $rating-filled;
+			color: $colour-secondary;
 		}
 		&.empty {
 			color: $rating-empty;
@@ -32,5 +32,8 @@ $rating-empty: #DDD;
 				color: $rating-empty;
 			}
 		}
+	}
+	.avatar {
+		text-align: center;
 	}
 }

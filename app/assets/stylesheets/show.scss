@@ -30,9 +30,54 @@ div.row .col-xs-6 .button_to{
 
 #hike-title {
   font-size:4 em;
-  color: $colour-primary;
+  color: $colour-bright;
 }
 
-.show-hikes:hover {
-  background-color: $colour-secondary;
+.hike-std-btn {
+  background-color: $colour-primary;
+  color: $colour-bright;
+  border: none;
+  &:hover {
+    background-color: $colour-secondary;
+    color: $colour-dark;
+  }
+}
+
+.hike-header {
+  min-height: 150px;
+  background-image: url('/media/hikers-bright.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0px -15px 15px;
+}
+
+.hike_glyphicon_descriptions {
+  .hike-desc-item {
+    color: $colour-dark;
+    // background-color: $colour-secondary-bright;
+    background-color: rgba(242,245,220, 0.7);
+    padding: 6px 12px;
+    margin: 5px 0px;
+    font-size: .8em;
+    font-weight: 500;
+  }
+  .distance-icon {
+    color: $colour-primary;
+    margin: 0px 6px;
+    // color: #d9534f;
+  }
+  .time-icon {
+    color: $colour-primary;
+    margin: 0px 6px;
+  }
+  .difficulty-icon {
+    color: $colour-primary;
+    margin: 0px 6px;
+    // color: #f0ad4e;
+  }
+  .seasons-icon {
+    color: $colour-primary;
+    margin: 0px 6px;
+    // color: #5cb85c;
+  }
 }
