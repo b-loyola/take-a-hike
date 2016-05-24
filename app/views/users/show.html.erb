@@ -89,16 +89,7 @@
                             <td>Difficulty</td>
                             <td>Date Completed</td>
                             <% if current_user == @user %>
-                              <td>
-                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
-                                <div class="delete-cell">
-                                  <%= link_to "Yes", hike_completed_hike_path(hike.hike_id, hike.id),
-                                        method: :delete,
-                                        remote: true,
-                                        class: "btn btn-default btn-sm deletable completed_hikes_delete" %>
-                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
-                                </div>
-                              </td>
+                              <td>Delete</td>
                             <% end %>
                           </tr>
                         </thead>
@@ -110,11 +101,16 @@
                               <td><%= hike.hike.difficulty %></td>
                               <td><%= hike.created_at.strftime("%b %d, %Y") %></td>
                               <% if current_user == @user %>
-                                <td><%= button_to "Delete", hike_completed_hike_path(hike.hike_id, hike.id),
+                                <td>
+                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
+                                <div class="delete-cell">
+                                  <%= link_to "Yes", hike_completed_hike_path(hike.hike_id, hike.id),
                                         method: :delete,
-                                        style: "background-color: #C6D166;",
-                                        class: "btn btn-default btn-sm" %>
-                                </td>
+                                        remote: true,
+                                        class: "btn btn-default btn-sm deletable completed_hikes_delete" %>
+                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
+                                </div>
+                              </td>
                               <% end %>
                             </tr>
                           <% end %>
@@ -129,16 +125,7 @@
                             <td>Distance</td>
                             <td>Difficulty</td>
                             <% if current_user == @user %>
-                              <td>
-                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
-                                <div class="delete-cell">
-                                  <%= link_to "Yes", hike_fave_hike_path(hike.hike_id, hike.id),
-                                        method: :delete,
-                                        remote: true,
-                                        class: "btn btn-default btn-sm deletable fave_hikes_delete" %>
-                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
-                                </div>
-                              </td>
+                              <td>Delete</td>
                             <% end %>
                           </tr>
                         </thead>
@@ -149,11 +136,16 @@
                               <td><%= hike.hike.distance_in_km %></td>
                               <td><%= hike.hike.difficulty %></td>
                               <% if current_user == @user %>
-                                <td><%= button_to "Delete", hike_fave_hike_path(hike.hike_id, hike.id),
+                                <td>
+                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
+                                <div class="delete-cell">
+                                  <%= link_to "Yes", hike_fave_hike_path(hike.hike_id, hike.id),
                                         method: :delete,
-                                        style: "background-color: #C6D166;",
-                                        class: "btn btn-default btn-sm" %>
-                                </td>
+                                        remote: true,
+                                        class: "btn btn-default btn-sm deletable fave_hikes_delete" %>
+                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
+                                </div>
+                              </td>
                               <% end %>
                             </tr>
                           <% end %>
@@ -168,16 +160,7 @@
                             <td>Review</td>
                             <td>Rating</td>
                             <% if current_user == @user %>
-                              <td>
-                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
-                                <div class="delete-cell">
-                                  <%= link_to "Yes", hike_review_path(review.hike_id, review.id),
-                                    method: :delete,
-                                    remote: true,
-                                    class: "btn btn-default btn-sm deletable reviews_delete" %>
-                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
-                                </div>
-                              </td>
+                              <td>Delete</td>
                             <% end %>
                           </tr>
                         </thead>
@@ -192,11 +175,15 @@
                               </td>
                               <% if current_user == @user %>
                                 <td>
-                                  <%= button_to "Delete", hike_review_path(review.hike_id, review.id),
-                                      method: :delete,
-                                      style: "background-color: #C6D166;",
-                                      class: "btn btn-default btn-sm" %>
-                                </td>
+                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
+                                <div class="delete-cell">
+                                  <%= link_to "Yes", hike_review_path(review.hike_id, review.id),
+                                    method: :delete,
+                                    remote: true,
+                                    class: "btn btn-default btn-sm deletable reviews_delete" %>
+                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
+                                </div>
+                              </td>
                               <% end %>
                             </tr>
                           <% end %>
