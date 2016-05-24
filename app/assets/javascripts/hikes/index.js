@@ -100,7 +100,12 @@ function initMap() {
 
   //------ ADD ALL MARKERS TO MAP START ----//
 
-  function populateMap(hikes){
+  function populateMap(response){
+    var hikes = response.hikes;
+    var hikesCompleted = response.completed;
+
+    console.log(hikesCompleted);
+
     deleteMarkers();
 
     $('#searched_hikes').dataTable().fnDestroy();
@@ -108,7 +113,9 @@ function initMap() {
 
     hikes.forEach(function(hike){
 
-      console.log(hike.difficulty);
+      if (hikesCompleted.indexOf(hike.id) >= 0) {
+        console.log(hike);
+      }
 
       var hikeIcon;
       var hikeClass;
@@ -127,7 +134,11 @@ function initMap() {
           hikeClass = 'extreme-difficulty';
           break;
         default:
-          hikeIcon = 'media/hiking.png';
+          // if (hikesCompleted.indexOf(hike.id) >= 0) {
+          //   hikeIcon = 'media/footprint.png';          
+          // } else {
+            hikeIcon = 'media/hiking.png';
+          // }
           hikeClass = 'easy-difficulty';
       }
 
