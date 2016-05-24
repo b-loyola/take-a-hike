@@ -13,10 +13,12 @@ class CompletedHikesController < ApplicationController
 
   def destroy
     @completed_hike = CompletedHike.find(params[:id])
-    if @completed_hike.destroy
-      redirect_to :back, notice: "Removed Completed Hike Entry"
-    else
-      redirect_to :back, notice: "Unable to remove Completed Hike"
+    respond_to do |format|
+      if @completed_hike.destroy
+        format.json { render json: @completed_hike }
+      else
+        format.json { render :json => { :error => @completed_hike.errors.full_messages }, :status => 422 }
+      end
     end
   end
 

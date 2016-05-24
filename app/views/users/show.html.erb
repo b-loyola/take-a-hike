@@ -1,6 +1,7 @@
 <div id="profile-page">
 
-    <section class="hero-profile">
+  <section class="hero-profile">
+
     <div class="container">
       <div id="profile-header" class="row">
         <div id="user-avatar">
@@ -12,7 +13,7 @@
           <h3><%= @user.full_name %></h3>
           <h4>
             <span class="glyphicon glyphicon-signal"></span>
-            <%= @user.hiker_level.upcase %>
+            <%= @user.hiker_level %>
           </h4>
           <h4>
             <span class="glyphicon glyphicon-dashboard"></span>
@@ -22,168 +23,195 @@
       </div> <!-- end of row -->
     </div>
 
-    </section>
+  </section>
 
 
   <!-- New Tab Panels -->
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 folder-tabs">
-      <div class="panel with-nav-tabs panel-default">
-        <div class="panel-heading">
-          <ul class="nav nav-tabs">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 folder-tabs">
+        <div class="panel with-nav-tabs panel-default">
+          <div class="panel-heading">
+            <ul class="nav nav-tabs">
 
-            <li class="active">
-              <a href="#tab1" data-toggle="tab">
-                <div class="row">
+              <li class="active">
+                <a href="#tab1" data-toggle="tab">
+                  <div class="row">
 
-                  <div class="col-xs-12 col-md-2">
-                    <h3><span class="glyphicon glyphicon-ok glyph-tab" aria-hidden="true"></span></h3>
+                    <div class="col-xs-12 col-md-2">
+                      <h3><span class="glyphicon glyphicon-ok glyph-tab" aria-hidden="true"></span></h3>
+                    </div>
+                    <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+                      <h4>Completed Hikes</h4>
+                    </div>
                   </div>
-                  <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
-                    <h4>Completed Hikes</h4>
-                  </div>
-                </div>
-              </a>
-            </li>
+                </a>
+              </li>
 
-            <li>
-              <a href="#tab2" data-toggle="tab">
-                <div class="row">
+              <li>
+                <a href="#tab2" data-toggle="tab">
+                  <div class="row">
 
-                  <div class="col-xs-12 col-md-2">
-                    <h3><span class="glyphicon glyphicon-heart glyph-tab" aria-hidden="true"></span></h3>
+                    <div class="col-xs-12 col-md-2">
+                      <h3><span class="glyphicon glyphicon-heart glyph-tab" aria-hidden="true"></span></h3>
+                    </div>
+                    <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+                      <h4>Favourite Hikes</h4>
+                    </div>
                   </div>
-                  <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
-                    <h4>Favourite Hikes</h4>
-                  </div>
-                </div>
-              </a>
-            </li>
+                </a>
+              </li>
 
-            <li>
-              <a href="#tab3" data-toggle="tab">
-                <div class="row">
+              <li>
+                <a href="#tab3" data-toggle="tab">
+                  <div class="row">
 
-                  <div class="col-xs-12 col-md-2">
-                    <h3><span class="glyphicon glyphicon-pencil glyph-tab" aria-hidden="true"></span></h3>
+                    <div class="col-xs-12 col-md-2">
+                      <h3><span class="glyphicon glyphicon-pencil glyph-tab" aria-hidden="true"></span></h3>
+                    </div>
+                    <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
+                      <h4>Reviews</h4>
+                    </div>
                   </div>
-                  <div class="main-btn-txt hidden-xs hidden-sm col-md-8">
-                    <h4>Reviews</h4>
-                  </div>
-                </div>
-              </a>
-            </li>
+                </a>
+              </li>
 
-          </ul>
-          </div>
-          <div class="panel-body">
-              <div class="tab-content">
-                  <div class="tab-pane fade in active" id="tab1">
-                    <table id="completed_hikes_table" class="table table-hover" style="width:100%">
-                      <thead>
-                        <tr>
-                          <td>Name</td>
-                          <td>Distance</td>
-                          <td>Difficulty</td>
-                          <td>Date Completed</td>
-                          <% if current_user == @user %>
-                            <td>Delete</td>
-                          <% end %>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% @completed_hikes.each do |hike| %>
+            </ul>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1">
+                      <table id="completed_hikes_table" class="table table-hover" style="width:100%">
+                        <thead>
                           <tr>
-                            <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
-                            <td><%= hike.hike.distance_in_km %></td>
-                            <td><%= hike.hike.difficulty %></td>
-                            <td><%= hike.created_at.strftime("%b %d, %Y") %></td>
-                            <% if current_user == @user %>
-                              <td><%= button_to "Delete", hike_completed_hike_path(hike.hike_id, hike.id),
-                                      method: :delete,
-                                      style: "background-color: #C6D166;",
-                                      class: "btn btn-default btn-sm" %>
-                              </td>
-                            <% end %>
-                          </tr>
-                        <% end %>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="tab-pane fade" id="tab2">
-                    <table id="fave_hikes_table" class="table table-hover" style="width:100%">
-                      <thead>
-                        <tr>
-                          <td>Name</td>
-                          <td>Distance</td>
-                          <td>Difficulty</td>
-                          <% if current_user == @user %>
-                            <td>Delete</td>
-                          <% end %>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% @fave_hikes.each do |hike| %>
-                          <tr>
-                            <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
-                            <td><%= hike.hike.distance_in_km %></td>
-                            <td><%= hike.hike.difficulty %></td>
-                            <% if current_user == @user %>
-                              <td><%= button_to "Delete", hike_fave_hike_path(hike.hike_id, hike.id),
-                                      method: :delete,
-                                      style: "background-color: #C6D166;",
-                                      class: "btn btn-default btn-sm" %>
-                              </td>
-                            <% end %>
-                          </tr>
-                        <% end %>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="tab-pane fade" id="tab3">
-                    <table id="reviews-table" class="table table-hover" style="width:100%">
-                      <thead>
-                        <tr>
-                          <td>Name</td>
-                          <td>Review</td>
-                          <td>Rating</td>
-                          <% if current_user == @user %>
-                            <td>Delete</td>
-                          <% end %>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% @user.reviews.each do |review| %>
-                          <tr>
-                            <td><%= link_to review.hike.name, hike_path(review.hike_id) %></td>
-                            <td><%= review.comment %></td>
-                            <td><% review.rating.times do %>
-                                  <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-                                <% end %>
-                            </td>
+                            <td>Name</td>
+                            <td>Distance</td>
+                            <td>Difficulty</td>
+                            <td>Date Completed</td>
                             <% if current_user == @user %>
                               <td>
-                                <%= button_to "Delete", hike_review_path(review.hike_id, review.id),
-                                    method: :delete,
-                                    style: "background-color: #C6D166;",
-                                    class: "btn btn-default btn-sm" %>
+                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
+                                <div class="delete-cell">
+                                  <%= link_to "Yes", hike_completed_hike_path(hike.hike_id, hike.id),
+                                        method: :delete,
+                                        remote: true,
+                                        class: "btn btn-default btn-sm deletable completed_hikes_delete" %>
+                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
+                                </div>
                               </td>
                             <% end %>
                           </tr>
-                        <% end %>
-                      </tbody>
-                    </table>
-                  </div>
-              </div>
-          </div>
+                        </thead>
+                        <tbody>
+                          <% @completed_hikes.each do |hike| %>
+                            <tr>
+                              <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
+                              <td><%= hike.hike.distance_in_km %></td>
+                              <td><%= hike.hike.difficulty %></td>
+                              <td><%= hike.created_at.strftime("%b %d, %Y") %></td>
+                              <% if current_user == @user %>
+                                <td><%= button_to "Delete", hike_completed_hike_path(hike.hike_id, hike.id),
+                                        method: :delete,
+                                        style: "background-color: #C6D166;",
+                                        class: "btn btn-default btn-sm" %>
+                                </td>
+                              <% end %>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="tab-pane fade" id="tab2">
+                      <table id="fave_hikes_table" class="table table-hover" style="width:100%">
+                        <thead>
+                          <tr>
+                            <td>Name</td>
+                            <td>Distance</td>
+                            <td>Difficulty</td>
+                            <% if current_user == @user %>
+                              <td>
+                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
+                                <div class="delete-cell">
+                                  <%= link_to "Yes", hike_fave_hike_path(hike.hike_id, hike.id),
+                                        method: :delete,
+                                        remote: true,
+                                        class: "btn btn-default btn-sm deletable fave_hikes_delete" %>
+                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
+                                </div>
+                              </td>
+                            <% end %>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @fave_hikes.each do |hike| %>
+                            <tr>
+                              <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
+                              <td><%= hike.hike.distance_in_km %></td>
+                              <td><%= hike.hike.difficulty %></td>
+                              <% if current_user == @user %>
+                                <td><%= button_to "Delete", hike_fave_hike_path(hike.hike_id, hike.id),
+                                        method: :delete,
+                                        style: "background-color: #C6D166;",
+                                        class: "btn btn-default btn-sm" %>
+                                </td>
+                              <% end %>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="tab-pane fade" id="tab3">
+                      <table id="reviews-table" class="table table-hover" style="width:100%">
+                        <thead>
+                          <tr>
+                            <td>Name</td>
+                            <td>Review</td>
+                            <td>Rating</td>
+                            <% if current_user == @user %>
+                              <td>
+                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
+                                <div class="delete-cell">
+                                  <%= link_to "Yes", hike_review_path(review.hike_id, review.id),
+                                    method: :delete,
+                                    remote: true,
+                                    class: "btn btn-default btn-sm deletable reviews_delete" %>
+                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
+                                </div>
+                              </td>
+                            <% end %>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @user.reviews.each do |review| %>
+                            <tr>
+                              <td><%= link_to review.hike.name, hike_path(review.hike_id) %></td>
+                              <td><%= review.comment %></td>
+                              <td><% review.rating.times do %>
+                                    <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+                                  <% end %>
+                              </td>
+                              <% if current_user == @user %>
+                                <td>
+                                  <%= button_to "Delete", hike_review_path(review.hike_id, review.id),
+                                      method: :delete,
+                                      style: "background-color: #C6D166;",
+                                      class: "btn btn-default btn-sm" %>
+                                </td>
+                              <% end %>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
   <!-- End of new panel -->
 
 </div>
-</div>
+
 <%= javascript_include_tag 'jquery.dataTables.min' %>
 <%= javascript_include_tag 'user_profile.js' %>
