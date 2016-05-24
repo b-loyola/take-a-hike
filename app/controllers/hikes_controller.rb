@@ -44,8 +44,19 @@ class HikesController < ApplicationController
 
     @hikes = @hikes.search_name(params[:name]) if params[:name]
 
+    if current_user
+      @hikes_completed = current_user.completed_hikes.pluck(:hike_id) 
+    else  
+      @hikes_completed = []
+    end
+
+    @response = {
+      hikes: @hikes,
+      completed: @hikes_completed
+    }
+
     respond_to do |format|
-      format.json { render json: @hikes }
+      format.json { render json: @response }
     end
   end
 
