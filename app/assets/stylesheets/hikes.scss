@@ -15,8 +15,10 @@ $extreme-hike: #B10000;
 .fixed_map{
   height:550px;
   width:100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  &.show_map {
+	  border: 1px solid #ccc;
+	  border-radius: 4px;  	
+  }
 }
 
 #map{
