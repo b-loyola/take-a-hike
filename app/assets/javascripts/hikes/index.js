@@ -135,17 +135,9 @@ function initMap() {
     // delete markers outside view and set marker array to the markers that remained in view
     deleteMarkers(markersToDelete, markersToKeep);
 
-    $('#searched_hikes').dataTable().fnDestroy();
-    $('#searched_hikes').find('tbody').empty();
-
+    // add new markers to map
     newHikes.forEach(function(hike){
-
-      if (prevMarkersRef[hike.id]) {
-        return true;
-      }
-
       var hikeIcon;
-      var hikeClass;
       var completed = '';
 
       if (hikesCompleted.indexOf(hike.id) >= 0) {
@@ -189,9 +181,34 @@ function initMap() {
         // calcRoute(this.position);
         infoWindow.setContent(windowContent);
         infoWindow.open(map, this);
-      });
+      });    
+    });
+
+    // clear and repopulate table
+    $('#searched_hikes').dataTable().fnDestroy();
+    $('#searched_hikes').find('tbody').empty();
+
+    hikes.forEach(function(hike){
 
       //------ POPULATE TABLE WITH DATA ----------//
+
+      var hikeClass;
+
+      switch (hike.difficulty){
+        case 1:
+          hikeClass = 'medium-difficulty';
+          break;
+        case 2:
+          hikeClass = 'hard-difficulty';
+          break;
+        case 3:
+          hikeClass = 'extreme-difficulty';
+          break;
+        default:
+          hikeClass = 'easy-difficulty';
+      }
+
+      console.log(hike);
 
       var name = $('<td>').append($('<a>').attr('href', '/hikes/' + hike.id).text(hike.name));
       var dist = $('<td>').text(hike.distance_in_km).addClass('distance');
@@ -212,6 +229,7 @@ function initMap() {
         $(this).find('a')[0].click();
       });
       $('#searched_hikes').append(row);
+
     });
 
     addDataTable();
