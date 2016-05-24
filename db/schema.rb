@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524050027) do
+ActiveRecord::Schema.define(version: 20160524220152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(version: 20160524050027) do
     t.text     "waypoints"
     t.float    "start_lat"
     t.float    "start_lng"
-    t.integer  "average_rating"
   end
 
   create_table "reviews", force: :cascade do |t|
