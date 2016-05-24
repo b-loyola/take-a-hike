@@ -84,11 +84,7 @@ class Hike < ActiveRecord::Base
         ORDER BY average_rating DESC
         LIMIT 1'
     )
-    if hike.size > 1
-      Hike.find(hike[0][:hike_id])
-    else
-      Hike.all.sample
-    end
+    hike.empty? ? Hike.all.sample : Hike.find(hike[0][:hike_id])
   end
 
   def self.featured
