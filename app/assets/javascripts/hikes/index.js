@@ -119,26 +119,27 @@ function initMap() {
 
       var hikeIcon;
       var hikeClass;
+      var completed = '';
+
+      if (hikesCompleted.indexOf(hike.id) >= 0) {
+        completed = '-completed';          
+      }
 
       switch (hike.difficulty){
         case 1:
-          hikeIcon = 'media/hiking-medium.png';
+          hikeIcon = 'media/hiking-medium' + completed + '.png';
           hikeClass = 'medium-difficulty';
           break;
         case 2:
-          hikeIcon = 'media/hiking-hard.png';
+          hikeIcon = 'media/hiking-hard' + completed + '.png';
           hikeClass = 'hard-difficulty';
           break;
         case 3:
-          hikeIcon = 'media/hiking-extreme.png';
+          hikeIcon = 'media/hiking-extreme' + completed + '.png';
           hikeClass = 'extreme-difficulty';
           break;
         default:
-          // if (hikesCompleted.indexOf(hike.id) >= 0) {
-          //   hikeIcon = 'media/footprint.png';          
-          // } else {
-            hikeIcon = 'media/hiking.png';
-          // }
+          hikeIcon = 'media/hiking' + completed + '.png';
           hikeClass = 'easy-difficulty';
       }
 
