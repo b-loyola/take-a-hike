@@ -139,8 +139,16 @@
 .folder-tabs {
   min-width: 492;
 }
-.completed_hikes_delete, .fave_hikes_delete, .reviews_delete {
-  background-color: #C6D166;
+
+.deletable {
   margin: 0;
   padding: 3px 5px;
+  background-color: #C6D166;
+    &.completed_hikes_delete, &.fave_hikes_delete, &.reviews_delete {
+    background-color: $colour-accent;
+  }
+}
+
+.delete-cell {
+  display: none;
 }

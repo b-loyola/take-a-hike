@@ -13,10 +13,12 @@ class FaveHikesController < ApplicationController
 
   def destroy
     @fave_hike = FaveHike.find(params[:id])
-    if @fave_hike.destroy
-      redirect_to :back, notice: "Removed Hike from Faves"
-    else
-      redirect_to :back, notice: "Unable to remove hike from Faves"
+    respond_to do |format|
+      if @fave_hike.destroy
+        format.json { render json: @fave_hike }
+      else
+        format.json { render :json => { :error => @fave_hike.errors.full_messages }, :status => 422 }
+      end
     end
   end
 
