@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
           review: @review,
           username: @review.user.full_name
         }
-        format.json { render json: @response}
+        format.json { render json: @response }
       end
     else
       respond_to do |format|
@@ -28,10 +28,12 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
-    if @review.destroy
-      redirect_to :back, notice: "Review has been deleted"
-    else
-      redirect_to :back, notice: "Unable to delete Review"
+    respond_to do |format|
+      if @review.destroy
+        format.json { render json: @review }
+      else
+        format.json { render :json => { :error => @review.errors.full_messages }, :status => 422 }
+      end
     end
   end
 

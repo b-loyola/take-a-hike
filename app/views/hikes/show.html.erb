@@ -57,7 +57,13 @@
   <div class="container hike-body">
 
     <!-- HIKE DESCRIPTION SECTION -->
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12 col-md-6 hike_directions" style="display:none">
+    <h1> Directions </h1>
+    <hr/>
+    <div class="hike_steps">
+    </div> 
+    </div>
+    <div class="col-xs-12 col-md-6 hide_hike_descriptions">
 
       <div class="row hike_glyphicon_descriptions">
         <div class="col-xs-12 col-md-6">
@@ -125,8 +131,8 @@
     <!-- HIKE MAP AND ELEVATION -->
     <div class="col-xs-12 col-md-6">
         <button class="btn btn-default hike-std-btn" id="directions"> Show Directions </button>
-        <button class="btn btn-default hike-std-btn" id="showmap" style="display:none"> Show Map </button>
-        <div class="fixed_map">
+        <button class="btn btn-default hike-std-btn" id="showmap" style="display:none"> Show Hike </button>
+        <div class="fixed_map show_map">
         	<div id="map"></div>
         </div>
         <div class="wrapper">

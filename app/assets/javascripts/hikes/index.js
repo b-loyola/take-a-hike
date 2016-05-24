@@ -76,26 +76,26 @@ function initMap() {
   }
 
   // Sets the map on all markers in the array.
-  function setMapOnAll(map) {
+  function setMapOnAll(map,markers) {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(map);
     }
   }
 
   // Removes the markers from the map, but keeps them in the array.
-  function clearMarkers() {
-    setMapOnAll(null);
+  function clearMarkers(markers) {
+    setMapOnAll(null,markers);
   }
 
   // Shows any markers currently in the array.
-  function showMarkers() {
-    setMapOnAll(map);
+  function showMarkers(markers) {
+    setMapOnAll(map,markers);
   }
 
   // Deletes all markers in the array by removing references to them.
-  function deleteMarkers() {
-    clearMarkers();
-    markers = [];
+  function deleteMarkers(markersToDelete, newMarkerArray) {
+    clearMarkers(markersToDelete);
+    markers = newMarkerArray;
   }
 
   //------ ADD ALL MARKERS TO MAP START ----//
@@ -103,42 +103,62 @@ function initMap() {
   function populateMap(response){
     var hikes = response.hikes;
     var hikesCompleted = response.completed;
+    
+    // create map of previous markers
+    var prevMarkersRef = {};
+    markers.forEach(function(marker){
+      prevMarkersRef[marker.id] = true;
+    });
 
-    console.log(hikesCompleted);
-
-    deleteMarkers();
-
-    $('#searched_hikes').dataTable().fnDestroy();
-    $('#searched_hikes').find('tbody').empty();
-
+    // create map of new markers
+    var newMarkersRef = {};
     hikes.forEach(function(hike){
+      newMarkersRef[hike.id] = true;
+    });
+
+    // create array with new hikes only
+    var newHikes = hikes.filter(function(hike){   
+      return !prevMarkersRef[hike.id]; 
+    });
+
+    // create arrays with markers to delete (outside of map view) and markers to keep (remained inside view)
+    var markersToDelete = [];
+    var markersToKeep = [];
+    markers.forEach(function(marker){
+      if (newMarkersRef[marker.id]) {
+        markersToKeep.push(marker);
+      } else {
+        markersToDelete.push(marker);
+      }
+    });
+
+    // delete markers outside view and set marker array to the markers that remained in view
+    deleteMarkers(markersToDelete, markersToKeep);
+
+    // add new markers to map
+    newHikes.forEach(function(hike){
+      var hikeIcon;
+      var completed = '';
 
       if (hikesCompleted.indexOf(hike.id) >= 0) {
-        console.log(hike);
+        completed = '-completed';          
       }
-
-      var hikeIcon;
-      var hikeClass;
 
       switch (hike.difficulty){
         case 1:
-          hikeIcon = 'media/hiking-medium.png';
+          hikeIcon = 'media/hiking-medium' + completed + '.png';
           hikeClass = 'medium-difficulty';
           break;
         case 2:
-          hikeIcon = 'media/hiking-hard.png';
+          hikeIcon = 'media/hiking-hard' + completed + '.png';
           hikeClass = 'hard-difficulty';
           break;
         case 3:
-          hikeIcon = 'media/hiking-extreme.png';
+          hikeIcon = 'media/hiking-extreme' + completed + '.png';
           hikeClass = 'extreme-difficulty';
           break;
         default:
-          // if (hikesCompleted.indexOf(hike.id) >= 0) {
-          //   hikeIcon = 'media/footprint.png';          
-          // } else {
-            hikeIcon = 'media/hiking.png';
-          // }
+          hikeIcon = 'media/hiking' + completed + '.png';
           hikeClass = 'easy-difficulty';
       }
 
@@ -161,9 +181,34 @@ function initMap() {
         // calcRoute(this.position);
         infoWindow.setContent(windowContent);
         infoWindow.open(map, this);
-      });
+      });    
+    });
+
+    // clear and repopulate table
+    $('#searched_hikes').dataTable().fnDestroy();
+    $('#searched_hikes').find('tbody').empty();
+
+    hikes.forEach(function(hike){
 
       //------ POPULATE TABLE WITH DATA ----------//
+
+      var hikeClass;
+
+      switch (hike.difficulty){
+        case 1:
+          hikeClass = 'medium-difficulty';
+          break;
+        case 2:
+          hikeClass = 'hard-difficulty';
+          break;
+        case 3:
+          hikeClass = 'extreme-difficulty';
+          break;
+        default:
+          hikeClass = 'easy-difficulty';
+      }
+
+      console.log(hike);
 
       var name = $('<td>').append($('<a>').attr('href', '/hikes/' + hike.id).text(hike.name));
       var dist = $('<td>').text(hike.distance_in_km).addClass('distance');
@@ -184,6 +229,7 @@ function initMap() {
         $(this).find('a')[0].click();
       });
       $('#searched_hikes').append(row);
+
     });
 
     addDataTable();
