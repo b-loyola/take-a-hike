@@ -74,4 +74,13 @@ $(function(){
     }
   });
 
+  $('.completed_hikes_delete').on('mouseenter', function(e){
+    console.log('yerp');
+  });
+
+  $("a.completed_hikes_delete").on("ajax:success", function(e, data, status, xhr) {
+    alert("The article was deleted.");
+  });
+
+
 })

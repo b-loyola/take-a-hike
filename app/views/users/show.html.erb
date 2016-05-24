@@ -100,10 +100,10 @@
                             <td><%= hike.hike.difficulty %></td>
                             <td><%= hike.created_at.strftime("%b %d, %Y") %></td>
                             <% if current_user == @user %>
-                              <td><%= button_to "Delete", hike_completed_hike_path(hike.hike_id, hike.id),
+                              <td><%= link_to "Delete", hike_completed_hike_path(hike.hike_id, hike.id),
                                       method: :delete,
-                                      style: "background-color: #C6D166;",
-                                      class: "btn btn-default btn-sm" %>
+                                      remote: true,
+                                      class: "btn btn-default btn-sm completed_hikes_delete" %>
                               </td>
                             <% end %>
                           </tr>
@@ -132,8 +132,8 @@
                             <% if current_user == @user %>
                               <td><%= button_to "Delete", hike_fave_hike_path(hike.hike_id, hike.id),
                                       method: :delete,
-                                      style: "background-color: #C6D166;",
-                                      class: "btn btn-default btn-sm" %>
+                                      remote: true,
+                                      class: "btn btn-default btn-sm fave_hikes_delete" %>
                               </td>
                             <% end %>
                           </tr>
@@ -166,8 +166,8 @@
                               <td>
                                 <%= button_to "Delete", hike_review_path(review.hike_id, review.id),
                                     method: :delete,
-                                    style: "background-color: #C6D166;",
-                                    class: "btn btn-default btn-sm" %>
+                                    remote: true,
+                                    class: "btn btn-default btn-sm reviews_delete" %>
                               </td>
                             <% end %>
                           </tr>
