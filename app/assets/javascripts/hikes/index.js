@@ -76,26 +76,26 @@ function initMap() {
   }
 
   // Sets the map on all markers in the array.
-  function setMapOnAll(map) {
+  function setMapOnAll(map,markers) {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(map);
     }
   }
 
   // Removes the markers from the map, but keeps them in the array.
-  function clearMarkers() {
-    setMapOnAll(null);
+  function clearMarkers(markers) {
+    setMapOnAll(null,markers);
   }
 
   // Shows any markers currently in the array.
-  function showMarkers() {
-    setMapOnAll(map);
+  function showMarkers(markers) {
+    setMapOnAll(map,markers);
   }
 
   // Deletes all markers in the array by removing references to them.
-  function deleteMarkers() {
-    clearMarkers();
-    markers = [];
+  function deleteMarkers(markersToDelete, newMarkerArray) {
+    clearMarkers(markersToDelete);
+    markers = newMarkerArray;
   }
 
   //------ ADD ALL MARKERS TO MAP START ----//
@@ -103,18 +103,45 @@ function initMap() {
   function populateMap(response){
     var hikes = response.hikes;
     var hikesCompleted = response.completed;
+    
+    // create map of previous markers
+    var prevMarkersRef = {};
+    markers.forEach(function(marker){
+      prevMarkersRef[marker.id] = true;
+    });
 
-    console.log(hikesCompleted);
+    // create map of new markers
+    var newMarkersRef = {};
+    hikes.forEach(function(hike){
+      newMarkersRef[hike.id] = true;
+    });
 
-    deleteMarkers();
+    // create array with new hikes only
+    var newHikes = hikes.filter(function(hike){   
+      return !prevMarkersRef[hike.id]; 
+    });
+
+    // create arrays with markers to delete (outside of map view) and markers to keep (remained inside view)
+    var markersToDelete = [];
+    var markersToKeep = [];
+    markers.forEach(function(marker){
+      if (newMarkersRef[marker.id]) {
+        markersToKeep.push(marker);
+      } else {
+        markersToDelete.push(marker);
+      }
+    });
+
+    // delete markers outside view and set marker array to the markers that remained in view
+    deleteMarkers(markersToDelete, markersToKeep);
 
     $('#searched_hikes').dataTable().fnDestroy();
     $('#searched_hikes').find('tbody').empty();
 
-    hikes.forEach(function(hike){
+    newHikes.forEach(function(hike){
 
-      if (hikesCompleted.indexOf(hike.id) >= 0) {
-        console.log(hike);
+      if (prevMarkersRef[hike.id]) {
+        return true;
       }
 
       var hikeIcon;
