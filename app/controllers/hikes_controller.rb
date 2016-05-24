@@ -23,18 +23,23 @@ class HikesController < ApplicationController
       min_lng: params[:position]["min_lng"].to_f
     }
 
-    @hikes = Hike.where('start_lat >= ? AND start_lat <= ?', bounds[:min_lat], bounds[:max_lat]).where('start_lng >= ? AND start_lng <= ?', bounds[:min_lng], bounds[:max_lng]).select(:id,
-      :spring,
-      :winter,
-      :summer,
-      :fall,
-      :name,
-      :distance_in_km,
-      :time_in_hours,
-      :difficulty,
-      :start_lat,
-      :start_lng
-    )
+    @hikes = Hike.where('start_lat >= ? AND start_lat <= ?', bounds[:min_lat], bounds[:max_lat])
+      .where('start_lng >= ? AND start_lng <= ?', bounds[:min_lng], bounds[:max_lng])
+      .select(
+        :id,
+        :spring,
+        :winter,
+        :summer,
+        :fall,
+        :name,
+        :distance_in_km,
+        :time_in_hours,
+        :difficulty,
+        :start_lat,
+        :start_lng
+      )
+
+
     @hikes = @hikes.difficulty(params[:difficulty]) if params[:difficulty] && params[:difficulty] != ''
 
     if params[:duration]
@@ -45,8 +50,8 @@ class HikesController < ApplicationController
     @hikes = @hikes.search_name(params[:name]) if params[:name]
 
     if current_user
-      @hikes_completed = current_user.completed_hikes.pluck(:hike_id) 
-    else  
+      @hikes_completed = current_user.completed_hikes.pluck(:hike_id)
+    else
       @hikes_completed = []
     end
 
