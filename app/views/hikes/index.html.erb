@@ -18,17 +18,18 @@
 						<th>Distance <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
 						<th>Time <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
 						<th>Difficulty <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
+						<th>Average Rating <span class="glyphicon glyphicon-sort" aria-hidden="true" style="font-size: 10px"></span></th>
 
 					</tr>
 				</thead>
 				<tbody>
-			  	<%#= render @hikes %>
+					<!-- append here with jQuery -->
 				</tbody>
 			</table>
 		</div>
 	</div>
 
-	<%#= paginate(@hikes) %>
+
 
 </div>
 <%= javascript_include_tag 'jquery.dataTables.min' %>

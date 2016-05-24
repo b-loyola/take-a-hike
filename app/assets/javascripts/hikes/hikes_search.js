@@ -43,10 +43,6 @@ function addDataTable() {
     });
   }
 
-  function init() {
-    buildTable();
-  }
-
-  init();
+  buildTable();
 
 }

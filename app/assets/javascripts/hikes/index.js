@@ -108,8 +108,6 @@ function initMap() {
 
     hikes.forEach(function(hike){
 
-      console.log(hike.difficulty);
-
       var hikeIcon;
       var hikeClass;
 
@@ -158,6 +156,8 @@ function initMap() {
       var dist = $('<td>').text(hike.distance_in_km).addClass('distance');
       var difficulty = $('<td>').text(hike.difficulty).addClass('difficulty');
       var time = $('<td>').text(hike.time_in_hours).addClass('time');
+      // var rating = $('<td>').text();
+      debugger;
 
       var row = $('<tr>')
         .addClass('hike-row')
