@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to hikes_path, notice: "Welcome back to the trails, #{@user.first_name}!"
+      redirect_to hikes_path, notice: "Welcome to the trails, #{@user.first_name}!"
     else
       render :new
     end
