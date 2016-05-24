@@ -72,6 +72,10 @@ class Hike < ActiveRecord::Base
     seasons
   end
 
+  def average_rating_sql
+    self.reviews.average(:rating).round
+  end
+
   def self.top_rated
     hike = Review.find_by_sql(
       'SELECT AVG("reviews"."rating") AS average_rating,
