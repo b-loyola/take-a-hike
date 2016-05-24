@@ -61,7 +61,11 @@ div.row .col-xs-6 .button_to{
   background-image: url('/media/hikers-bright.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  margin: 0px -15px 15px;
+  margin: 0px -15px;
+}
+
+.hike-body {
+  padding-top: 20px;
 }
 
 .hike_glyphicon_descriptions {

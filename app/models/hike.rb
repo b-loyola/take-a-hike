@@ -47,8 +47,6 @@ class Hike < ActiveRecord::Base
     end
   end
 
-
-
   def simplified_waypoints(array)
     simplified = []
     array.each_with_index do |point,i|
