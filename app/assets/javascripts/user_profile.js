@@ -22,7 +22,7 @@ $(function(){
       { "width": "15%" },
       { "width": "15%" },
       { "width": "15%" },
-      { "width": "15%" }
+      { "width": "15%", "orderable": "false" }
     ],
     "paging": false,
     "filter": false,
@@ -73,5 +73,31 @@ $(function(){
       $('#profile-header').fadeIn('fast');
     }
   });
+
+  $('.delete-button').on('click', function(){
+    console.log('clicked');
+    $('.delete-cell').hide();
+    $('.delete-button').show();
+    $(this).hide();
+    $(this).nextAll().show();
+  });
+
+  $('.non-delete').on('click', function(){
+    $('.delete-cell').hide();
+    $('.delete-button').show();
+  })
+
+  $("a.completed_hikes_delete").on("ajax:success", function(e, data, status, xhr) {
+    $(this).closest('tr').fadeOut('slow');
+  });
+
+  $("a.fave_hikes_delete").on("ajax:success", function(e, data, status, xhr) {
+    $(this).closest('tr').fadeOut('slow');
+  });
+
+  $("a.reviews_delete").on("ajax:success", function(e, data, status, xhr) {
+    $(this).closest('tr').fadeOut('slow');
+  });
+
 
 })
