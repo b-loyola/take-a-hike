@@ -103,12 +103,13 @@ function initMap() {
   function populateMap(response){
     var hikes = response.hikes;
     var hikesCompleted = response.completed;
-    
+
     // create map of previous markers
     var prevMarkersRef = {};
     markers.forEach(function(marker){
       prevMarkersRef[marker.id] = true;
     });
+
 
     // create map of new markers
     var newMarkersRef = {};
@@ -117,8 +118,8 @@ function initMap() {
     });
 
     // create array with new hikes only
-    var newHikes = hikes.filter(function(hike){   
-      return !prevMarkersRef[hike.id]; 
+    var newHikes = hikes.filter(function(hike){
+      return !prevMarkersRef[hike.id];
     });
 
     // create arrays with markers to delete (outside of map view) and markers to keep (remained inside view)
@@ -141,7 +142,7 @@ function initMap() {
       var completed = '';
 
       if (hikesCompleted.indexOf(hike.id) >= 0) {
-        completed = '-completed';          
+        completed = '-completed';
       }
 
       switch (hike.difficulty){
@@ -181,7 +182,7 @@ function initMap() {
         // calcRoute(this.position);
         infoWindow.setContent(windowContent);
         infoWindow.open(map, this);
-      });    
+      });
     });
 
     // clear and repopulate table
@@ -214,6 +215,7 @@ function initMap() {
       var dist = $('<td>').text(hike.distance_in_km).addClass('distance');
       var difficulty = $('<td>').text(hike.difficulty).addClass('difficulty');
       var time = $('<td>').text(hike.time_in_hours).addClass('time');
+      var rating = $('<td>').text( Math.round(hike.average_rating) );
 
       var row = $('<tr>')
         .addClass('hike-row')
@@ -223,7 +225,8 @@ function initMap() {
         .append(name)
         .append(dist)
         .append(time)
-        .append(difficulty);
+        .append(difficulty)
+        .append(rating);
 
       row.on('click', function(){
         $(this).find('a')[0].click();
