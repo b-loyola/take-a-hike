@@ -16,33 +16,34 @@
 <div id="review-block" class="review-block">
 
     <script id="handlebars-review" type="text/x-handlebars-template">​
-      <div class="col-xs-3 avatar">
-        <img src="http://lorempixel.com/60/60/nature/{{userID}}" class="img-rounded">
-        <div class="review-block-name">
-          <a href="/users/1">{{username}}</a>
+      <div class="individual-review row">
+        <div class="col-xs-3 avatar">
+          <img src="http://lorempixel.com/60/60/nature/{{userID}}" class="img-rounded">
+          <div class="review-block-name">
+            <a href="/users/1">{{username}}</a>
+          </div>
         </div>
-      </div>
-      
+        
 
-      <div class="col-xs-9">
-        <div id="current-user-rating" class="review-block-rate" data-rating={{rating}}>
-          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-          <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+        <div class="col-xs-9">
+          <div id="current-user-rating" class="review-block-rate" data-rating={{rating}}>
+            <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+            <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+            <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+            <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+            <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          </div>
+
+          <div class="review-block-description">
+            <h4>{{comment}}</h4>
+          </div>
+
         </div>
-
-        <div class="review-block-description">
-          <h4>{{comment}}</h4>
-        </div>
-
       </div>
     ​</script>
   
   <% @hike.reviews.each do |review| %>
-    <div class="individual-review row">
-          
+    <div class="individual-review row">     
       <div class="col-xs-3 avatar">
         <img src="http://lorempixel.com/60/60/nature/<%= review.user.id %>" class="img-rounded">
         <div class="review-block-name">
@@ -58,12 +59,11 @@
           <% end %>
         </div>
 
-        <div class="review-block-description"> Rating: <%= review.rating %> 
+        <div class="review-block-description"> 
           <h4><%= review.comment %></h4>
         </div>
 
       </div>
-      <hr>
     </div>
   <% end %>
 

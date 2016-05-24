@@ -36,28 +36,33 @@ def hike_builder(target)
       text_box = source.css("div#description")
 
       waypoints = extract_coordinates(gpx_file_builder(source))
+
       seasons = extract_seasons(stats)
       difficulty = extract_difficulty(stats)
       hours = extract_hours(stats)
       distance = extract_distance(stats)
       description = extract_description(text_box)
 
-      Hike.create(
-        name: name,
-        difficulty: difficulty,
-        time_in_hours: hours,
-        distance_in_km: distance,
-        description: description,
-        winter: seasons[:winter],
-        spring: seasons[:spring],
-        summer: seasons[:summer],
-        fall: seasons[:fall],
-        start_lat: waypoints[0][:lat],
-        start_lng: waypoints[0][:lng],
-        waypoints: waypoints
-      )
-    rescue
-      puts "*** Failed to import ***"
+      if !waypoints.empty?
+        Hike.create(
+          name: name,
+          difficulty: difficulty,
+          time_in_hours: hours,
+          distance_in_km: distance,
+          description: description,
+          winter: seasons[:winter],
+          spring: seasons[:spring],
+          summer: seasons[:summer],
+          fall: seasons[:fall],
+          start_lat: waypoints[0][:lat],
+          start_lng: waypoints[0][:lng],
+          waypoints: waypoints
+        )
+      else
+        puts "\e[31m\tNo waypoints\e[0m"
+      end
+    rescue StandardError => e
+      puts "\e[31m\tFailed to import: #{e}\e[0m"
     end
 
     i += 1
@@ -65,9 +70,9 @@ def hike_builder(target)
 end
 
 
-#creates gpx URL out of a few components of the scraped page
+# Creates gpx URL out of a few components of the scraped page
 def gpx_file_builder(source)
-  script = source.css('script')[3]
+  script = source.css('script')
   trail_id = script.children.to_s.match(/TRAIL_ID\s=\s\"(\d+)\"/)[1]
   gpx_name = script.children.to_s.match(/GPX_URL\s=\s\"([a-zA-Z0-9_\-]+).*\"/)[1]
   TARGET_DOMAIN + "content/gpsData/gps" + trail_id + "-" + gpx_name + ".gpx"
@@ -129,7 +134,8 @@ def extract_distance(stats)
 end
 
 def extract_description(text_box)
-  text_box.xpath('text()').text.strip
+  # text_box.xpath('text()').text.strip
+  text_box.css('p').text.gsub(/NTS[^\.]+\./i, "").strip
 end
 
 
