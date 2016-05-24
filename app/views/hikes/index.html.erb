@@ -13,22 +13,21 @@
 			<table id="searched_hikes" class="table table-hover">
 				<thead>
 					<tr>
-
 						<th>Hike Name</th>
 						<th>Distance</th>
 						<th>Time</th>
 						<th>Difficulty</th>
-
+						<th>Average Rating</th>
 					</tr>
 				</thead>
 				<tbody>
-			  	<%#= render @hikes %>
+					<!-- append here with jQuery -->
 				</tbody>
 			</table>
 		</div>
 	</div>
 
-	<%#= paginate(@hikes) %>
+
 
 </div>
 <%= javascript_include_tag 'jquery.dataTables.min' %>
