@@ -187,7 +187,17 @@ $(function(){
       }, function(response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
           directionsDisplay.setDirections(response);
-
+          var directions_steps=response.routes[0].legs[0].steps
+          var distance = $("<h4>").text("Distance: "+ response.routes[0].legs[0].distance.text);
+          var duration = $("<h4>").text("Duration: "+ response.routes[0].legs[0].duration.text);
+          $(".hike_steps").append(distance);
+          $(".hike_steps").append(duration);
+          directions_steps.forEach(function(step, index){
+            var step_index = index + 1
+            step_index = step_index.toString();
+            $(".hike_steps").append(step_index + ": "+ step.instructions);
+            $(".hike_steps").append($("<br>"));
+          })
           globalEndMarker.setMap(null);
           globalHikePath.setMap(null);
           globalStartMarker.setMap(null);
@@ -202,11 +212,20 @@ $(function(){
 
     $("#showmap").show();
     $(this).hide();
+    $(".hide_hike_descriptions").hide();
+    $(".fixed_graph").hide();
+    $("#weather").hide();
+    $(".hike_directions").show();
    });
 
   $("#showmap").on('click', function(){
     initMap();
     $(this).hide();
     $("#directions").show();
+    $(".hide_hike_descriptions").show();
+    $(".fixed_graph").show();
+    $(".hike_directions").hide();
+    $(".hike_steps").html("");
+    $("#weather").show();
   });
 });

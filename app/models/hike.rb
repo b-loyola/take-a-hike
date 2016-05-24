@@ -83,18 +83,14 @@ class Hike < ActiveRecord::Base
   end
 
   def self.top_rated
-    hike = Review.find_by_sql(
+    review = Review.find_by_sql(
       'SELECT AVG("reviews"."rating") AS average_rating,
         hike_id AS hike_id FROM "reviews"
         GROUP BY "reviews"."hike_id"
         ORDER BY average_rating DESC
         LIMIT 1'
     )
-    if hike.size > 1
-      Hike.find(hike[0][:hike_id])
-    else
-      Hike.all.sample
-    end
+    review.empty? ? Hike.all.sample : review.first.hike
   end
 
   def self.featured

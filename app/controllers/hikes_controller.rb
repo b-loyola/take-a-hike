@@ -27,10 +27,6 @@ class HikesController < ApplicationController
       .where('start_lng >= ? AND start_lng <= ?', bounds[:min_lng], bounds[:max_lng])
       .select(
         :id,
-        :spring,
-        :winter,
-        :summer,
-        :fall,
         :name,
         :distance_in_km,
         :time_in_hours,
@@ -38,7 +34,6 @@ class HikesController < ApplicationController
         :start_lat,
         :start_lng
       )
-
 
     @hikes = @hikes.difficulty(params[:difficulty]) if params[:difficulty] && params[:difficulty] != ''
 
