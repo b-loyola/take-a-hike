@@ -48,6 +48,8 @@ $(function(){
     e.preventDefault();
     var rating = $('#review_rating').val();
     var comment = $('#review_comment').val();
+    $(".show-button").hide();
+    $(".hide-button").show();
 
     $.ajax({
       method: 'POST',
