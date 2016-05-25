@@ -51,7 +51,6 @@
               <li>
                 <a href="#tab2" data-toggle="tab">
                   <div class="row">
-
                     <div class="col-xs-12 col-md-2">
                       <h3><span class="glyphicon glyphicon-heart glyph-tab" aria-hidden="true"></span></h3>
                     </div>
@@ -65,7 +64,6 @@
               <li>
                 <a href="#tab3" data-toggle="tab">
                   <div class="row">
-
                     <div class="col-xs-12 col-md-2">
                       <h3><span class="glyphicon glyphicon-pencil glyph-tab" aria-hidden="true"></span></h3>
                     </div>
@@ -79,122 +77,122 @@
             </ul>
             </div>
             <div class="panel-body">
-                <div class="tab-content">
-                    <div class="tab-pane fade in active" id="tab1">
-                      <table id="completed_hikes_table" class="table table-hover" style="width:100%">
-                        <thead>
-                          <tr>
-                            <td>Name</td>
-                            <td>Distance</td>
-                            <td>Difficulty</td>
-                            <td>Date Completed</td>
-                            <% if current_user == @user %>
-                              <td>Delete</td>
-                            <% end %>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <% @completed_hikes.each do |hike| %>
-                          <%hike_km = hike.hike.distance_in_km%>
-                            <tr>
-                              <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
-                              <td><%= hike.hike.distance_in_km %></td>
-                              <td><%= hike.hike.difficulty %></td>
-                              <td><%= hike.created_at.strftime("%b %d, %Y") %></td>
-                              <% if current_user == @user %>
-                                <td>
-                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
-                                <div class="delete-cell">
-                                  <%= link_to "Yes", hike_completed_hike_path(hike.hike_id, hike.id),
-                                        :data => {id: hike_km},
-                                        method: :delete,
-                                        remote: true,
-                                        class: "btn btn-default btn-sm deletable completed_hikes_delete"%>
-                                      
-                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
-                                </div>
-                              </td>
-                              <% end %>
-                            </tr>
-                          <% end %>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="tab-pane fade" id="tab2">
-                      <table id="fave_hikes_table" class="table table-hover" style="width:100%">
-                        <thead>
-                          <tr>
-                            <td>Name</td>
-                            <td>Distance</td>
-                            <td>Difficulty</td>
-                            <% if current_user == @user %>
-                              <td>Delete</td>
-                            <% end %>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <% @fave_hikes.each do |hike| %>
-                            <tr>
-                              <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
-                              <td><%= hike.hike.distance_in_km %></td>
-                              <td><%= hike.hike.difficulty %></td>
-                              <% if current_user == @user %>
-                                <td>
-                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
-                                <div class="delete-cell">
-                                  <%= link_to "Yes", hike_fave_hike_path(hike.hike_id, hike.id),
-                                        method: :delete,
-                                        remote: true,
-                                        class: "btn btn-default btn-sm deletable fave_hikes_delete" %>
-                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
-                                </div>
-                              </td>
-                              <% end %>
-                            </tr>
-                          <% end %>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="tab-pane fade" id="tab3">
-                      <table id="reviews-table" class="table table-hover" style="width:100%">
-                        <thead>
-                          <tr>
-                            <td>Name</td>
-                            <td>Review</td>
-                            <td>Rating</td>
-                            <% if current_user == @user %>
-                              <td>Delete</td>
-                            <% end %>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <% @user.reviews.each do |review| %>
-                            <tr>
-                              <td><%= link_to review.hike.name, hike_path(review.hike_id) %></td>
-                              <td><%= review.comment %></td>
-                              <td><% review.rating.times do %>
-                                    <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
-                                  <% end %>
-                              </td>
-                              <% if current_user == @user %>
-                                <td>
-                                <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
-                                <div class="delete-cell">
-                                  <%= link_to "Yes", hike_review_path(review.hike_id, review.id),
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab1">
+                  <table id="completed_hikes_table" class="table table-hover" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Distance</th>
+                        <th class="hide-on-collapse">Difficulty</th>
+                        <th class="hide-on-collapse">Date Completed</th>
+                        <% if current_user == @user %>
+                          <th>Delete</th>
+                        <% end %>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @completed_hikes.each do |hike| %>
+                      <%hike_km = hike.hike.distance_in_km%>
+                        <tr>
+                          <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
+                          <td><%= hike.hike.distance_in_km %></td>
+                          <td class="hide-on-collapse"><%= hike.hike.difficulty %></td>
+                          <td class="hide-on-collapse"><%= hike.created_at.strftime("%b %d, %Y") %></td>
+                          <% if current_user == @user %>
+                            <td>
+                            <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
+                            <div class="delete-cell">
+                              <%= link_to "Yes", hike_completed_hike_path(hike.hike_id, hike.id),
+                                    :data => {id: hike_km},
                                     method: :delete,
                                     remote: true,
-                                    class: "btn btn-default btn-sm deletable reviews_delete" %>
-                                  <button class="btn btn-default btn-sm deletable non-delete">No</button>
-                                </div>
-                              </td>
-                              <% end %>
-                            </tr>
+                                    class: "btn btn-default btn-sm deletable completed_hikes_delete"%>
+
+                              <button class="btn btn-default btn-sm deletable non-delete">No</button>
+                            </div>
+                          </td>
                           <% end %>
-                        </tbody>
-                      </table>
-                    </div>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
                 </div>
-            </div>
+                <div class="tab-pane fade" id="tab2">
+                  <table id="fave_hikes_table" class="table table-hover" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Distance</th>
+                        <th class="hide-on-collapse">Difficulty</th>
+                        <% if current_user == @user %>
+                          <th>Delete</th>
+                        <% end %>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @fave_hikes.each do |hike| %>
+                        <tr>
+                          <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
+                          <td><%= hike.hike.distance_in_km %></td>
+                          <td class="hide-on-collapse"><%= hike.hike.difficulty %></td>
+                          <% if current_user == @user %>
+                            <td>
+                            <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
+                            <div class="delete-cell">
+                              <%= link_to "Yes", hike_fave_hike_path(hike.hike_id, hike.id),
+                                    method: :delete,
+                                    remote: true,
+                                    class: "btn btn-default btn-sm deletable fave_hikes_delete" %>
+                              <button class="btn btn-default btn-sm deletable non-delete">No</button>
+                            </div>
+                          </td>
+                          <% end %>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tab-pane fade" id="tab3">
+                  <table id="reviews-table" class="table table-hover" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Review</th>
+                        <th class="hide-on-collapse">Rating</th>
+                        <% if current_user == @user %>
+                          <th>Delete</th>
+                        <% end %>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @user.reviews.each do |review| %>
+                        <tr>
+                          <td><%= link_to review.hike.name, hike_path(review.hike_id) %></td>
+                          <td><%= review.comment %></td>
+                          <td class="hide-on-collapse"><% review.rating.times do %>
+                                <span class="rate-tree glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+                              <% end %>
+                          </td>
+                          <% if current_user == @user %>
+                            <td>
+                              <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
+                              <div class="delete-cell">
+                                <%= link_to "Yes", hike_review_path(review.hike_id, review.id),
+                                  method: :delete,
+                                  remote: true,
+                                  class: "btn btn-default btn-sm deletable reviews_delete" %>
+                                <button class="btn btn-default btn-sm deletable non-delete">No</button>
+                              </div>
+                            </td>
+                          <% end %>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
         </div>
       </div>
     </div>

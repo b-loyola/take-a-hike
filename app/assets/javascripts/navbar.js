@@ -1,3 +1,3 @@
 $(function(){
-  $("#navbar").autoHidingNavbar();
+  $(".navbar-fixed-top").autoHidingNavbar();
 });
