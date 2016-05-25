@@ -17,6 +17,9 @@ body {
 		@media (min-width: 75em) {
 			top: 260px;
 		}
+		@media (min-width: 90em) {
+			top: 310px;
+		}
 		color: white;
 		z-index: 1;
 		vertical-align: middle;
@@ -35,6 +38,9 @@ body {
 	}
 	@media (min-width: 75em) {
 		height: 535px;
+	}
+	@media (min-width: 90em) {
+		height: 640px;
 	}
 	#video {
 		width: 100%;
