@@ -3,11 +3,13 @@ class FaveHikesController < ApplicationController
   before_filter :load_hike
 
   def create
-    @fave_hike = @hike.fave_hikes.create(user: current_user)
-    if @fave_hike.save
-      redirect_to @hike, notice: "Succesfully Saved to Faves"
-    else
-      redirect_to @hike, notice: "Unable to Save to Faves"
+    @fave_hike = @hike.fave_hikes.new(user: current_user)
+    respond_to do |format|
+      if @fave_hike.save
+        format.json { render json: @fave_hike, status: :created }
+      else
+        format.json { render :json => { :error => @fave_hike.errors.full_messages }, :status => 422 }
+      end
     end
   end
 

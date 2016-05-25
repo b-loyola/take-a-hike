@@ -18,14 +18,16 @@
 
 
 <div class="container-fluid">
-
   <div class="hike-header">
+    <div class="alert alert-info alert-dismissible flash" style="display: none;">Hike completed!</div>
     <div class="container">
       <div class="col-xs-12">
         <h1 id="hike-title"><%= @hike.name %></h1>
-        <% if current_user && current_user.number_of_times_completed(@hike) >= 1 %>
-          <h5 id="times-completed">You have completed this hike <%= pluralize(current_user.number_of_times_completed(@hike), 'time') %></h5>
-        <% end %>
+        <div id="times-completed-container">
+          <% if current_user && current_user.number_of_times_completed(@hike) >= 1 %>
+            <h5 class="times-completed">You have completed this hike <%= pluralize(current_user.number_of_times_completed(@hike), 'time') %></h5>
+          <% end %>
+        </div>
         <!-- AVERAGE STAR RATING -->
         <% unless @hike.reviews.count == 0 %>
           <div id="rating-block">
@@ -38,16 +40,24 @@
             </div>
           </div>
         <% end %>
-          <% if current_user && current_user.has_favourited?(@hike) %>
-            <div class="btn btn-default hike-std-btn favourite">
-              <i class="glyphicon glyphicon-heart"></i> Marked as Favourite
-            </div>
-          <% else %>
-            <%= button_to hike_fave_hikes_path(params[:id]), method: :post, class: "btn btn-default hike-std-btn" do %>
+        <% if current_user && current_user.has_favourited?(@hike) %>
+          <div class="btn btn-default hike-std-btn favourite">
+            <i class="glyphicon glyphicon-heart"></i> Marked as Favourite
+          </div>
+        <% else %>
+          <div class="not-favorited">
+            <%= link_to hike_fave_hikes_path(params[:id]),
+                method: :post,
+                remote: true,
+                class: "btn btn-default hike-std-btn hike-faved hike-faved" do %>
               <i class="glyphicon glyphicon-heart-empty"></i> Add to Favourites
-            <% end %>  
-          <% end %>
-        <%= button_to hike_completed_hikes_path(params[:id]), method: :post, class: "btn btn-default hike-std-btn" do %>
+            <% end %>
+          </div>
+        <% end %>
+        <%= link_to hike_completed_hikes_path(params[:id]),
+            method: :post,
+            remote: true,
+            class: "btn btn-default hike-std-btn hike-complete" do %>
           <i class="glyphicon glyphicon-ok"></i> Mark Completed
         <% end %>
       </div>
@@ -55,13 +65,12 @@
   </div>
 
   <div class="container hike-body">
-
     <!-- HIKE DESCRIPTION SECTION -->
     <div class="col-xs-12 col-md-6 hike_directions" style="display:none">
     <h1> Directions </h1>
     <hr/>
     <div class="hike_steps">
-    </div> 
+    </div>
     </div>
     <div class="col-xs-12 col-md-6 hide_hike_descriptions">
 
@@ -116,7 +125,7 @@
           <%= render partial: 'review' %>
         </div>
       </div>
-      
+
       <div align="right">
          <a href=<%=text%> class="twitter-hashtag-button">Tweet #TakeAHike</a>
         <div class="fb-send" data-href="http://www.takeahike.co" data-layout="button_count"></div>
@@ -167,5 +176,6 @@
 </script>
 
 <%= javascript_include_tag 'hikes/show.js' %>
+<%= javascript_include_tag 'hikes/show_ajax.js' %>
 
 

@@ -5,7 +5,7 @@ $(function(){
       var distance = data[1];
       var difficulty = data[2];
 
-      row.eq(1).text(distance + " km");
+      row.eq(1).text(distance + " km").attr('data-distance', distance);
 
       if (difficulty == 0) {
         row.eq(2).text("Easy");
@@ -52,7 +52,7 @@ $(function(){
       { "width": "40%" },
       { "width": "15%" },
       { "width": "15%" },
-      { "width": "15%" },
+      { "width": "15%", "orderable": "false" }
     ],
     "paging": false,
     "filter": false,

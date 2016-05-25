@@ -20,7 +20,11 @@
   top:-5px;
 }
 
-div.row .col-xs-6 .button_to{
+div.row .col-xs-6 .link_to{
+  display: inline-block;
+}
+
+a.hike-complete, a.hike-faved, .not-favorited {
   display: inline-block;
 }
 
@@ -33,7 +37,7 @@ div.row .col-xs-6 .button_to{
   color: $colour-bright;
 }
 
-#times-completed {
+.times-completed {
   color: $colour-bright;
 }
 
