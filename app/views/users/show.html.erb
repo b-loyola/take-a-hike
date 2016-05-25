@@ -15,7 +15,7 @@
             <span class="glyphicon glyphicon-signal"></span>
             <%= @user.hiker_level %>
           </h4>
-          <h4>
+          <h4 id="kms_hiked">
             <span class="glyphicon glyphicon-dashboard"></span>
             <%= @user.kms_hiked %> kms
           </h4>
@@ -95,6 +95,7 @@
                         </thead>
                         <tbody>
                           <% @completed_hikes.each do |hike| %>
+                          <%hike_km = hike.hike.distance_in_km%>}
                             <tr>
                               <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
                               <td><%= hike.hike.distance_in_km %></td>
@@ -105,9 +106,11 @@
                                 <button class="btn btn-default btn-sm deletable delete-button">Delete</button>
                                 <div class="delete-cell">
                                   <%= link_to "Yes", hike_completed_hike_path(hike.hike_id, hike.id),
+                                        :data => {id: hike_km},
                                         method: :delete,
                                         remote: true,
-                                        class: "btn btn-default btn-sm deletable completed_hikes_delete" %>
+                                        class: "btn btn-default btn-sm deletable completed_hikes_delete"%>
+                                      
                                   <button class="btn btn-default btn-sm deletable non-delete">No</button>
                                 </div>
                               </td>

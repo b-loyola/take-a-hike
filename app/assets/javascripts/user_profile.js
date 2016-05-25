@@ -89,6 +89,11 @@ $(function(){
 
   $("a.completed_hikes_delete").on("ajax:success", function(e, data, status, xhr) {
     $(this).closest('tr').fadeOut('slow');
+    var km=$(this).attr('data-id')
+    var hiked=$("#kms_hiked").text()
+    console.log(hiked);
+
+
   });
 
   $("a.fave_hikes_delete").on("ajax:success", function(e, data, status, xhr) {
@@ -98,6 +103,5 @@ $(function(){
   $("a.reviews_delete").on("ajax:success", function(e, data, status, xhr) {
     $(this).closest('tr').fadeOut('slow');
   });
-
 
 })
