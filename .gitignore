@@ -11,7 +11,7 @@
 /log/*
 !/log/.keep
 /tmp
-/app/assets/javascripts/_env*
+# /app/assets/javascripts/_env*
 *.DS_Store
 
 
