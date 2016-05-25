@@ -36,8 +36,6 @@ class HikesController < ApplicationController
     .group(' "hikes".name, "hikes".id')
     .having('start_lat >= ? AND start_lat <= ?', bounds[:min_lat], bounds[:max_lat])
     .having('start_lng >= ? AND start_lng <= ?', bounds[:min_lng], bounds[:max_lng])
-
-    puts "***************************************************"
     
     @hikes = @hikes.difficulty(params[:difficulty]) if params[:difficulty] && params[:difficulty] != ''
 
