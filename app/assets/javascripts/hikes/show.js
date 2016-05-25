@@ -1,40 +1,40 @@
 //--------------LOAD API KEY--------------//
-  var script = $('<script>')
-    .attr('src', "https://maps.googleapis.com/maps/api/js?key=" + googleKey + "&callback=initMap")
-    .attr('async','').attr('defer','');
-  script.appendTo($('body'));
-  //--------------LOAD API KEY--------------//
-  var map;
-  var markers=[];
-  var globalPos;
-  var globalStartMarker;
-  var globalEndMarker;
-  var globalHikePath;
-  var globalChart;
-  var globalHikerMarker;
-  
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-      globalPos = pos;
-    });
-  }
+var script = $('<script>')
+  .attr('src', "https://maps.googleapis.com/maps/api/js?key=" + googleKey + "&callback=initMap")
+  .attr('async','').attr('defer','');
+script.appendTo($('body'));
+//--------------LOAD API KEY--------------//
+var map;
+var markers=[];
+var globalPos;
+var globalStartMarker;
+var globalEndMarker;
+var globalHikePath;
+var globalChart;
+var globalHikerMarker;
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function (position) {
+    pos = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+    globalPos = pos;
+  });
+}
 
 
-  function initMap() {
-    //---- GENERATE MAP ---//
-    midPoint = Math.floor(hikeCoordinates.length/2);
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 13,
-      center: hikeCoordinates[midPoint],
-      mapTypeId: google.maps.MapTypeId.TERRAIN,
-      scrollwheel:false
-    });
+function initMap() {
+  //---- GENERATE MAP ---//
+  midPoint = Math.floor(hikeCoordinates.length/2);
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 13,
+    center: hikeCoordinates[midPoint],
+    mapTypeId: google.maps.MapTypeId.TERRAIN,
+    scrollwheel:false
+  });
 
-      map.set('styles',[
+  map.set('styles',[
     {
       featureType: 'landscape',
       elementType: 'geometry',
@@ -54,45 +54,45 @@
   ]);
 
     //--- FIT MAP TO BOUNDS --//
-    var bounds = new google.maps.LatLngBounds();
-    hikeCoordinates.forEach(function(coord){
-      var point = new google.maps.LatLng(coord.lat, coord.lng);
-      bounds.extend(point);
-    });
-    map.fitBounds(bounds);
+  var bounds = new google.maps.LatLngBounds();
+  hikeCoordinates.forEach(function(coord){
+    var point = new google.maps.LatLng(coord.lat, coord.lng);
+    bounds.extend(point);
+  });
+  map.fitBounds(bounds);
 
-    //--- GENERATE HIKE PATH POLYLINE --//
-    var hikePath = new google.maps.Polyline({
-      path: hikeCoordinates,
-      geodesic: true,
-      strokeColor: 'black',
-      strokeOpacity: 1.0,
-      strokeWeight: 4
-    });       
-    hikePath.setMap(map);
-    globalHikePath=hikePath;
+  //--- GENERATE HIKE PATH POLYLINE --//
+  var hikePath = new google.maps.Polyline({
+    path: hikeCoordinates,
+    geodesic: true,
+    strokeColor: 'black',
+    strokeOpacity: 1.0,
+    strokeWeight: 4
+  });
+  hikePath.setMap(map);
+  globalHikePath=hikePath;
 
-    //---START AND END MARKERS---//
-    var startMarker = new google.maps.Marker({
-      position: hikeCoordinates[0],
-      map: map,
-      title: 'Start',
-      icon: '../../media/start.png'
-    });
-    globalStartMarker=startMarker;
-    
-    var endMarker = new google.maps.Marker({
-      position: hikeCoordinates[hikeCoordinates.length-1],
-      map: map,
-      title: 'End',
-      icon: '../../media/finish.png'
-    });
-    globalEndMarker=endMarker;
+  //---START AND END MARKERS---//
+  var startMarker = new google.maps.Marker({
+    position: hikeCoordinates[0],
+    map: map,
+    title: 'Start',
+    icon: '../../media/start.png'
+  });
+  globalStartMarker=startMarker;
 
-    //----ELEVATION CHART----//
-    var elevator = new google.maps.ElevationService();
-    displayPathElevation(hikeCoordinates, elevator, map);
-  }
+  var endMarker = new google.maps.Marker({
+    position: hikeCoordinates[hikeCoordinates.length-1],
+    map: map,
+    title: 'End',
+    icon: '../../media/finish.png'
+  });
+  globalEndMarker=endMarker;
+
+  //----ELEVATION CHART----//
+  var elevator = new google.maps.ElevationService();
+  displayPathElevation(hikeCoordinates, elevator, map);
+}
 
 //--- ELEVATION CHART FUNCTIONS--//
 function displayPathElevation(path, elevator, map) {
@@ -149,7 +149,7 @@ function plotElevation(elevations, status, path) {
       position : position,
       map : map,
       icon: 'http://maps.google.com/mapfiles/ms/micons/hiker.png'
-    }); 
+    });
     globalHikerMarker = hikeMarker;
     markers.push(hikeMarker);
   }
@@ -176,7 +176,7 @@ $(function(){
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
     directionsDisplay.setMap(map);
-    
+
 
     var start = new google.maps.LatLng(globalPos.lat, globalPos.lng);
     var end = new google.maps.LatLng(hikeCoordinates[0].lat, hikeCoordinates[0].lng);

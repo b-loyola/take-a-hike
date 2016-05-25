@@ -3,11 +3,13 @@ class CompletedHikesController < ApplicationController
   before_filter :load_hike
 
   def create
-    @completed_hike = @hike.completed_hikes.create(user: current_user)
-    if @completed_hike.save
-      redirect_to @hike, notice: "Succesfully Marked as Complete!"
-    else
-      redirect_to @hike, notice: "Unable to Mark as Complete"
+    @completed_hike = @hike.completed_hikes.new(user: current_user)
+    respond_to do |format|
+      if @completed_hike.save
+        format.json { render json: @completed_hike, status: :created }
+      else
+        format.json { render :json => { :error => @completed_hike.errors.full_messages }, :status => 422 }
+      end
     end
   end
 
