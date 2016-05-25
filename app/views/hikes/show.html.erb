@@ -1,3 +1,5 @@
+<%= title "#{@hike.name} | Take a hike" %>
+<%= favicon_link_tag 'mtn.ico' %>
 <%text = "https://twitter.com/intent/tweet?button_hashtag=TakeAHike&text=I%20just%20finished%20" +@hike.name.gsub(" ","%20") +"!!" %>
 <script src="https://www.google.com/jsapi"></script>
 
