@@ -75,7 +75,6 @@ $(function(){
   });
 
   $('.delete-button').on('click', function(){
-    console.log('clicked');
     $('.delete-cell').hide();
     $('.delete-button').show();
     $(this).hide();
@@ -89,10 +88,14 @@ $(function(){
 
   $("a.completed_hikes_delete").on("ajax:success", function(e, data, status, xhr) {
     $(this).closest('tr').fadeOut('slow');
-    var km=$(this).attr('data-id')
-    var hiked=$("#kms_hiked").text()
-    console.log(hiked);
-
+    var km=parseInt($(this).attr('data-id'));
+    var hiked=$("#km_text");
+    var oldValue=hiked.text();
+    oldValue = oldValue.replace(/[^\d]/,'');
+    oldValue = oldValue.replace('kms','');
+    oldValue = parseInt(oldValue);
+    newValue = oldValue - km;
+    hiked.text(newValue + " kms");
 
   });
 

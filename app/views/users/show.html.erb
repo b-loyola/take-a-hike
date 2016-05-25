@@ -17,7 +17,7 @@
           </h4>
           <h4 id="kms_hiked">
             <span class="glyphicon glyphicon-dashboard"></span>
-            <%= @user.kms_hiked %> kms
+            <span id="km_text"><%= @user.kms_hiked %> kms</span>
           </h4>
         </div>
       </div> <!-- end of row -->
@@ -95,7 +95,7 @@
                         </thead>
                         <tbody>
                           <% @completed_hikes.each do |hike| %>
-                          <%hike_km = hike.hike.distance_in_km%>}
+                          <%hike_km = hike.hike.distance_in_km%>
                             <tr>
                               <td><%= link_to hike.hike.name, hike_path(hike.hike_id) %></td>
                               <td><%= hike.hike.distance_in_km %></td>
