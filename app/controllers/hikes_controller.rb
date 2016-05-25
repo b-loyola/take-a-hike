@@ -23,18 +23,20 @@ class HikesController < ApplicationController
       min_lng: params[:position]["min_lng"].to_f
     }
 
-    @hikes = Hike.where('start_lat >= ? AND start_lat <= ?', bounds[:min_lat], bounds[:max_lat])
-      .where('start_lng >= ? AND start_lng <= ?', bounds[:min_lng], bounds[:max_lng])
-      .select(
-        :id,
-        :name,
-        :distance_in_km,
-        :time_in_hours,
-        :difficulty,
-        :start_lat,
-        :start_lng
-      )
-
+    @hikes = Hike.select('
+      "hikes".name, 
+      "hikes".id, 
+      "hikes".distance_in_km, 
+      "hikes".time_in_hours, 
+      "hikes".difficulty, 
+      "hikes".start_lat, 
+      "hikes".start_lng, 
+      AVG("reviews".rating) AS avg_rating')
+    .joins('LEFT OUTER JOIN reviews ON hikes.id = reviews.hike_id')
+    .group(' "hikes".name, "hikes".id')
+    .having('start_lat >= ? AND start_lat <= ?', bounds[:min_lat], bounds[:max_lat])
+    .having('start_lng >= ? AND start_lng <= ?', bounds[:min_lng], bounds[:max_lng])
+    
     @hikes = @hikes.difficulty(params[:difficulty]) if params[:difficulty] && params[:difficulty] != ''
 
     if params[:duration]

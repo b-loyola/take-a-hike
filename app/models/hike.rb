@@ -43,7 +43,7 @@ class Hike < ActiveRecord::Base
     when 1
       "1 km"
     else
-      " #{ self.distance_in_km } km"
+      "#{ self.distance_in_km } km"
     end
   end
 
@@ -57,12 +57,6 @@ class Hike < ActiveRecord::Base
     else
       simplified
     end
-  end
-
-  def as_json(json)
-    hike = super(json)
-    hike[:average_rating] = average_rating_sql
-    hike
   end
 
   def average_rating

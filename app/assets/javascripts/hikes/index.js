@@ -215,7 +215,7 @@ function initMap() {
       var dist = $('<td>').text(hike.distance_in_km).addClass('distance');
       var difficulty = $('<td>').text(hike.difficulty).addClass('difficulty');
       var time = $('<td>').text(hike.time_in_hours).addClass('time');
-      var rating = $('<td>').text( Math.round(hike.average_rating) );
+      var rating = $('<td>').text( Math.round(hike.avg_rating) );
 
       var row = $('<tr>')
         .addClass('hike-row')
