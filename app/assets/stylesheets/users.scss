@@ -116,6 +116,13 @@
   padding: 15px;
 }
 
+
+.hide-on-collapse{
+  @media (max-width: 34em){
+    display: none;
+  }
+}
+
 #reviews-table tr {
   td:nth-child(1){
     width:20%;
