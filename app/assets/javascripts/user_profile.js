@@ -1,5 +1,5 @@
 $(function(){
-  $('#completed_hikes_table').dataTable({
+  var table = $('#completed_hikes_table').dataTable({
     "createdRow": function ( row, data, index ) {
       var row = $('td', row);
       var distance = data[1];
@@ -26,9 +26,12 @@ $(function(){
     ],
     "paging": false,
     "filter": false,
-    "responsive": true
+    "responsive": true,
+    "sDom": 'rt'
+    // "pagingType": false
     // "bDestroy": true,
   });
+
 
   $('#fave_hikes_table').dataTable({
     "createdRow": function ( row, data, index ) {
@@ -56,13 +59,15 @@ $(function(){
     ],
     "paging": false,
     "filter": false,
-    "responsive": true
+    "responsive": true,
+    "sDom": 'rt'
   })
 
   $('#reviews-table').dataTable({
     "paging": false,
     "filter": false,
-    "responsive": true
+    "responsive": true,
+    "sDom": 'rt'
   });
 
   $(window).on('scroll', function() {
@@ -95,12 +100,7 @@ $(function(){
     hiked.text(newValue + " kms");
   });
 
-  $("a.fave_hikes_delete").on("ajax:success", function(e, data, status, xhr) {
+  $("a.fave_hikes_delete, a.reviews_delete").on("ajax:success", function(e, data, status, xhr) {
     $(this).closest('tr').fadeOut('slow');
   });
-
-  $("a.reviews_delete").on("ajax:success", function(e, data, status, xhr) {
-    $(this).closest('tr').fadeOut('slow');
-  });
-
 })
