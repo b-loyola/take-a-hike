@@ -209,8 +209,6 @@ function initMap() {
           hikeClass = 'easy-difficulty';
       }
 
-      console.log(hike);
-
       var name = $('<td>').append($('<a>').attr('href', '/hikes/' + hike.id).text(hike.name));
       var dist = $('<td>').text(hike.distance_in_km).addClass('distance');
       var difficulty = $('<td>').text(hike.difficulty).addClass('difficulty');
