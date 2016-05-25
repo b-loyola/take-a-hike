@@ -43,7 +43,7 @@ class Hike < ActiveRecord::Base
     when 1
       "1 km"
     else
-      " #{ self.distance_in_km } km"
+      "#{ self.distance_in_km } km"
     end
   end
 
@@ -59,13 +59,14 @@ class Hike < ActiveRecord::Base
     end
   end
 
-  def as_json(json)
-    hike = super(json)
-    hike[:average_rating] = average_rating_sql
-    hike
-  end
+  # def as_json(json)
+  #   hike = super(json)
+  #   hike[:average_rating] = average_rating_sql
+  #   hike
+  # end
 
   def average_rating
+    puts "inside average_rating"
     reviews.count > 0 ? (reviews.sum(:rating).to_f/reviews.count).round(0) : 0
   end
 
@@ -79,6 +80,7 @@ class Hike < ActiveRecord::Base
   end
 
   def average_rating_sql
+    puts "inside average_rating_sql"
     self.reviews.average(:rating)
   end
 
