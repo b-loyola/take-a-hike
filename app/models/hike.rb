@@ -79,7 +79,6 @@ class Hike < ActiveRecord::Base
   def self.top_rated
     top_rated = Review.select("AVG(reviews.rating) as average_rating, reviews.hike_id").group(:hike_id).order("average_rating DESC").limit(1)
     review = [top_rated[0]]
-
     review.empty? ? Hike.all.sample : review.first.hike
   end
 
