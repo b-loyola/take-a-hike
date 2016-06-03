@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+  difficulty0: "Easy"
+  difficulty1: "Medium"
+  difficulty2: "Hard"
+  difficulty3: "Extreme"

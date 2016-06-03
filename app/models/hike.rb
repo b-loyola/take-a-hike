@@ -23,19 +23,6 @@ class Hike < ActiveRecord::Base
 
   # paginates_per 30
 
-  def difficulty_description
-    case self.difficulty
-    when 0
-      "Easy"
-    when 1
-      "Medium"
-    when 2
-      "Hard"
-    when 3
-      "Extreme"
-    end
-  end
-
   def distance_description
     case self.distance_in_km
     when 0
