@@ -51,7 +51,12 @@ function addDataTable() {
         { "width": "12.5%" },
         { "width": "12.5%" },
         { "width": "15%" }
-      ]
+      ],
+      "fnDrawCallback": function(oSettings) {
+        if ($('#searched_hikes tr').length < 26) {
+            $('.dataTables_paginate').hide();
+        }
+      }
     });
   }
 
