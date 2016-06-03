@@ -47,16 +47,9 @@ class Hike < ActiveRecord::Base
     end
   end
 
-  def simplified_waypoints(array)
-    simplified = []
-    array.each_with_index do |point,i|
-      simplified << point if i % 2 == 0
-    end
-    if simplified.length > 300
-      return simplified_waypoints(simplified)
-    else
-      simplified
-    end
+  def simplified_waypoints(waypoints)
+    return waypoints if waypoints.length < 600
+    simplified_waypoints( waypoints.each_slice(2).map(&:first) )
   end
 
   def average_rating
