@@ -4,6 +4,8 @@ function addDataTable() {
 
   function buildTable() {
 
+    var tableDisplayLength = 25
+
     $searchedHikes.dataTable({
       "createdRow": function ( row, data, index ) {
         var row = $('td', row);
@@ -44,7 +46,7 @@ function addDataTable() {
       },
 
       "bDestroy": true,
-      "iDisplayLength": 25,
+      "iDisplayLength": tableDisplayLength,
       "columns": [
         { "width": "50%" },
         { "width": "10%" },
@@ -53,7 +55,7 @@ function addDataTable() {
         { "width": "15%" }
       ],
       "fnDrawCallback": function(oSettings) {
-        if ($('#searched_hikes tr').length < 26) {
+        if ($('#searched_hikes tr').length <= tableDisplayLength) {
             $('.dataTables_paginate').hide();
         }
       }
