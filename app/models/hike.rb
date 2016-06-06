@@ -77,7 +77,11 @@ class Hike < ActiveRecord::Base
   end
 
   def self.top_rated
-    top_rated = Review.select("AVG(reviews.rating) as average_rating, reviews.hike_id").group(:hike_id).order("average_rating DESC").limit(1)
+    top_rated = Review.
+      select("AVG(reviews.rating) as average_rating, reviews.hike_id").
+      group(:hike_id).
+      order("average_rating DESC").
+      limit(1)
     top_rated.first.try!(:hike) || Hike.all.sample
   end
 
