@@ -53,7 +53,7 @@ class Hike < ActiveRecord::Base
   end
 
   def average_rating
-    reviews.count > 0 ? (reviews.sum(:rating).to_f/reviews.count).round(0) : 0
+    reviews.average(:rating) || 0
   end
 
   def seasons
@@ -63,10 +63,6 @@ class Hike < ActiveRecord::Base
     seasons << "Summer" if summer
     seasons << "Fall" if fall
     seasons
-  end
-
-  def average_rating_sql
-    self.reviews.average(:rating)
   end
 
   def self.top_rated
