@@ -1,8 +1,11 @@
 function addDataTable() {
 
   var $searchedHikes = $('#searched_hikes');
+  var $searchHikesRows = $('#searched_hikes tr');
 
   function buildTable() {
+
+    var tableDisplayLength = 25
 
     $searchedHikes.dataTable({
       "createdRow": function ( row, data, index ) {
@@ -44,14 +47,19 @@ function addDataTable() {
       },
 
       "bDestroy": true,
-      "iDisplayLength": 25,
+      "iDisplayLength": tableDisplayLength,
       "columns": [
         { "width": "50%" },
         { "width": "10%" },
         { "width": "12.5%" },
         { "width": "12.5%" },
         { "width": "15%" }
-      ]
+      ],
+      "fnDrawCallback": function(oSettings) {
+        if ($searchHikesRows.length <= tableDisplayLength) {
+            $('.dataTables_paginate').hide();
+        }
+      }
     });
   }
 
