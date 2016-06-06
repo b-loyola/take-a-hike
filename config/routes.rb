@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'pictures/index'
+
+  get 'pictures/show'
+
+  get 'pictures/new'
+
+  get 'pictures/edit'
+
   get 'completed_hikes/create'
 
   resources :hikes, only: [:index, :create, :show, :update] do
@@ -14,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :pictures
 
 
   resource :session, only: [:new, :create, :destroy]
