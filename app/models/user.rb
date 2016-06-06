@@ -23,15 +23,16 @@ class User < ActiveRecord::Base
 
   def hiker_level
     dist = self.kms_hiked
-    if dist == 0
+    case dist
+    when 0
       "Nature Neophyte"
-    elsif dist >= 1 && dist < 20
+    when 1..20
       "Wayward Wanderer"
-    elsif dist >= 20 && dist < 50
+    when 21..50
       "Tenacious Trekker"
-    elsif dist >= 50 && dist < 100
+    when 51..100
       "Expert Explorer"
-    elsif dist >= 100
+    else
       "Master Mountaineer"
     end
   end
