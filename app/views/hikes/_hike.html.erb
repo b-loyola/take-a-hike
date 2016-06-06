@@ -2,5 +2,5 @@
   <td><%= link_to hike.name, hike_path(hike) %></td>
   <td><%= pluralize(hike.distance_in_km, 'Km') %></td>
   <td><%= pluralize(hike.time_in_hours, 'Hour') %></td>
-  <td><%= hike.difficulty_description %></td>
+  <td><%= t('difficulty'+"#{@hike.difficulty}") %></td>
 </tr>
