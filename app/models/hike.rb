@@ -60,7 +60,7 @@ class Hike < ActiveRecord::Base
   end
 
   def average_rating
-    reviews.count > 0 ? reviews.average(:rating) : 0
+    reviews.average(:rating) || 0
   end
 
   def seasons
