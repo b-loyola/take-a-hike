@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :fave_hikes, dependent: :destroy
   has_many :completed_hikes, dependent: :destroy
 
+  has_many :pictures, as: :imageable
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
