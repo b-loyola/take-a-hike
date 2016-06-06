@@ -1,6 +1,7 @@
 function addDataTable() {
 
   var $searchedHikes = $('#searched_hikes');
+  var $searchHikesRows = $('#searched_hikes tr');
 
   function buildTable() {
 
@@ -55,7 +56,7 @@ function addDataTable() {
         { "width": "15%" }
       ],
       "fnDrawCallback": function(oSettings) {
-        if ($('#searched_hikes tr').length <= tableDisplayLength) {
+        if ($searchHikesRows.length <= tableDisplayLength) {
             $('.dataTables_paginate').hide();
         }
       }
