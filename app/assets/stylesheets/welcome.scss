@@ -8,6 +8,10 @@ body {
     margin-right: -50%;
     transform: translate(-50%, 0);
 		top: 90px;
+		h1 {
+			font-size: 3em;
+			text-shadow: 0 0 15px black;
+		}
 		@media (min-width: 34em) {
 			top: 130px;
 		}
